@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WTTG 1 Toolkit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #061018;
@@ -20,30 +23,33 @@
       --warning: #ffd166;
       --good: #9dffbc;
       --border: #294553;
-      --shadow: 0 22px 65px rgba(0, 0, 0, 0.42);
+      --shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
       --radius: 22px;
       --sidebar: 286px;
+      --font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-display: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "Cascadia Mono", "Segoe UI Mono", Consolas, "Liberation Mono", monospace;
     }
 
     * { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      min-height: 100%;
+      scroll-behavior: smooth;
+      background: #04070d;
+    }
 
     body {
       margin: 0;
       min-height: 100vh;
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(114, 247, 255, 0.16), transparent 36%),
-        radial-gradient(circle at 100% 12%, rgba(167, 255, 207, 0.08), transparent 30%),
-        radial-gradient(circle at 50% 100%, rgba(255, 115, 183, 0.07), transparent 42%),
-        linear-gradient(135deg, #04070d, var(--bg) 48%, #08141d);
+      font-family: var(--font-ui);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      background: #04070d;
+      overflow-x: hidden;
     }
 
-    body.fx-off {
-      background: linear-gradient(135deg, #04070d, var(--bg) 48%, #08141d);
-    }
 
     body.compact-mode {
       --radius: 16px;
@@ -55,9 +61,19 @@
     a { color: inherit; text-decoration: none; }
 
     .shell {
+      position: relative;
       min-height: 100vh;
       display: grid;
       grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(114, 247, 255, 0.14), transparent 36%),
+        radial-gradient(circle at 100% 12%, rgba(167, 255, 207, 0.07), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(255, 115, 183, 0.04), transparent 42%),
+        linear-gradient(135deg, #04070d, var(--bg) 48%, #08141d);
+    }
+
+    body.fx-off .shell {
+      background: linear-gradient(135deg, #04070d, var(--bg) 48%, #08141d);
     }
 
     .sidebar {
@@ -66,7 +82,7 @@
       height: 100vh;
       padding: 22px;
       border-right: 1px solid rgba(114, 247, 255, 0.18);
-      background: rgba(6, 16, 24, 0.78);
+      background: rgba(6, 16, 24, 0.96);
       backdrop-filter: blur(18px);
       display: flex;
       flex-direction: column;
@@ -99,8 +115,9 @@
     .brand-title {
       font-size: 20px;
       line-height: 1;
-      font-weight: 950;
-      letter-spacing: -0.04em;
+      font-family: var(--font-display);
+      font-weight: 850;
+      letter-spacing: 0;
     }
 
     .brand-subtitle {
@@ -108,7 +125,7 @@
       color: var(--muted);
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0;
       text-transform: uppercase;
     }
 
@@ -178,20 +195,12 @@
       opacity: 0.72;
     }
 
-    .side-note {
-      margin-top: auto;
-      border: 1px solid rgba(114, 247, 255, 0.18);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.035);
-      padding: 14px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
 
     .main {
       min-width: 0;
-      padding: 26px;
+      min-height: 100vh;
+      padding: 26px 26px 34px;
+      background: linear-gradient(180deg, rgba(4, 11, 16, 0.18), rgba(4, 11, 16, 0.58));
     }
 
     .topbar {
@@ -206,7 +215,7 @@
       color: var(--accent);
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: 0.14em;
+      letter-spacing: 0;
       text-transform: uppercase;
       margin-bottom: 8px;
     }
@@ -215,7 +224,9 @@
       margin: 0;
       font-size: clamp(34px, 5vw, 64px);
       line-height: 0.92;
-      letter-spacing: -0.055em;
+      font-family: var(--font-display);
+      font-weight: 850;
+      letter-spacing: 0;
     }
 
     .subtitle {
@@ -232,7 +243,7 @@
       color: var(--accent);
       border-radius: 999px;
       padding: 10px 14px;
-      font-weight: 900;
+      font-weight: 800;
       box-shadow: 0 0 0 5px rgba(114, 247, 255, 0.04);
     }
 
@@ -264,7 +275,7 @@
     .status-chip strong {
       display: block;
       font-size: 20px;
-      letter-spacing: -.03em;
+      letter-spacing: 0;
       margin-top: 3px;
     }
 
@@ -274,9 +285,254 @@
       gap: 10px;
     }
 
+    .strategy-board {
+      display: grid;
+      gap: 12px;
+    }
+
+    .strategy-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .mini-stat {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(255,255,255,.032);
+      padding: 12px;
+    }
+
+    .mini-stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .mini-stat strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .warning-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .warning-row {
+      border: 1px solid rgba(255, 209, 102, .34);
+      border-radius: 13px;
+      background: rgba(255, 209, 102, .07);
+      color: #ffe8a8;
+      padding: 9px 10px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .resource-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,.032);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .resource-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .resource-title {
+      font-weight: 800;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .resource-note {
+      min-height: 70px;
+    }
+
+    .threat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .threat-card, .site-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,.032);
+      padding: 14px;
+      display: grid;
+      gap: 11px;
+    }
+
+    .threat-card h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .quick-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .site-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) 180px 190px 160px;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .site-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .site-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .site-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .site-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .site-note {
+      min-height: 68px;
+    }
+
+    .practice-target {
+      border: 1px solid rgba(114,247,255,.25);
+      border-radius: 16px;
+      background: rgba(114,247,255,.055);
+      padding: 12px;
+      min-height: 74px;
+      display: grid;
+      align-content: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      color: var(--accent-2);
+    }
+
+    .practice-flash, .hotspot.practice-flash {
+      border-color: rgba(167,255,207,.95) !important;
+      background: rgba(167, 255, 207, 0.96) !important;
+      color: #061017 !important;
+      box-shadow: 0 0 0 7px rgba(167,255,207,.18), 0 0 34px rgba(114,247,255,.45) !important;
+      transform: translate(-50%, -50%) scale(1.18) !important;
+    }
+
+    .site-order {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .site-meta-line {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      padding: 9px 10px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .history-list {
+      display: grid;
+      gap: 8px;
+      max-height: 210px;
+      overflow: auto;
+    }
+
+    .history-item {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      background: rgba(255,255,255,.03);
+      padding: 9px 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .streak-bars {
+      display: flex;
+      align-items: end;
+      gap: 6px;
+      min-height: 80px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .streak-bar {
+      width: 18px;
+      min-height: 12px;
+      border-radius: 8px 8px 4px 4px;
+      background: rgba(255,85,117,.45);
+      flex: 0 0 auto;
+    }
+
+    .streak-bar.win { background: linear-gradient(180deg, var(--good), rgba(157,255,188,.28)); }
+
+    .edit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
     @media (max-width: 980px) {
       .dashboard-status { grid-template-columns: 1fr; }
       .status-grid { grid-template-columns: 1fr; }
+      .strategy-actions, .metric-row, .resource-grid, .edit-grid { grid-template-columns: 1fr; }
+      .threat-grid, .site-grid, .site-toolbar { grid-template-columns: 1fr; }
     }
 
     .view { display: none; }
@@ -326,7 +582,6 @@
       }
       .brand { padding-bottom: 4px; }
       .nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .side-note { display: none; }
       .main { padding: 18px; }
       .topbar { align-items: flex-start; flex-direction: column; }
       .route-pill { align-self: flex-start; }
@@ -366,9 +621,9 @@
     }
 
     .card-title {
-      font-weight: 950;
+      font-weight: 800;
       font-size: 18px;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
     }
 
     .small {
@@ -405,13 +660,13 @@
       font-size: 13px;
       font-weight: 850;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0;
     }
 
     .stat-value {
       font-size: 36px;
-      font-weight: 950;
-      letter-spacing: -0.05em;
+      font-weight: 800;
+      letter-spacing: 0;
     }
 
     .stat-hint { color: var(--muted); font-size: 13px; line-height: 1.4; }
@@ -446,8 +701,8 @@
 
     .module-title {
       font-size: 21px;
-      font-weight: 950;
-      letter-spacing: -0.035em;
+      font-weight: 800;
+      letter-spacing: 0;
       margin-bottom: 6px;
     }
 
@@ -465,7 +720,7 @@
       background: var(--panel-2);
       border-radius: 13px;
       padding: 10px 13px;
-      font-weight: 900;
+      font-weight: 800;
       cursor: pointer;
       transition: transform 0.1s ease, border-color 0.1s ease, background 0.1s ease;
       display: inline-flex;
@@ -505,11 +760,11 @@
     textarea { min-height: 84px; resize: vertical; }
     input:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(114, 247, 255, 0.07); }
 
-    label.field-label {
+    .field-label {
       color: var(--muted);
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0;
       text-transform: uppercase;
       display: block;
       margin-bottom: 7px;
@@ -559,14 +814,14 @@
       white-space: nowrap;
       cursor: pointer;
       font-size: 13px;
-      font-weight: 950;
+      font-weight: 800;
       box-shadow: 0 0 0 4px rgba(114, 247, 255, 0.18), 0 8px 22px rgba(0, 0, 0, 0.25);
       transition: transform 0.1s ease, background 0.1s ease, border-color 0.1s ease, opacity 0.1s ease;
     }
 
     .hotspot:hover { transform: translate(-50%, -50%) scale(1.1); background: rgba(4, 18, 24, 0.95); border-color: white; }
     .hotspot.used { background: rgba(167, 255, 207, 0.93); color: #061017; border-color: #061017; min-width: calc(var(--size) + 28px); box-shadow: 0 0 0 5px rgba(167, 255, 207, 0.24), 0 8px 22px rgba(0, 0, 0, 0.28); }
-    .hotspot-order, .hotspot-id, .hotspot-label { font-weight: 950; }
+    .hotspot-order, .hotspot-id, .hotspot-label { font-weight: 800; }
     .hotspot-label { font-size: 11px; opacity: .82; }
     .map-shell.hide-hotspots .hotspot { opacity: 0.18; }
     .map-shell.hide-hotspots .hotspot:hover { opacity: 1; }
@@ -588,8 +843,8 @@
     }
 
     .slot.filled { border-style: solid; border-color: rgba(114, 247, 255, 0.55); background: rgba(114, 247, 255, 0.075); }
-    .slot-number { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; }
-    .slot-value { font-size: 22px; font-weight: 950; letter-spacing: -0.03em; }
+    .slot-number { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0; }
+    .slot-value { font-size: 22px; font-weight: 800; letter-spacing: 0; }
     .slot-label { color: var(--muted); font-size: 12px; font-weight: 800; }
 
     .result-box {
@@ -600,7 +855,7 @@
       min-height: 70px;
       padding: 13px;
       color: var(--accent-2);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family: var(--font-mono);
       line-height: 1.45;
       word-break: break-word;
     }
@@ -628,7 +883,7 @@
     .key-slot.status-empty { border-style: dashed; }
 
     .key-slot-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .key-slot-title { font-weight: 950; }
+    .key-slot-title { font-weight: 800; }
     .badge {
       border: 1px solid rgba(114, 247, 255, 0.3);
       border-radius: 999px;
@@ -654,7 +909,7 @@
       background: rgba(167, 255, 207, 0.08);
       padding: 16px;
       color: var(--accent-2);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family: var(--font-mono);
       font-size: 17px;
       line-height: 1.55;
       min-height: 84px;
@@ -677,8 +932,8 @@
       gap: 12px;
       align-items: start;
     }
-    .entry-title { font-weight: 950; word-break: break-word; }
-    .entry-url { color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; margin-top: 4px; word-break: break-word; }
+    .entry-title { font-weight: 800; word-break: break-word; }
+    .entry-url { color: var(--accent); font-family: var(--font-mono); font-size: 13px; margin-top: 4px; word-break: break-word; }
     .entry-note { color: var(--muted); line-height: 1.45; margin-top: 8px; white-space: pre-wrap; }
     .entry-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
     .tiny-btn { padding: 7px 9px; border-radius: 10px; font-size: 12px; }
@@ -758,8 +1013,8 @@
       background: rgba(255,255,255,0.035);
       padding: 14px;
     }
-    .mini-metric-label { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
-    .mini-metric-value { font-size: 30px; font-weight: 950; letter-spacing: -.045em; margin-top: 6px; }
+    .mini-metric-label { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0; }
+    .mini-metric-value { font-size: 30px; font-weight: 800; letter-spacing: 0; margin-top: 6px; }
     .win-entry { border-color: rgba(157, 255, 188, 0.28); }
     .loss-entry { border-color: rgba(255, 85, 117, 0.32); }
 
@@ -782,7 +1037,7 @@
       display: grid;
       place-items: center;
       font-size: 12px;
-      font-weight: 950;
+      font-weight: 800;
     }
 
     .timeline-dot.win { color: #061017; background: var(--good); }
@@ -800,7 +1055,7 @@
       gap: 10px;
     }
     .cue-head { display:flex; align-items:flex-start; justify-content:space-between; gap: 12px; }
-    .cue-title { font-weight: 950; font-size: 16px; }
+    .cue-title { font-weight: 800; font-size: 16px; }
     .cue-meta { color: var(--muted); font-size: 13px; line-height: 1.42; margin-top: 4px; }
     .cue-actions { display:flex; flex-wrap:wrap; gap: 8px; }
     .cue-real { border-color: rgba(157, 255, 188, 0.34); }
@@ -810,7 +1065,7 @@
       border-radius: 999px;
       padding: 6px 9px;
       font-size: 12px;
-      font-weight: 950;
+      font-weight: 800;
       border: 1px solid rgba(255,255,255,0.12);
       white-space: nowrap;
     }
@@ -828,7 +1083,7 @@
       align-content: center;
       gap: 8px;
     }
-    .big-status strong { font-size: 22px; letter-spacing: -.03em; }
+    .big-status strong { font-size: 22px; letter-spacing: 0; }
     .sound-visual {
       height: 60px;
       border: 1px solid var(--border);
@@ -862,9 +1117,9 @@
       gap: 12px;
       color: var(--muted);
       font-size: 12px;
-      font-weight: 950;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: 0;
     }
     input[type="range"] {
       width: 100%;
@@ -895,8 +1150,8 @@
       font-variant-numeric: tabular-nums;
       font-size: clamp(44px, 9vw, 86px);
       line-height: .95;
-      font-weight: 950;
-      letter-spacing: -.055em;
+      font-weight: 800;
+      letter-spacing: 0;
       color: var(--text);
       text-shadow: 0 0 28px rgba(114,247,255,.18);
     }
@@ -914,7 +1169,7 @@
       gap: 12px;
       align-items: flex-start;
     }
-    .timeline-time { color: var(--accent); font-weight: 950; font-variant-numeric: tabular-nums; }
+    .timeline-time { color: var(--accent); font-weight: 800; font-variant-numeric: tabular-nums; }
 
     .settings-panel {
       display: grid;
@@ -923,7 +1178,7 @@
 
     .data-box {
       min-height: 210px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-family: var(--font-mono);
       font-size: 13px;
     }
 
@@ -983,12 +1238,11 @@
         <a class="nav-link" href="#wins" data-nav="wins"><span class="nav-icon">★</span><span class="nav-text"><strong>Win Log</strong><span>Streak tracker</span></span></a>
         <a class="nav-link" href="#soundboard" data-nav="soundboard"><span class="nav-icon">◉</span><span class="nav-text"><strong>Soundboard</strong><span>Cue trainer</span></span></a>
         <a class="nav-link" href="#checklist" data-nav="checklist"><span class="nav-icon">✓</span><span class="nav-text"><strong>Checklist</strong><span>Run control</span></span></a>
+        <a class="nav-link" href="#threats" data-nav="threats"><span class="nav-icon">!</span><span class="nav-text"><strong>Threat Guide</strong><span>Enemy reactions</span></span></a>
+        <a class="nav-link" href="#sites" data-nav="sites"><span class="nav-icon">⌕</span><span class="nav-text"><strong>Sites Database</strong><span>Page lookup</span></span></a>
+        <a class="nav-link" href="#resources" data-nav="resources"><span class="nav-icon">?</span><span class="nav-text"><strong>Resources</strong><span>Learning hub</span></span></a>
         <a class="nav-link" href="#settings" data-nav="settings"><span class="nav-icon">⚙</span><span class="nav-text"><strong>Settings</strong><span>Data + defaults</span></span></a>
       </nav>
-
-      <div class="side-note">
-        One file, multiple subpages. Later this can become React Router pages: Dashboard, Run Timer, Claffis, Keys, Notes, Win Log, Soundboard and Checklist.
-      </div>
     </aside>
 
     <main class="main">
@@ -1039,6 +1293,30 @@
             <div class="stat-label">Checklist</div>
             <div><div class="stat-value" id="dashChecklistCount">0%</div><div class="stat-hint">run prep completed</div></div>
           </article>
+          <article class="card stat-card">
+            <div class="stat-label">Troll mode</div>
+            <div><div class="stat-value" id="dashTrollStatus">OFF</div><div class="stat-hint">sound stress trainer</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Last run</div>
+            <div><div class="stat-value" id="dashLastRun">None</div><div class="stat-hint">latest saved result</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Resources</div>
+            <div><div class="stat-value" id="dashResourceCount">0 / 0</div><div class="stat-hint">favorites / links</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Sites open</div>
+            <div><div class="stat-value" id="dashOpenSites">--</div><div class="stat-hint">for selected in-game time</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Claffis practice</div>
+            <div><div class="stat-value" id="dashClaffisPractice">0%</div><div class="stat-hint">practice win rate</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Sound accuracy</div>
+            <div><div class="stat-value" id="dashSoundAccuracy">0%</div><div class="stat-hint">cue trainer accuracy</div></div>
+          </article>
         </div>
 
         <div style="height: 18px"></div>
@@ -1065,10 +1343,65 @@
               <button class="btn ghost" id="dashOpenKeysBtn">Open Key Compiler</button>
               <button class="btn ghost" id="dashOpenClaffisBtn">Open Claffis</button>
               <button class="btn ghost" id="dashAddLinkBtn">Add Link</button>
+              <button class="btn ghost" id="dashResourcesBtn">Resources</button>
+              <button class="btn ghost" id="dashSitesBtn">Sites DB</button>
+              <button class="btn ghost" id="dashThreatsBtn">Threat Guide</button>
               <button class="btn good" id="dashQuickWinBtn">Quick Win</button>
               <button class="btn danger" id="dashQuickLossBtn">Quick Loss</button>
             </div>
           </article>
+        </section>
+
+        <div style="height: 18px"></div>
+
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Run Strategy Board</div><div class="small">A compact plan for the next few minutes of the run.</div></div>
+              <button class="btn ghost" id="strategySaveBtn">Save plan</button>
+            </div>
+            <div class="card-body strategy-board">
+              <div class="form-grid">
+                <div class="form-span">
+                  <label class="field-label" for="strategyObjective">Current objective</label>
+                  <input id="strategyObjective" placeholder="e.g. find two more keys, confirm suspicious hashes..." autocomplete="off" />
+                </div>
+                <div>
+                  <label class="field-label" for="strategyWikiLevel">Deep Wiki level</label>
+                  <input id="strategyWikiLevel" type="number" min="0" max="8" step="1" placeholder="0" />
+                </div>
+                <div>
+                  <label class="field-label" for="strategyThreat">Threat focus</label>
+                  <select id="strategyThreat">
+                    <option value="none">None</option>
+                    <option value="breather">Breather</option>
+                    <option value="kidnapper">Kidnapper</option>
+                    <option value="both">Both</option>
+                  </select>
+                </div>
+                <div class="form-span">
+                  <label class="field-label" for="strategyNextAction">Next action</label>
+                  <input id="strategyNextAction" placeholder="What should you do next?" autocomplete="off" />
+                </div>
+              </div>
+              <div class="strategy-actions">
+                <button class="btn ghost" data-strategy-action="Search pages">Search pages</button>
+                <button class="btn ghost" data-strategy-action="Compile key">Compile key</button>
+                <button class="btn ghost" data-strategy-action="Reset modem">Reset modem</button>
+                <button class="btn ghost" data-strategy-action="Listen for cue">Listen for cue</button>
+                <button class="btn ghost" data-strategy-action="Open Claffis">Open Claffis</button>
+                <button class="btn ghost" data-strategy-action="Check resources">Check resources</button>
+              </div>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div><div class="card-title">Current Plan</div><div class="small" id="strategySavedAt">Not saved yet</div></div>
+            </div>
+            <div class="card-body">
+              <div class="compiled-key" id="strategySummary">No strategy saved yet.</div>
+            </div>
+          </aside>
         </section>
 
         <div style="height: 18px"></div>
@@ -1106,7 +1439,22 @@
           </a>
           <a class="card module-card" href="#checklist">
             <div class="module-icon">✓</div>
-            <div><div class="module-title">Session Checklist</div><div class="module-description">A small panic-proof run checklist for preparation and searching.</div></div>
+            <div><div class="module-title">Session Checklist</div><div class="module-description">A small run-safe checklist for preparation and searching.</div></div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card module-card" href="#threats">
+            <div class="module-icon">!</div>
+            <div><div class="module-title">Threat Guide</div><div class="module-description">Fast Breather and Kidnapper reaction cards for quick reads.</div></div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card module-card" href="#sites">
+            <div class="module-icon">⌕</div>
+            <div><div class="module-title">Sites Database</div><div class="module-description">Lookup WTTG 1 pages by key chance, open time, Deep Wiki, dead links and notes.</div></div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card module-card" href="#resources">
+            <div class="module-icon">?</div>
+            <div><div class="module-title">Resources</div><div class="module-description">Open trusted wiki and guide links, tag favorites, and save your own short notes.</div></div>
             <div class="arrow">→</div>
           </a>
           <a class="card module-card" href="#settings">
@@ -1140,6 +1488,10 @@
                     <button class="btn ghost" data-quick-event="Important page">Important page</button>
                     <button class="btn ghost" data-quick-event="Enemy cue">Enemy cue</button>
                     <button class="btn ghost" data-quick-event="Safe escape">Safe escape</button>
+                    <button class="btn ghost" data-quick-event="Modem reset">Modem reset</button>
+                    <button class="btn ghost" data-quick-event="Claffis solved">Claffis solved</button>
+                    <button class="btn ghost" data-quick-event="Wiki unlocked">Wiki unlocked</button>
+                    <button class="btn ghost" data-quick-event="Custom">Custom</button>
                     <button class="btn danger" data-quick-event="Death / reset">Death / reset</button>
                   </div>
                   <div style="height:12px"></div>
@@ -1164,8 +1516,10 @@
             <div class="card-body">
               <div class="controls" style="margin-top:0; margin-bottom:12px">
                 <button class="btn primary" id="copyTimelineBtn">Copy timeline</button>
+                <button class="btn ghost" id="copyTimelineJsonBtn">Export JSON</button>
                 <button class="btn danger" id="clearTimelineBtn">Clear timeline</button>
               </div>
+              <div class="compiled-key" id="timerSummaryBox" style="margin-bottom:12px">No active run summary yet.</div>
               <div class="timeline-list" id="timerTimeline"></div>
             </div>
           </aside>
@@ -1187,6 +1541,7 @@
                 <img class="claffis-img" src="assets/claffis-guide.png" alt="Annotated Claffis page from Welcome to the Game" draggable="false" />
               </div>
               <div class="controls" style="justify-content:center">
+                <button class="btn primary" id="claffisPracticeStartMapBtn">Start Practice</button>
                 <button class="btn ghost" id="claffisToggleHotspotsBtn">Dim hotspots</button>
                 <button class="btn ghost" id="claffisToggleLabelsBtn">Hide labels</button>
                 <button class="btn ghost" id="claffisToggleOrdersBtn">Hide order</button>
@@ -1215,6 +1570,51 @@
             </div>
           </aside>
         </section>
+        <div style="height:18px"></div>
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Claffis Practice Mode</div><div class="small">Practice a random 7-note memory sequence without touching your real run sequence.</div></div>
+              <button class="btn primary" id="claffisPracticeStartBtn">Start Practice</button>
+            </div>
+            <div class="card-body strategy-board">
+              <div class="form-grid">
+                <div>
+                  <label class="field-label" for="claffisPracticeDifficulty">Difficulty</label>
+                  <select id="claffisPracticeDifficulty">
+                    <option value="slow">Slow</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="fast">Fast</option>
+                  </select>
+                </div>
+                <label class="toggle-row" style="align-self:end">
+                  <input id="claffisPracticeVisualOnly" type="checkbox" />
+                  <span>Visual only mode (mute practice notes).</span>
+                </label>
+              </div>
+              <div class="practice-target" id="claffisPracticeDisplay">Press Start Practice to generate a sequence.</div>
+              <div class="controls">
+                <button class="btn ghost" id="claffisPracticeReplayBtn">Replay sequence</button>
+                <button class="btn danger" id="claffisPracticeResetBtn">Reset practice input</button>
+              </div>
+              <div class="compiled-key" id="claffisPracticeResult">No practice attempt running.</div>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div><div class="card-title">Practice Stats</div><div class="small">Saved locally.</div></div>
+            </div>
+            <div class="card-body">
+              <div class="metric-row">
+                <div class="mini-stat"><span>Attempts</span><strong id="claffisPracticeAttempts">0</strong></div>
+                <div class="mini-stat"><span>Wins</span><strong id="claffisPracticeWins">0</strong></div>
+                <div class="mini-stat"><span>Best streak</span><strong id="claffisPracticeBest">0</strong></div>
+                <div class="mini-stat"><span>Accuracy</span><strong id="claffisPracticeAccuracy">0%</strong></div>
+              </div>
+              <div class="small">During input, click the note hotspots on the Claffis image above. Practice input is tracked separately from your recorded run sequence.</div>
+            </div>
+          </aside>
+        </section>
       </section>
 
       <section class="view" id="view-keys">
@@ -1238,10 +1638,13 @@
               <div class="controls">
                 <button class="btn primary" id="copyCompiledKeyBtn">Copy .ann URL</button>
                 <button class="btn ghost" id="copyRawKeyBtn">Copy raw parts</button>
+                <button class="btn ghost" id="copyNumberedKeyBtn">Copy numbered parts</button>
                 <button class="btn ghost" id="copyKeyNotesBtn">Copy key notes</button>
                 <button class="btn danger" id="clearUnsureKeysBtn">Clear fake / unsure</button>
               </div>
               <div style="height:16px"></div>
+              <div class="warning-list" id="keyWarnings"></div>
+              <div style="height:12px"></div>
               <div class="progress-list" id="keyProgress"></div>
             </div>
           </aside>
@@ -1275,6 +1678,15 @@
                     <option value="important">Important</option>
                   </select>
                 </div>
+                <div>
+                  <label class="field-label" for="linkSource">Source</label>
+                  <select id="linkSource">
+                    <option value="page">Page</option>
+                    <option value="wiki">Wiki</option>
+                    <option value="clue">Clue</option>
+                    <option value="user">User</option>
+                  </select>
+                </div>
                 <div class="form-span">
                   <label class="field-label" for="linkTags">Tags</label>
                   <input id="linkTags" placeholder="key, clue, revisit" autocomplete="off" />
@@ -1287,6 +1699,7 @@
                   <button class="btn primary" type="submit">Add note</button>
                   <button class="btn ghost" type="button" id="copyLinksBtn">Copy all notes</button>
                   <button class="btn ghost" type="button" id="copyImportantLinksBtn">Copy important</button>
+                  <button class="btn ghost" type="button" id="copyUncheckedLinksBtn">Copy unchecked</button>
                   <button class="btn danger" type="button" id="clearLinksBtn">Clear notes</button>
                 </div>
               </form>
@@ -1311,6 +1724,7 @@
                 </select>
                 <select id="linkSort">
                   <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
                   <option value="updated">Recently updated</option>
                   <option value="status">Status</option>
                   <option value="important">Important first</option>
@@ -1334,6 +1748,13 @@
                 <div class="mini-metric"><div class="mini-metric-label">Current streak</div><div class="mini-metric-value" id="winsCurrentStreak">0</div></div>
                 <div class="mini-metric"><div class="mini-metric-label">Best streak</div><div class="mini-metric-value" id="winsBestStreak">0</div></div>
                 <div class="mini-metric"><div class="mini-metric-label">Total wins</div><div class="mini-metric-value" id="winsTotal">0</div></div>
+                <div class="mini-metric"><div class="mini-metric-label">Attempts</div><div class="mini-metric-value" id="winsAttempts">0</div></div>
+                <div class="mini-metric"><div class="mini-metric-label">Win rate</div><div class="mini-metric-value" id="winsWinRate">0%</div></div>
+                <div class="mini-metric"><div class="mini-metric-label">Avg duration</div><div class="mini-metric-value" id="winsAvgDuration">--</div></div>
+              </div>
+              <div class="controls">
+                <button class="btn good" type="button" id="quickWinTopBtn">Quick win</button>
+                <button class="btn danger" type="button" id="quickLossTopBtn">Quick loss</button>
               </div>
               <div style="height:16px"></div>
               <form id="winForm" class="form-grid">
@@ -1390,6 +1811,7 @@
                 </select>
               </div>
               <div class="win-timeline" id="winsTimeline" aria-label="Run result timeline"></div>
+              <div class="streak-bars" id="winsStreakGraph" aria-label="Win and loss streak graph"></div>
               <div class="entries" id="winsEntries"></div>
             </div>
           </aside>
@@ -1420,8 +1842,30 @@
                 <button class="btn ghost" id="guessFakeBtn">Fake / ignore</button>
                 <button class="btn ghost" id="guessBreatherBtn">Breather</button>
                 <button class="btn ghost" id="guessKidnapperBtn">Kidnapper</button>
+                <button class="btn ghost" id="guessIgnoreBtn">Ignore</button>
+                <button class="btn danger" id="resetSoundStatsBtn">Reset stats</button>
               </div>
               <div class="compiled-key" id="soundScoreBox">Score: 0 / 0</div>
+              <div class="form-grid">
+                <div>
+                  <label class="field-label" for="soundDifficulty">Training difficulty</label>
+                  <select id="soundDifficulty">
+                    <option value="easy">Easy</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="hard">Hard</option>
+                  </select>
+                </div>
+                <label class="toggle-row" style="align-self:end">
+                  <input id="soundRealisticDelay" type="checkbox" />
+                  <span>Use realistic delay before cue.</span>
+                </label>
+              </div>
+              <div class="card soft">
+                <div class="card-body">
+                  <div class="card-title" style="font-size:16px">Last 10 guesses</div>
+                  <div class="history-list" id="soundGuessHistory"><div class="small">No guesses yet.</div></div>
+                </div>
+              </div>
               <div class="card soft">
                 <div class="card-body">
                   <div class="card-title" style="font-size:16px">Troll mode</div>
@@ -1440,15 +1884,18 @@
                   </div>
                   <label class="field-label" for="trollCuePool">Cue pool</label>
                   <select id="trollCuePool">
-                    <option value="scary">Scary real-like cues</option>
+                    <option value="scary">Real-like cues</option>
                     <option value="all">All audio cues</option>
                     <option value="fake">Fake / ignore only</option>
+                    <option value="breather">Breather only</option>
+                    <option value="kidnapper">Kidnapper only</option>
                   </select>
                   <label class="toggle-row">
                     <input id="trollInstant" type="checkbox" />
                     <span>Play one cue immediately when Troll mode starts.</span>
                   </label>
                   <div class="status-line" id="trollStatus">Troll mode is off.</div>
+                  <div class="history-list" id="trollHistory"><div class="small">No Troll mode cues yet.</div></div>
                   <div class="controls">
                     <button class="btn danger" id="trollModeBtn">Troll mode: OFF</button>
                   </div>
@@ -1485,13 +1932,15 @@
               <label class="field-label" for="checklistPreset">Preset</label>
               <select id="checklistPreset">
                 <option value="new-run">New Run Prep</option>
-                <option value="while-searching">While Searching</option>
+                <option value="while-searching">Searching Phase</option>
                 <option value="enemy-safety">Enemy Safety</option>
-                <option value="endgame">Endgame</option>
+                <option value="key-routine">Key Found Routine</option>
+                <option value="endgame">Endgame / Red Room Prep</option>
               </select>
               <div class="controls">
                 <button class="btn ghost" id="applyChecklistPresetBtn">Apply preset</button>
-                <button class="btn primary" id="copyChecklistBtn">Copy checklist</button>
+                <button class="btn ghost" id="resetChecklistPresetBtn">Reset current preset</button>
+                <button class="btn primary" id="copyChecklistBtn">Copy checklist status</button>
                 <button class="btn danger" id="resetChecklistBtn">Reset checklist</button>
               </div>
               <div style="height:14px"></div>
@@ -1517,6 +1966,119 @@
               <div class="check-group" id="checkCustom" style="margin-top:14px"></div>
             </div>
           </article>
+        </section>
+      </section>
+
+      <section class="view" id="view-threats">
+        <section class="threat-grid" id="threatGuideGrid"></section>
+        <article class="card soft" style="margin-top:18px">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Threat workflow</div>
+              <div class="small">Quick actions for when you hear a cue and need to log or practice it fast.</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="quick-action-grid">
+              <button class="btn ghost" data-quick-event="Enemy cue">Log enemy cue</button>
+              <a class="btn ghost" href="#soundboard">Open Soundboard</a>
+              <a class="btn ghost" href="#run">Open Run Timer</a>
+              <a class="btn ghost" href="#checklist">Open Checklist</a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="view" id="view-sites">
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Sites Database / Page Lookup</div><div class="small">Search WTTG 1 page names by key chance and open time. The default order follows the walkthrough list from top to bottom.</div></div>
+            </div>
+            <div class="card-body">
+              <div class="metric-row">
+                <div class="mini-stat"><span>Total known</span><strong id="sitesTotalCount">0</strong></div>
+                <div class="mini-stat"><span>Key-spawn</span><strong id="sitesKeyCount">0</strong></div>
+                <div class="mini-stat"><span>Dead links</span><strong id="sitesDeadCount">0</strong></div>
+                <div class="mini-stat"><span>Open now</span><strong id="sitesOpenCount">--</strong></div>
+              </div>
+              <div class="site-toolbar">
+                <input id="siteSearch" placeholder="Search site names or notes..." autocomplete="off" />
+                <select id="siteCategoryFilter">
+                  <option value="all">All categories</option>
+                  <option value="dead">Dead Link</option>
+                  <option value="possible-key">Possible key</option>
+                  <option value="always-key">Always key</option>
+                  <option value="deep-wiki">Deep Wiki URL</option>
+                  <option value="secret-n-keys">Secret N Keys</option>
+                  <option value="ceased">Ceased</option>
+                </select>
+                <select id="siteOpenFilter">
+                  <option value="all">All open times</option>
+                </select>
+                <select id="siteTimeInput">
+                  <option value="">In-game time</option>
+                  <option value="22">10PM</option>
+                  <option value="23">11PM</option>
+                  <option value="24">12AM</option>
+                  <option value="25">1AM</option>
+                  <option value="26">2AM</option>
+                  <option value="27">3AM</option>
+                </select>
+              </div>
+              <div class="site-grid" id="siteGrid"></div>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div><div class="card-title">Lookup Notes</div><div class="small" id="sitesShownCount">0 shown</div></div>
+            </div>
+            <div class="card-body">
+              <div class="compiled-key" id="sitesSummary">Select an in-game time to see currently open sites.</div>
+              <div class="controls">
+                <button class="btn primary" id="copyOpenSitesBtn">Copy open sites</button>
+                <button class="btn ghost" id="showFavoriteSitesBtn">Show favorites</button>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </section>
+
+      <section class="view" id="view-resources">
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Resources / Learning</div><div class="small">Links to useful wiki pages and guides, plus your own short notes.</div></div>
+            </div>
+            <div class="card-body">
+              <div class="filter-bar">
+                <input id="resourceSearch" placeholder="Search resources, tags, notes..." autocomplete="off" />
+                <select id="resourceTypeFilter">
+                  <option value="all">All types</option>
+                  <option value="Wiki">Wiki</option>
+                  <option value="Steam Guide">Steam Guide</option>
+                  <option value="Tool">Tool</option>
+                  <option value="Notes">Notes</option>
+                </select>
+                <select id="resourceTagFilter">
+                  <option value="all">All tags</option>
+                </select>
+              </div>
+              <div class="resource-grid" id="resourceGrid"></div>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div><div class="card-title">Favorites</div><div class="small" id="resourceCounter">0 resources</div></div>
+            </div>
+            <div class="card-body">
+              <div class="compiled-key" id="resourceSummary">No favorite resources yet.</div>
+              <div class="controls">
+                <button class="btn primary" id="copyResourceNotesBtn">Copy resource notes</button>
+                <button class="btn ghost" id="openResourceFavoritesBtn">Show favorites</button>
+              </div>
+            </div>
+          </aside>
         </section>
       </section>
 
@@ -1552,9 +2114,11 @@
                   </div>
                   <label class="field-label" for="settingsTrollPool">Cue pool</label>
                   <select id="settingsTrollPool">
-                    <option value="scary">Scary real-like cues</option>
+                    <option value="scary">Real-like cues</option>
                     <option value="all">All audio cues</option>
                     <option value="fake">Fake / ignore only</option>
+                    <option value="breather">Breather only</option>
+                    <option value="kidnapper">Kidnapper only</option>
                   </select>
                   <label class="toggle-row">
                     <input id="settingsTrollInstant" type="checkbox" />
@@ -1578,6 +2142,23 @@
               </div>
               <div class="danger-zone">
                 <div><div class="card-title" style="font-size:16px">Reset local saves</div><div class="small">This clears only the toolkit keys listed in this app, not unrelated browser storage.</div></div>
+                <label class="field-label" for="settingsModuleReset">Module</label>
+                <select id="settingsModuleReset">
+                  <option value="runTimer">Run Timer</option>
+                  <option value="claffis">Claffis</option>
+                  <option value="keys">Key Compiler</option>
+                  <option value="links">A.N.N Notes</option>
+                  <option value="wins">Win Log</option>
+                  <option value="soundboard">Soundboard</option>
+                  <option value="soundTraining">Sound Training Stats</option>
+                  <option value="checklist">Checklist</option>
+                  <option value="claffisPractice">Claffis Practice Stats</option>
+                  <option value="sites">Site Favorites / Notes</option>
+                  <option value="resources">Resources</option>
+                  <option value="strategy">Run Strategy</option>
+                  <option value="settings">Settings</option>
+                </select>
+                <button class="btn danger" id="settingsResetModuleBtn">Reset selected module</button>
                 <button class="btn danger" id="settingsResetAllBtn">Reset all toolkit data</button>
               </div>
             </div>
@@ -1639,8 +2220,26 @@
       checklist: {
         title: "Session Checklist",
         eyebrow: "Run control",
-        subtitle: "Simple saved checkboxes for preparation and searching. Mostly here to stop panic-clicking and forgetting important stuff.",
+        subtitle: "Simple saved checkboxes for preparation and searching. Mostly here to stop rushed clicking and forgetting important stuff.",
         pill: "Local checklist"
+      },
+      threats: {
+        title: "Threat Guide",
+        eyebrow: "Emergency reference",
+        subtitle: "Fast reaction cards for Breather, Kidnapper and general danger cues. Designed for quick reads during a run.",
+        pill: "Enemy reactions"
+      },
+      sites: {
+        title: "Sites Database",
+        eyebrow: "Page lookup",
+        subtitle: "Search WTTG 1 site names by key chance, open window, Deep Wiki links, Secret N Keys, dead links and notes.",
+        pill: "Known pages"
+      },
+      resources: {
+        title: "Resources",
+        eyebrow: "Learning hub",
+        subtitle: "Open useful WTTG wiki pages and Steam guides, filter by topic, favorite links, and keep your own short notes.",
+        pill: "Guides + notes"
       },
       settings: {
         title: "Settings",
@@ -1658,6 +2257,10 @@
       wins: "wttg1-toolkit-wins-v1",
       soundboard: "wttg1-toolkit-soundboard-v1",
       checklist: "wttg1-toolkit-checklist-v1",
+      resources: "wttg1-toolkit-resources-v1",
+      strategy: "wttg1-toolkit-strategy-v1",
+      sites: "wttg1-toolkit-sites-v1",
+      claffisPractice: "wttg1-toolkit-claffis-practice-v1",
       settings: "wttg1-toolkit-settings-v1"
     };
 
@@ -1739,7 +2342,7 @@
       settings.trollDefaults = { ...defaultSettings.trollDefaults, ...(settings.trollDefaults || {}) };
       settings.trollDefaults.frequency = Math.min(180, Math.max(10, Number(settings.trollDefaults.frequency || 45)));
       settings.trollDefaults.jitter = Math.min(90, Math.max(0, Number(settings.trollDefaults.jitter || 20)));
-      settings.trollDefaults.pool = ["scary", "all", "fake"].includes(settings.trollDefaults.pool) ? settings.trollDefaults.pool : "scary";
+      settings.trollDefaults.pool = ["scary", "all", "fake", "breather", "kidnapper"].includes(settings.trollDefaults.pool) ? settings.trollDefaults.pool : "scary";
       settings.trollDefaults.instant = Boolean(settings.trollDefaults.instant);
       return settings;
     }
@@ -1810,6 +2413,522 @@
 
     window.addEventListener("hashchange", navigate);
 
+    // Run strategy module
+    let strategyState = loadJson(STORAGE.strategy, {
+      objective: "",
+      wikiLevel: "",
+      threat: "none",
+      nextAction: "",
+      updatedAt: null
+    });
+    if (!strategyState || typeof strategyState !== "object") strategyState = { objective: "", wikiLevel: "", threat: "none", nextAction: "", updatedAt: null };
+
+    function saveStrategy() {
+      strategyState.objective = $("#strategyObjective")?.value.trim() || "";
+      strategyState.wikiLevel = $("#strategyWikiLevel")?.value || "";
+      strategyState.threat = $("#strategyThreat")?.value || "none";
+      strategyState.nextAction = $("#strategyNextAction")?.value.trim() || "";
+      strategyState.updatedAt = new Date().toISOString();
+      saveJson(STORAGE.strategy, strategyState);
+      renderStrategy();
+      renderDashboard();
+      showToast("Strategy saved.");
+    }
+
+    function setStrategyAction(action) {
+      if ($("#strategyNextAction")) $("#strategyNextAction").value = action;
+      if (action === "Search pages") setRoute("links");
+      if (action === "Compile key") setRoute("keys");
+      if (action === "Reset modem") addTimerEvent("Modem reset", "Added from Strategy Board.");
+      if (action === "Listen for cue") setRoute("soundboard");
+      if (action === "Open Claffis") setRoute("claffis");
+      if (action === "Check resources") setRoute("resources");
+      saveStrategy();
+    }
+
+    function renderStrategy() {
+      if ($("#strategyObjective")) $("#strategyObjective").value = strategyState.objective || "";
+      if ($("#strategyWikiLevel")) $("#strategyWikiLevel").value = strategyState.wikiLevel || "";
+      if ($("#strategyThreat")) $("#strategyThreat").value = strategyState.threat || "none";
+      if ($("#strategyNextAction")) $("#strategyNextAction").value = strategyState.nextAction || "";
+      const summary = $("#strategySummary");
+      if (summary) {
+        const filledKeys = typeof getFilledKeys === "function" ? getFilledKeys().length : 0;
+        summary.textContent = [
+          `Objective: ${strategyState.objective || "not set"}`,
+          `Deep Wiki level: ${strategyState.wikiLevel || "?"}`,
+          `Keys found: ${filledKeys} / 8`,
+          `Threat focus: ${strategyState.threat || "none"}`,
+          `Next action: ${strategyState.nextAction || "not set"}`
+        ].join("\n");
+      }
+      if ($("#strategySavedAt")) $("#strategySavedAt").textContent = strategyState.updatedAt ? `Saved ${formatDateTime(strategyState.updatedAt)}` : "Not saved yet";
+    }
+
+    $("#strategySaveBtn")?.addEventListener("click", saveStrategy);
+    $$("button[data-strategy-action]").forEach((button) => button.addEventListener("click", () => setStrategyAction(button.dataset.strategyAction)));
+    ["#strategyObjective", "#strategyWikiLevel", "#strategyThreat", "#strategyNextAction"].forEach((selector) => {
+      const element = $(selector);
+      if (element) element.addEventListener("change", saveStrategy);
+    });
+
+    // Resources module
+    const resourceLibrary = [
+      {
+        id: "walkthrough",
+        title: "Welcome to the Game Walkthrough",
+        type: "Wiki",
+        tags: ["walkthrough", "keys", "red room", "enemies"],
+        description: "Broad walkthrough reference for run flow, threats, and puzzle context.",
+        url: "https://welcometothegame.fandom.com/wiki/Welcome_to_the_Game_Walkthrough"
+      },
+      {
+        id: "wiki-home",
+        title: "Welcome to the Game Wiki",
+        type: "Wiki",
+        tags: ["wiki", "reference", "pages"],
+        description: "General wiki hub for pages, mechanics, enemies, and connected articles.",
+        url: "https://welcometothegame.fandom.com/wiki/Welcome_to_the_Game_Wiki"
+      },
+      {
+        id: "claffis-wiki",
+        title: "Claffis Wiki",
+        type: "Wiki",
+        tags: ["Claffis", "puzzle", "sequence"],
+        description: "Focused reference for the Claffis puzzle and its in-game context.",
+        url: "https://welcometothegame.fandom.com/wiki/Claffis"
+      },
+      {
+        id: "steam-tips-20",
+        title: "Welcome to the Game 2.0 Tips",
+        type: "Steam Guide",
+        tags: ["tips", "strategy", "enemies"],
+        description: "Steam community tips guide for practical survival and run habits.",
+        url: "https://steamcommunity.com/sharedfiles/filedetails/?id=820857871"
+      },
+      {
+        id: "steam-strategy-20",
+        title: "Welcome To The Game v2.0 Strategy Guide",
+        type: "Steam Guide",
+        tags: ["strategy", "walkthrough", "keys"],
+        description: "Long-form strategy guide link for planning and troubleshooting runs.",
+        url: "https://steamcommunity.com/sharedfiles/filedetails/?id=1319259305"
+      },
+      {
+        id: "top-one-percent",
+        title: "Top 1% of the 1%",
+        type: "Steam Guide",
+        tags: ["challenge", "advanced", "routing"],
+        description: "Advanced guide link for high-level play and achievement-style routing.",
+        url: "https://steamcommunity.com/sharedfiles/filedetails/?id=3012293249"
+      },
+      {
+        id: "local-toolkit",
+        title: "This Toolkit",
+        type: "Tool",
+        tags: ["offline", "notes", "timer", "keys"],
+        description: "Use this app alongside external guides to track only what matters in your current run.",
+        url: "#dashboard"
+      }
+    ];
+
+    let resourceState = loadJson(STORAGE.resources, {});
+    if (!resourceState || typeof resourceState !== "object") resourceState = {};
+    let resourceFilters = { search: "", type: "all", tag: "all", favoritesOnly: false };
+
+    function getResourceMeta(id) {
+      const meta = resourceState[id] || {};
+      return { favorite: Boolean(meta.favorite), note: meta.note || "", updatedAt: meta.updatedAt || null };
+    }
+
+    function saveResourceMeta(id, patch) {
+      resourceState[id] = { ...getResourceMeta(id), ...patch, updatedAt: new Date().toISOString() };
+      saveJson(STORAGE.resources, resourceState);
+      renderResources();
+      renderDashboard();
+    }
+
+    function getFilteredResources() {
+      const search = resourceFilters.search.trim().toLowerCase();
+      return resourceLibrary.filter((resource) => {
+        const meta = getResourceMeta(resource.id);
+        const haystack = [resource.title, resource.type, resource.description, meta.note, ...resource.tags].join(" ").toLowerCase();
+        const matchesSearch = !search || haystack.includes(search);
+        const matchesType = resourceFilters.type === "all" || resource.type === resourceFilters.type;
+        const matchesTag = resourceFilters.tag === "all" || resource.tags.includes(resourceFilters.tag);
+        const matchesFavorite = !resourceFilters.favoritesOnly || meta.favorite;
+        return matchesSearch && matchesType && matchesTag && matchesFavorite;
+      });
+    }
+
+    function renderResourceTagFilter() {
+      const select = $("#resourceTagFilter");
+      if (!select) return;
+      const selected = select.value || "all";
+      const tags = [...new Set(resourceLibrary.flatMap((resource) => resource.tags))].sort((a, b) => a.localeCompare(b));
+      select.innerHTML = `<option value="all">All tags</option>${tags.map((tag) => `<option value="${escapeHtml(tag)}">${escapeHtml(tag)}</option>`).join("")}`;
+      select.value = tags.includes(selected) ? selected : "all";
+      resourceFilters.tag = select.value;
+    }
+
+    function renderResources() {
+      renderResourceTagFilter();
+      const grid = $("#resourceGrid");
+      if (!grid) return;
+      const resources = getFilteredResources();
+      $("#resourceCounter").textContent = `${resourceLibrary.length} resources · ${resourceLibrary.filter((resource) => getResourceMeta(resource.id).favorite).length} favorites`;
+      grid.innerHTML = "";
+      if (!resources.length) {
+        grid.innerHTML = `<div class="small">No resources match the current filters.</div>`;
+      }
+      resources.forEach((resource) => {
+        const meta = getResourceMeta(resource.id);
+        const card = document.createElement("article");
+        card.className = "resource-card";
+        card.innerHTML = `
+          <div class="resource-head">
+            <div>
+              <div class="resource-title">${escapeHtml(resource.title)}</div>
+              <div class="small">${escapeHtml(resource.type)}${meta.updatedAt ? ` · note updated ${escapeHtml(formatDateTime(meta.updatedAt))}` : ""}</div>
+            </div>
+            <button class="btn tiny-btn ghost" data-resource-fav="${escapeHtml(resource.id)}">${meta.favorite ? "Unstar" : "Star"}</button>
+          </div>
+          <div class="small">${escapeHtml(resource.description)}</div>
+          <div class="tag-list">${resource.tags.map((tag) => `<span class="tag-chip">#${escapeHtml(tag)}</span>`).join("")}</div>
+          <textarea class="resource-note" data-resource-note="${escapeHtml(resource.id)}" placeholder="Your short note for this resource...">${escapeHtml(meta.note)}</textarea>
+          <div class="controls" style="margin-top:0">
+            <a class="btn primary" href="${escapeHtml(resource.url)}" target="${resource.url.startsWith("#") ? "_self" : "_blank"}" rel="noopener noreferrer">Open link</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      grid.querySelectorAll("button[data-resource-fav]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.dataset.resourceFav;
+          saveResourceMeta(id, { favorite: !getResourceMeta(id).favorite });
+          showToast(getResourceMeta(id).favorite ? "Resource favorited." : "Resource unstarred.");
+        });
+      });
+      grid.querySelectorAll("textarea[data-resource-note]").forEach((textarea) => {
+        textarea.addEventListener("change", () => {
+          saveResourceMeta(textarea.dataset.resourceNote, { note: textarea.value.trim() });
+          showToast("Resource note saved.");
+        });
+      });
+      const favorites = resourceLibrary.filter((resource) => getResourceMeta(resource.id).favorite);
+      $("#resourceSummary").textContent = favorites.length
+        ? favorites.map((resource) => `* ${resource.title}`).join("\n")
+        : "No favorite resources yet.";
+    }
+
+    function getResourceNotesText() {
+      return resourceLibrary.map((resource) => {
+        const meta = getResourceMeta(resource.id);
+        return `${meta.favorite ? "* " : ""}${resource.title} [${resource.type}]\n${resource.url}\nTags: ${resource.tags.join(", ")}\nNote: ${meta.note || "-"}`;
+      }).join("\n\n");
+    }
+
+    $("#resourceSearch")?.addEventListener("input", (event) => { resourceFilters.search = event.target.value; renderResources(); });
+    $("#resourceTypeFilter")?.addEventListener("change", (event) => { resourceFilters.type = event.target.value; renderResources(); });
+    $("#resourceTagFilter")?.addEventListener("change", (event) => { resourceFilters.tag = event.target.value; renderResources(); });
+    $("#openResourceFavoritesBtn")?.addEventListener("click", () => { resourceFilters.favoritesOnly = !resourceFilters.favoritesOnly; renderResources(); });
+    $("#copyResourceNotesBtn")?.addEventListener("click", () => copyText(getResourceNotesText(), "Resource notes copied."));
+
+    // Threat guide module
+    const threatGuideData = [
+      {
+        id: "breather",
+        title: "Breather",
+        cues: ["Car door / outside approach cue.", "Faint doorknob or front-door pressure.", "A real cue means stop browsing immediately."],
+        dos: ["Go to the front door.", "Hold the doorknob until the danger passes.", "Return only after the cue is handled."],
+        donts: ["Do not keep typing.", "Do not ignore repeated door cues.", "Do not wander around the room."],
+        checklist: ["Hands off keyboard.", "Confirm Breather cue.", "Front door.", "Hold doorknob."]
+      },
+      {
+        id: "kidnapper",
+        title: "Kidnapper",
+        cues: ["Grass steps plus voice cue.", "Location-style visual cue can matter.", "Phone during encounter can become dangerous."],
+        dos: ["Turn lights off.", "Stay quiet and wait.", "If the phone rings during the encounter, pick up and hang up."],
+        donts: ["Do not browse with lights on.", "Do not treat standalone ambience as the full cue.", "Do not let rushed clicks stack up."],
+        checklist: ["Stop typing.", "Lights off.", "Stay quiet.", "Handle phone if needed."]
+      },
+      {
+        id: "general",
+        title: "Other / general danger",
+        cues: ["Unexpected audio while searching.", "Suspicious page state.", "You are unsure what you heard."],
+        dos: ["Pause and listen.", "Log the cue to the timer.", "Use Soundboard practice if unsure after the run."],
+        donts: ["Do not guess while actively typing.", "Do not erase notes while stressed.", "Do not reset tools unless the run actually died."],
+        checklist: ["Stop.", "Listen.", "Identify.", "React or resume."]
+      }
+    ];
+
+    function renderThreatGuide() {
+      const grid = $("#threatGuideGrid");
+      if (!grid) return;
+      grid.innerHTML = threatGuideData.map((threat) => `
+        <article class="threat-card">
+          <h2>${escapeHtml(threat.title)}</h2>
+          <div><div class="field-label">Cue signs</div><ul class="quick-list">${threat.cues.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+          <div><div class="field-label">What to do</div><ul class="quick-list">${threat.dos.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+          <div><div class="field-label">What not to do</div><ul class="quick-list">${threat.donts.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+          <div><div class="field-label">Quick checklist</div><ul class="quick-list">${threat.checklist.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+          <div class="controls">
+            <button class="btn danger" data-threat-log="${escapeHtml(threat.title)}">Log cue to timer</button>
+            <button class="btn ghost" data-threat-practice="${escapeHtml(threat.id)}">Practice this cue</button>
+          </div>
+        </article>
+      `).join("");
+      grid.querySelectorAll("button[data-threat-log]").forEach((button) => {
+        button.addEventListener("click", () => addTimerEvent("Enemy cue", button.dataset.threatLog));
+      });
+      grid.querySelectorAll("button[data-threat-practice]").forEach((button) => {
+        button.addEventListener("click", () => {
+          setRoute("soundboard");
+          showToast(`Practice ${button.dataset.threatPractice} cues in Soundboard.`);
+        });
+      });
+    }
+
+
+    // Sites database module
+    const openTimeOptions = ["Always Open", "10PM–1AM", "10PM–2AM", "11PM–2AM", "11PM–3AM", "12AM–3AM", "12AM–Rest of Night", "1AM–Rest of Night", "2AM–Rest of Night", "3AM–Rest of Night", "Dead Link", "Ceased"];
+
+    const siteSourceRows = [
+      ...["133734", "Alphabit Market", "ANN Hoster", "ANN Wallet", "Beaminfo", "BLACKHOST", "Black Wire", "CannabisWorld", "Charlie EU", "Cheap Cigs", "Decrypt You", "Deepweed", "DoubleUP", "Dream Place", "Easy Paybuddy", "Flame", "Gnumped", "Hidden Questions", "Hotel ANN", "Mobile Market", "Parasite", "Pay Blocker", "Paybuddy Dolla", "PirateHACKERS", "Pounds", "Rent A Hacker", "Shiwa", "The Info Exchange", "Upper Earth", "Vess", "XXXTEENXXX"].map((name) => ({ name, openTime: "Dead Link", categories: ["dead"], keyChance: "Dead Link", sourceSection: "Dead Link Sites" })),
+      ["Bathroom Cams", "Always Open", "Bathroom Cams"],
+      ["Black Hat Post", "10PM–1AM"],
+      ["Borrow My Daughter", "Always Open"],
+      ["Burned At The Stake", "10PM–2AM"],
+      ["Cheap Surgery", "Always Open"],
+      ["DarkBook", "Always Open"],
+      ["Death Log", "Always Open"],
+      ["Doctor Murder", "12AM–3AM"],
+      ["Euro Firearms", "10PM–1AM"],
+      ["Family Drug Shop", "Always Open"],
+      ["Father Donald", "12AM–Rest of Night"],
+      ["Flesh Trade", "Always Open"],
+      ["Forgive Me", "Always Open"],
+      ["Forsaken Gifts", "Always Open"],
+      ["Grandmas Fantasy", "Always Open"],
+      ["Grave Thieves", "11PM–3AM"],
+      ["Greet MySisters", "12AM–Rest of Night"],
+      ["Hail Satan", "Always Open"],
+      ["Hidden Cams", "Always Open"],
+      ["Hot Burners", "Always Open"],
+      ["Illuminati", "3AM–Rest of Night"],
+      ["IsEvil", "2AM–Rest of Night"],
+      ["Kill For Me", "12AM–Rest of Night"],
+      ["Legion", "Always Open"],
+      ["NudeYouTubers", "11PM–2AM"],
+      ["Organ Mart", "10PM–1AM"],
+      ["Passports R Us", "Always Open"],
+      ["Pay 2 Rape", "1AM–Rest of Night"],
+      ["Scream Bitch", "Always Open"],
+      ["Shadow Web Portal", "12AM–3AM"],
+      ["Steroid Queen", "Always Open"],
+      ["Takedownman", "Always Open"],
+      ["Tango Down", "10PM–2AM"],
+      ["Testical Mutilation", "12AM–3AM"],
+      ["The Bomb Maker", "Always Open"],
+      ["The Butcher", "Always Open"],
+      ["The Doll Maker", "Always Open"],
+      ["The Loogaroo", "Always Open"],
+      ["The Muhgel", "10PM–1AM"],
+      ["The Pedo Handbook", "1AM–Rest of Night"],
+      ["The Prey", "11PM–2AM"],
+      ["Warehouse 33", "Always Open"],
+      ["Weed Post", "Always Open"],
+      ["zeroDay", "Always Open"],
+      { name: "The Gatekeeper", openTime: "Always Open", categories: ["always-key"], keyChance: "Always", sourceSection: "Always Key Sites" },
+      { name: "ChosenAwake", openTime: "Always Open", categories: ["deep-wiki"], keyChance: "Deep Wiki", sourceSection: "Deep Wiki URL Sites" },
+      { name: "Claffis", openTime: "Always Open", categories: ["deep-wiki"], keyChance: "Deep Wiki", sourceSection: "Deep Wiki URL Sites" },
+      { name: "Cotton Road", openTime: "Ceased", categories: ["ceased"], keyChance: "Ceased", sourceSection: "Ceased Sites" },
+      { name: "The Bunker", openTime: "Ceased", categories: ["ceased"], keyChance: "Ceased", sourceSection: "Ceased Sites" }
+    ].map((row) => Array.isArray(row) ? ({ name: row[0], openTime: row[1], categories: ["possible-key"], keyChance: "Possible", sourceSection: "Possible Key Spawn Sites" }) : row);
+
+    const secretNKeySiteNames = new Set(["Grandmas Fantasy", "Greet MySisters", "NudeYouTubers", "Testical Mutilation"]);
+
+    function normalizeOpenTimeLabel(value) {
+      return String(value || "Always Open")
+        .replace(/\s*-\s*/g, "–")
+        .replace(/Open from\s*/i, "")
+        .trim();
+    }
+
+    function buildSitesDatabase() {
+      const seen = new Map();
+      const ordered = [];
+      siteSourceRows.forEach((row, index) => {
+        const id = row.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+        const existing = seen.get(id);
+        const categories = [...(row.categories || [])];
+        if (secretNKeySiteNames.has(row.name)) categories.push("secret-n-keys");
+        const patch = {
+          id,
+          sourceOrder: existing ? existing.sourceOrder : index + 1,
+          name: row.name,
+          openTime: normalizeOpenTimeLabel(row.openTime),
+          categories,
+          keyChance: row.keyChance || "None",
+          sourceSection: row.sourceSection || "Known Sites"
+        };
+        if (existing) {
+          existing.categories = [...new Set([...existing.categories, ...patch.categories])];
+          if (existing.openTime === "Always Open" && patch.openTime !== "Always Open") existing.openTime = patch.openTime;
+          if (existing.keyChance === "None") existing.keyChance = patch.keyChance;
+        } else {
+          patch.categories = [...new Set(patch.categories)];
+          seen.set(id, patch);
+          ordered.push(patch);
+        }
+      });
+      return ordered;
+    }
+
+    const sitesDatabase = buildSitesDatabase();
+    let siteState = loadJson(STORAGE.sites, {});
+    if (!siteState || typeof siteState !== "object") siteState = {};
+    let siteFilters = { search: "", category: "all", openTime: "all", time: "", favoritesOnly: false };
+
+    function getSiteMeta(id) {
+      const meta = siteState[id] || {};
+      return { favorite: Boolean(meta.favorite), note: meta.note || "", updatedAt: meta.updatedAt || null };
+    }
+
+    function saveSiteMeta(id, patch) {
+      siteState[id] = { ...getSiteMeta(id), ...patch, updatedAt: new Date().toISOString() };
+      saveJson(STORAGE.sites, siteState);
+      renderSites();
+      renderDashboard();
+    }
+
+    function isSiteOpenAt(site, hourValue = siteFilters.time) {
+      if (site.openTime === "Always Open") return true;
+      if (site.openTime === "Dead Link" || site.openTime === "Ceased" || !hourValue) return false;
+      const hour = Number(hourValue);
+      const windows = {
+        "10PM–1AM": [22, 25], "10PM–2AM": [22, 26], "11PM–2AM": [23, 26], "11PM–3AM": [23, 27],
+        "12AM–3AM": [24, 27], "12AM–Rest of Night": [24, 28], "1AM–Rest of Night": [25, 28],
+        "2AM–Rest of Night": [26, 28], "3AM–Rest of Night": [27, 28]
+      };
+      const range = windows[site.openTime];
+      return range ? hour >= range[0] && hour < range[1] : false;
+    }
+
+    function getFilteredSites() {
+      const search = siteFilters.search.trim().toLowerCase();
+      return sitesDatabase.filter((site) => {
+        const meta = getSiteMeta(site.id);
+        const text = [site.name, site.openTime, site.keyChance, meta.note, ...site.categories].join(" ").toLowerCase();
+        return (!search || text.includes(search))
+          && (siteFilters.category === "all" || site.categories.includes(siteFilters.category))
+          && (siteFilters.openTime === "all" || site.openTime === siteFilters.openTime)
+          && (!siteFilters.favoritesOnly || meta.favorite);
+      });
+    }
+
+    function getSiteInfoText(site) {
+      const meta = getSiteMeta(site.id);
+      return `${site.name}\nCategories: ${site.categories.join(", ") || "none"}\nOpen time: ${site.openTime}\nKey chance: ${site.keyChance}\nFavorite: ${meta.favorite ? "yes" : "no"}\nNote: ${meta.note || "-"}`;
+    }
+
+    function sendSiteToNotes(siteId) {
+      const site = sitesDatabase.find((item) => item.id === siteId);
+      if (!site) return;
+      linksState.push({
+        id: makeId(),
+        url: site.name,
+        title: site.name,
+        status: site.categories.includes("dead") || site.categories.includes("ceased") ? "dead" : site.categories.includes("possible-key") || site.categories.includes("always-key") ? "key" : "unchecked",
+        source: "page",
+        note: getSiteInfoText(site),
+        tags: ["site", ...site.categories],
+        important: site.categories.includes("always-key") || site.categories.includes("deep-wiki"),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+      saveLinks();
+      showToast("Site sent to A.N.N Notes.");
+    }
+
+    function renderSiteOpenFilter() {
+      const select = $("#siteOpenFilter");
+      if (!select) return;
+      const selected = select.value || "all";
+      select.innerHTML = `<option value="all">All open times</option>${openTimeOptions.map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join("")}`;
+      select.value = openTimeOptions.includes(selected) ? selected : "all";
+      siteFilters.openTime = select.value;
+    }
+
+    function renderSites() {
+      renderSiteOpenFilter();
+      const grid = $("#siteGrid");
+      if (!grid) return;
+      const filtered = getFilteredSites();
+      const keySites = sitesDatabase.filter((site) => site.categories.includes("possible-key") || site.categories.includes("always-key"));
+      const deadSites = sitesDatabase.filter((site) => site.categories.includes("dead"));
+      const openNow = siteFilters.time ? sitesDatabase.filter((site) => isSiteOpenAt(site)).length : null;
+      $("#sitesTotalCount").textContent = sitesDatabase.length;
+      $("#sitesKeyCount").textContent = keySites.length;
+      $("#sitesDeadCount").textContent = deadSites.length;
+      $("#sitesOpenCount").textContent = openNow === null ? "--" : openNow;
+      $("#sitesShownCount").textContent = `${filtered.length} shown`;
+      $("#sitesSummary").textContent = siteFilters.time
+        ? `${openNow} known sites are open for the selected time. Favorites: ${sitesDatabase.filter((site) => getSiteMeta(site.id).favorite).length}.`
+        : "Select an in-game time to see currently open sites.";
+      grid.innerHTML = filtered.length ? "" : `<div class="small">No sites match the current filters.</div>`;
+      filtered.forEach((site) => {
+        const meta = getSiteMeta(site.id);
+        const card = document.createElement("article");
+        card.className = "site-card";
+        card.innerHTML = `
+          <div class="site-card-head">
+            <div>
+              <div class="site-order">#${escapeHtml(site.sourceOrder)} · ${escapeHtml(site.sourceSection || "Known Sites")}</div>
+              <div class="site-title">${escapeHtml(site.name)}</div>
+              <div class="small">${isSiteOpenAt(site) ? "Open for selected time" : siteFilters.time ? "Closed for selected time" : "Time not checked"}</div>
+            </div>
+            <button class="btn tiny-btn ghost" data-site-fav="${escapeHtml(site.id)}">${meta.favorite ? "Unstar" : "Star"}</button>
+          </div>
+          <div class="site-badges">
+            ${site.categories.map((category) => `<span class="status-tag status-${category === "dead" || category === "ceased" ? "danger" : category === "always-key" ? "key" : "checked"}">${escapeHtml(category)}</span>`).join("")}
+            <span class="status-tag status-unchecked">${escapeHtml(site.openTime)}</span>
+            <span class="status-tag status-key">Key: ${escapeHtml(site.keyChance)}</span>
+          </div>
+          <div class="site-meta-line">
+            <div><strong>Open time:</strong> ${escapeHtml(site.openTime)}</div>
+            <div><strong>Key status:</strong> ${escapeHtml(site.keyChance)}</div>
+            <div><strong>Source order:</strong> ${escapeHtml(site.sourceSection || "Known Sites")}</div>
+          </div>
+          <textarea class="site-note" data-site-note="${escapeHtml(site.id)}" placeholder="Your note for this site...">${escapeHtml(meta.note)}</textarea>
+          <div class="controls" style="margin-top:0">
+            <button class="btn tiny-btn primary" data-site-copy="${escapeHtml(site.id)}">Copy</button>
+            <button class="btn tiny-btn ghost" data-site-send="${escapeHtml(site.id)}">Send to Notes</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      grid.querySelectorAll("button[data-site-fav]").forEach((button) => button.addEventListener("click", () => saveSiteMeta(button.dataset.siteFav, { favorite: !getSiteMeta(button.dataset.siteFav).favorite })));
+      grid.querySelectorAll("textarea[data-site-note]").forEach((textarea) => textarea.addEventListener("change", () => saveSiteMeta(textarea.dataset.siteNote, { note: textarea.value.trim() })));
+      grid.querySelectorAll("button[data-site-copy]").forEach((button) => button.addEventListener("click", () => {
+        const site = sitesDatabase.find((item) => item.id === button.dataset.siteCopy);
+        if (site) copyText(getSiteInfoText(site), "Site info copied.");
+      }));
+      grid.querySelectorAll("button[data-site-send]").forEach((button) => button.addEventListener("click", () => sendSiteToNotes(button.dataset.siteSend)));
+    }
+
+    function getOpenSitesText() {
+      const list = sitesDatabase.filter((site) => isSiteOpenAt(site));
+      return list.map((site) => `${site.name} — ${site.openTime} — ${site.keyChance}`).join("\n");
+    }
+
+    $("#siteSearch")?.addEventListener("input", (event) => { siteFilters.search = event.target.value; renderSites(); });
+    $("#siteCategoryFilter")?.addEventListener("change", (event) => { siteFilters.category = event.target.value; renderSites(); });
+    $("#siteOpenFilter")?.addEventListener("change", (event) => { siteFilters.openTime = event.target.value; renderSites(); });
+    $("#siteTimeInput")?.addEventListener("change", (event) => { siteFilters.time = event.target.value; renderSites(); renderDashboard(); });
+    $("#copyOpenSitesBtn")?.addEventListener("click", () => copyText(getOpenSitesText(), "Open sites copied."));
+    $("#showFavoriteSitesBtn")?.addEventListener("click", () => { siteFilters.favoritesOnly = !siteFilters.favoritesOnly; renderSites(); });
+
     // Run timer module
     let runTimerState = loadJson(STORAGE.runTimer, {
       elapsedMs: 0,
@@ -1860,6 +2979,16 @@
       if (count) count.textContent = `${runTimerState.events.length} ${runTimerState.events.length === 1 ? "event" : "events"}`;
       const sendToNotes = $("#timerSendToNotes");
       if (sendToNotes) sendToNotes.checked = Boolean(runTimerState.sendToNotes);
+      const summary = $("#timerSummaryBox");
+      if (summary) {
+        const lastEvent = runTimerState.events[runTimerState.events.length - 1];
+        summary.textContent = [
+          `Status: ${runTimerState.running ? "running" : elapsed > 0 ? "paused" : "idle"}`,
+          `Elapsed: ${formatDuration(elapsed, true)}`,
+          `Events: ${runTimerState.events.length}`,
+          `Last event: ${lastEvent ? `${formatDuration(lastEvent.timeMs || 0, true)} ${lastEvent.title}` : "none"}`
+        ].join("\n");
+      }
       const timeline = $("#timerTimeline");
       if (!timeline) return;
       timeline.innerHTML = "";
@@ -1944,6 +3073,14 @@
         .join("\n");
     }
 
+    function getTimelineJsonText() {
+      return JSON.stringify({
+        elapsedMs: getRunElapsedMs(),
+        exportedAt: new Date().toISOString(),
+        events: runTimerState.events
+      }, null, 2);
+    }
+
     function addTimerEventToNotes(timerEvent) {
       const status = /death|enemy/i.test(timerEvent.title) ? "danger" : /important|key|safe/i.test(timerEvent.title) ? "important" : "unchecked";
       linksState.push({
@@ -1990,6 +3127,7 @@
       if (event.key === "Enter") addTimerEvent("Custom note");
     });
     $("#copyTimelineBtn")?.addEventListener("click", () => copyText(getTimelineText(), "Timeline copied."));
+    $("#copyTimelineJsonBtn")?.addEventListener("click", () => copyText(getTimelineJsonText(), "Timeline JSON copied."));
     $("#clearTimelineBtn")?.addEventListener("click", () => {
       if (!confirmAction("Clear the current timer timeline?")) return;
       runTimerState.events = [];
@@ -2048,10 +3186,20 @@
     }
 
     function addClaffisSpot(id) {
+      if (claffisPracticeState.mode === "showing") {
+        showToast("Watch the practice sequence first.");
+        return;
+      }
+      if (claffisPracticeState.mode === "input") {
+        handleClaffisPracticeClick(id);
+        return;
+      }
       if (claffisState.lockAfterFull && claffisState.sequence.length >= MAX_CLAFFIS) {
         showToast("The Claffis sequence already has 7 notes.");
         return;
       }
+      const repeated = claffisState.sequence.filter((spotId) => spotId === id).length;
+      if (repeated >= 2 && !confirmAction(`${id} is already in the sequence ${repeated} times. Add it again?`)) return;
       claffisState.sequence.push(id);
       saveClaffis();
     }
@@ -2081,6 +3229,7 @@
         const button = document.createElement("button");
         button.type = "button";
         button.className = "hotspot";
+        button.dataset.spotId = spot.id;
         button.style.setProperty("--x", spot.x);
         button.style.setProperty("--y", spot.y);
         button.title = orders.length ? `${orderText} ${spot.id} — ${spot.label}` : `Add ${spot.id} — ${spot.label}`;
@@ -2145,6 +3294,142 @@
       if (key === "escape") resetClaffis();
     });
 
+    let claffisPracticeState = loadJson(STORAGE.claffisPractice, {
+      attempts: 0,
+      wins: 0,
+      streak: 0,
+      bestStreak: 0,
+      totalCorrect: 0,
+      totalNotes: 0,
+      sequence: [],
+      input: [],
+      mode: "idle"
+    });
+    if (!claffisPracticeState || typeof claffisPracticeState !== "object") claffisPracticeState = { attempts: 0, wins: 0, streak: 0, bestStreak: 0, totalCorrect: 0, totalNotes: 0, sequence: [], input: [], mode: "idle" };
+    if (!Array.isArray(claffisPracticeState.sequence)) claffisPracticeState.sequence = [];
+    if (!Array.isArray(claffisPracticeState.input)) claffisPracticeState.input = [];
+
+    function saveClaffisPractice() {
+      saveJson(STORAGE.claffisPractice, claffisPracticeState);
+      renderClaffisPractice();
+      renderDashboard();
+    }
+
+    function getClaffisPracticeDelay() {
+      const difficulty = $("#claffisPracticeDifficulty")?.value || "normal";
+      return difficulty === "slow" ? 900 : difficulty === "fast" ? 380 : 620;
+    }
+
+    function flashClaffisSpot(id) {
+      const button = $(`.hotspot[data-spot-id="${CSS.escape(id)}"]`);
+      if (!button) return;
+      button.classList.add("practice-flash");
+      setTimeout(() => button.classList.remove("practice-flash"), Math.max(240, getClaffisPracticeDelay() - 120));
+    }
+
+    const claffisPracticeNoteFrequencies = {
+      T1: 392, T2: 415, T3: 440, M1: 466, M2: 494, M3: 523, M4: 554, M5: 587, B1: 622, B2: 659, B3: 698, B4: 740
+    };
+
+    function playClaffisNoteSound(id) {
+      if ($("#claffisPracticeVisualOnly")?.checked) return;
+      const volume = Math.max(0.05, getVolumeScale());
+      const wavPath = `assets/audio/claffis/${id}.wav`;
+      const audio = new Audio(wavPath);
+      audio.volume = Math.min(1, 0.85 * volume);
+      const fallbackTone = () => {
+        try { tone(claffisPracticeNoteFrequencies[id] || 440, 0, 0.22, "triangle", 0.045); } catch {}
+      };
+      audio.addEventListener("error", fallbackTone, { once: true });
+      audio.play().catch(fallbackTone);
+    }
+
+    function maybePlayPracticeTone(id) {
+      playClaffisNoteSound(id);
+    }
+
+    async function playClaffisPracticeSequence() {
+      if (!claffisPracticeState.sequence.length) return;
+      claffisPracticeState.mode = "showing";
+      renderClaffisPractice();
+      const display = $("#claffisPracticeDisplay");
+      const delay = getClaffisPracticeDelay();
+      for (let index = 0; index < claffisPracticeState.sequence.length; index++) {
+        const id = claffisPracticeState.sequence[index];
+        if (display) display.textContent = `Watch ${index + 1} / ${claffisPracticeState.sequence.length}: ${id} — ${getClaffisSpot(id)?.label || id}`;
+        flashClaffisSpot(id);
+        maybePlayPracticeTone(id);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+      claffisPracticeState.mode = "input";
+      claffisPracticeState.input = [];
+      saveClaffisPractice();
+      if (display) display.textContent = "Your turn: click the notes back in order on the Claffis image.";
+    }
+
+    function startClaffisPractice() {
+      const ids = claffisDefaultSpots.map((spot) => spot.id);
+      claffisPracticeState.sequence = Array.from({ length: MAX_CLAFFIS }, () => ids[Math.floor(Math.random() * ids.length)]);
+      claffisPracticeState.input = [];
+      claffisPracticeState.mode = "idle";
+      if ($("#claffisPracticeResult")) $("#claffisPracticeResult").textContent = "Practice sequence generated. Watch and listen.";
+      saveClaffisPractice();
+      playClaffisPracticeSequence();
+    }
+
+    function handleClaffisPracticeClick(id) {
+      claffisPracticeState.input.push(id);
+      const index = claffisPracticeState.input.length - 1;
+      const expected = claffisPracticeState.sequence[index];
+      flashClaffisSpot(id);
+      playClaffisNoteSound(id);
+      const display = $("#claffisPracticeDisplay");
+      if (display) display.textContent = `Input ${claffisPracticeState.input.length} / ${MAX_CLAFFIS}: ${id}`;
+      if (claffisPracticeState.input.length < MAX_CLAFFIS) {
+        saveClaffisPractice();
+        return;
+      }
+      const mistakes = claffisPracticeState.sequence
+        .map((expectedId, i) => claffisPracticeState.input[i] === expectedId ? null : i + 1)
+        .filter(Boolean);
+      const correct = MAX_CLAFFIS - mistakes.length;
+      const won = mistakes.length === 0;
+      claffisPracticeState.attempts++;
+      claffisPracticeState.totalCorrect += correct;
+      claffisPracticeState.totalNotes += MAX_CLAFFIS;
+      claffisPracticeState.wins += won ? 1 : 0;
+      claffisPracticeState.streak = won ? claffisPracticeState.streak + 1 : 0;
+      claffisPracticeState.bestStreak = Math.max(claffisPracticeState.bestStreak, claffisPracticeState.streak);
+      claffisPracticeState.mode = "idle";
+      $("#claffisPracticeResult").textContent = `${won ? "Correct" : "Wrong"}\nAccuracy: ${Math.round((correct / MAX_CLAFFIS) * 100)}%\nMistake positions: ${mistakes.length ? mistakes.join(", ") : "none"}\nTarget: ${claffisPracticeState.sequence.join(" -> ")}\nInput: ${claffisPracticeState.input.join(" -> ")}`;
+      saveClaffisPractice();
+    }
+
+    function resetClaffisPracticeInput() {
+      claffisPracticeState.input = [];
+      claffisPracticeState.mode = claffisPracticeState.sequence.length ? "input" : "idle";
+      saveClaffisPractice();
+      showToast("Practice input reset.");
+    }
+
+    function renderClaffisPractice() {
+      const attempts = Number(claffisPracticeState.attempts || 0);
+      const wins = Number(claffisPracticeState.wins || 0);
+      const accuracy = claffisPracticeState.totalNotes ? Math.round((claffisPracticeState.totalCorrect / claffisPracticeState.totalNotes) * 100) : 0;
+      $("#claffisPracticeAttempts").textContent = attempts;
+      $("#claffisPracticeWins").textContent = wins;
+      $("#claffisPracticeBest").textContent = Number(claffisPracticeState.bestStreak || 0);
+      $("#claffisPracticeAccuracy").textContent = `${accuracy}%`;
+      if ($("#claffisPracticeResult") && claffisPracticeState.mode !== "input" && claffisPracticeState.mode !== "showing" && !$("#claffisPracticeResult").textContent.includes("Accuracy")) {
+        $("#claffisPracticeResult").textContent = attempts ? `Attempts: ${attempts}\nWins: ${wins}\nOverall accuracy: ${accuracy}%` : "No practice attempt running.";
+      }
+    }
+
+    $("#claffisPracticeStartBtn")?.addEventListener("click", startClaffisPractice);
+    $("#claffisPracticeStartMapBtn")?.addEventListener("click", startClaffisPractice);
+    $("#claffisPracticeReplayBtn")?.addEventListener("click", playClaffisPracticeSequence);
+    $("#claffisPracticeResetBtn")?.addEventListener("click", resetClaffisPracticeInput);
+
     // Key compiler module
     const keyStatuses = [
       ["empty", "Empty"],
@@ -2172,7 +3457,7 @@
     function parseKeyFragments(value) {
       const text = String(value || "");
       const matches = [];
-      const lineRegex = /(?:^|\n|\s)([1-8])\s*[-–—:]\s*([a-zA-Z0-9]{2,12})(?=\s|$)/g;
+      const lineRegex = /(?:^|[\s,;])([1-8])\s*[-–—:]\s*([a-zA-Z0-9]{2,16})(?=$|[\s,;])/g;
       let match;
       while ((match = lineRegex.exec(text))) {
         matches.push({ number: Number(match[1]), code: match[2] });
@@ -2248,6 +3533,28 @@
       }).join("\n");
     }
 
+    function getNumberedKeyText() {
+      return keyState.map((slot, index) => `${index + 1} - ${slot.part.trim() || ""}`).join("\n");
+    }
+
+    function getKeyWarnings() {
+      const warnings = [];
+      const seen = new Map();
+      keyState.forEach((slot, index) => {
+        const part = slot.part.trim();
+        if (!part) {
+          warnings.push(`Slot ${index + 1} is missing.`);
+          return;
+        }
+        const lower = part.toLowerCase();
+        if (seen.has(lower)) warnings.push(`Duplicate key part in slots ${seen.get(lower)} and ${index + 1}.`);
+        else seen.set(lower, index + 1);
+        if (part.length < 3 || part.length > 12) warnings.push(`Slot ${index + 1} has suspicious length (${part.length}).`);
+        if (slot.status === "fake") warnings.push(`Slot ${index + 1} is marked fake but still has text.`);
+      });
+      return warnings;
+    }
+
     function refreshKeyOutputs() {
       const filled = getFilledKeys();
       const raw = getRawCompiledKey();
@@ -2260,6 +3567,13 @@
 
       const progress = $("#keyProgress");
       progress.innerHTML = "";
+      const warnings = $("#keyWarnings");
+      if (warnings) {
+        const items = getKeyWarnings();
+        warnings.innerHTML = items.length
+          ? items.map((warning) => `<div class="warning-row">${escapeHtml(warning)}</div>`).join("")
+          : `<div class="small">No key warnings right now.</div>`;
+      }
       keyState.forEach((slot, index) => {
         const row = document.createElement("div");
         row.className = "progress-row";
@@ -2340,6 +3654,7 @@
     });
     $("#copyCompiledKeyBtn").addEventListener("click", () => copyText(getCompiledUrl(), "Compiled .ann URL copied."));
     $("#copyRawKeyBtn").addEventListener("click", () => copyText(getRawCompiledKey(), "Raw key parts copied."));
+    $("#copyNumberedKeyBtn").addEventListener("click", () => copyText(getNumberedKeyText(), "Numbered key parts copied."));
     $("#copyKeyNotesBtn").addEventListener("click", () => copyText(getKeyNotesText(), "Key notes copied."));
     $("#clearUnsureKeysBtn").addEventListener("click", () => {
       if (!confirmAction("Clear only fake and unsure key slots?")) return;
@@ -2381,6 +3696,7 @@
         url: entry.url || "",
         title: entry.title || "",
         status: statusLabels[entry.status] ? entry.status : "unchecked",
+        source: ["page", "wiki", "clue", "user"].includes(entry.source) ? entry.source : "page",
         note: entry.note || "",
         tags,
         important: Boolean(entry.important || entry.status === "important"),
@@ -2409,10 +3725,46 @@
         list = list.sort((a, b) => Number(b.important) - Number(a.important) || timeValue(b, "updatedAt") - timeValue(a, "updatedAt"));
       } else if (linkFilters.sort === "updated") {
         list = list.sort((a, b) => timeValue(b, "updatedAt") - timeValue(a, "updatedAt"));
+      } else if (linkFilters.sort === "oldest") {
+        list = list.sort((a, b) => timeValue(a, "createdAt") - timeValue(b, "createdAt"));
       } else {
         list = list.sort((a, b) => timeValue(b, "createdAt") - timeValue(a, "createdAt"));
       }
       return list;
+    }
+
+    function getNoteKeyFragments(entry) {
+      const text = [entry.title, entry.url, entry.note].join("\n");
+      const numbered = parseKeyFragments(text);
+      if (numbered.length) return numbered;
+      const raw = text.match(/\b[a-zA-Z0-9]{3,12}\b/);
+      if (!raw) return [];
+      const firstEmpty = keyState.find((slot) => !slot.part.trim() || slot.status === "fake");
+      return firstEmpty ? [{ number: firstEmpty.number, code: raw[0] }] : [];
+    }
+
+    function sendNoteToKeys(entryId) {
+      const entry = linksState.find((item) => item.id === entryId);
+      if (!entry) return;
+      const fragments = getNoteKeyFragments(entry);
+      if (!fragments.length) {
+        showToast("No key-looking fragment found.");
+        return;
+      }
+      fragments.forEach(({ number, code }) => {
+        const slot = keyState[number - 1];
+        if (!slot) return;
+        slot.part = code;
+        if (slot.status === "empty" || slot.status === "fake") slot.status = "found";
+        slot.source = entry.url || entry.title || "A.N.N Notes";
+        slot.note = entry.note || slot.note;
+      });
+      entry.status = "key";
+      entry.important = true;
+      entry.updatedAt = new Date().toISOString();
+      saveKeys({ rerender: true });
+      saveLinks();
+      showToast("Sent note fragment to Key Compiler.");
     }
 
     function saveLinks() {
@@ -2447,12 +3799,14 @@
           <div>
             <div class="entry-title">${entry.important ? "★ " : ""}${escapeHtml(entry.title || "Unknown page")}</div>
             <div class="entry-url">${escapeHtml(entry.url || "No URL")}</div>
+            <div class="meta-line">Source: ${escapeHtml(entry.source || "page")}</div>
             ${entry.note ? `<div class="entry-note">${escapeHtml(entry.note)}</div>` : ""}
             ${entry.tags?.length ? `<div class="tag-list">${entry.tags.map((tag) => `<span class="tag-chip">#${escapeHtml(tag)}</span>`).join("")}</div>` : ""}
             <div class="meta-line">Created ${escapeHtml(formatDateTime(entry.createdAt))} · Updated ${escapeHtml(formatDateTime(entry.updatedAt))}</div>
           </div>
           <div class="entry-actions">
             <span class="status-tag ${statusClass}">${escapeHtml(statusLabels[entry.status] || entry.status)}</span>
+            ${getNoteKeyFragments(entry).length ? `<button class="btn tiny-btn good" data-action="send-key" data-id="${entry.id}">Send to keys</button>` : ""}
             <button class="btn tiny-btn ghost" data-action="important" data-id="${entry.id}">${entry.important ? "Unstar" : "Star"}</button>
             <button class="btn tiny-btn danger" data-action="delete" data-id="${entry.id}">Delete</button>
           </div>
@@ -2475,6 +3829,8 @@
               entry.updatedAt = new Date().toISOString();
             }
           }
+          if (action === "send-key") sendNoteToKeys(id);
+          if (action === "send-key") return;
           saveLinks();
         });
       });
@@ -2484,7 +3840,7 @@
       return list.map((entry, index) => {
         const star = entry.important ? "★ " : "";
         const tags = entry.tags?.length ? `\n   Tags: ${entry.tags.map((tag) => `#${tag}`).join(", ")}` : "";
-        return `${index + 1}. ${star}${entry.title || "Unknown page"}\n   ${entry.url || "No URL"}\n   Status: ${statusLabels[entry.status] || entry.status}${tags}\n   Created: ${formatDateTime(entry.createdAt)}\n   Updated: ${formatDateTime(entry.updatedAt)}\n   Note: ${entry.note || "—"}`;
+        return `${index + 1}. ${star}${entry.title || "Unknown page"}\n   ${entry.url || "No URL"}\n   Status: ${statusLabels[entry.status] || entry.status}\n   Source: ${entry.source || "page"}${tags}\n   Created: ${formatDateTime(entry.createdAt)}\n   Updated: ${formatDateTime(entry.updatedAt)}\n   Note: ${entry.note || "—"}`;
       }).join("\n\n");
     }
 
@@ -2492,11 +3848,16 @@
       return getLinksText(linksState.filter((entry) => entry.important || entry.status === "important"));
     }
 
+    function getUncheckedLinksText() {
+      return getLinksText(linksState.filter((entry) => entry.status === "unchecked"));
+    }
+
     $("#linkForm").addEventListener("submit", (event) => {
       event.preventDefault();
       const url = $("#linkUrl").value.trim();
       const title = $("#linkTitle").value.trim();
       const status = $("#linkStatus").value;
+      const source = $("#linkSource").value;
       const tags = parseTags($("#linkTags").value);
       const note = $("#linkNote").value.trim();
 
@@ -2510,6 +3871,7 @@
         url,
         title,
         status,
+        source,
         note,
         tags,
         important: status === "important",
@@ -2520,6 +3882,7 @@
       $("#linkUrl").value = "";
       $("#linkTitle").value = "";
       $("#linkStatus").value = "unchecked";
+      $("#linkSource").value = "page";
       $("#linkTags").value = "";
       $("#linkNote").value = "";
       saveLinks();
@@ -2528,6 +3891,7 @@
 
     $("#copyLinksBtn").addEventListener("click", () => copyText(getLinksText(), "A.N.N notes copied."));
     $("#copyImportantLinksBtn").addEventListener("click", () => copyText(getImportantLinksText(), "Important A.N.N notes copied."));
+    $("#copyUncheckedLinksBtn").addEventListener("click", () => copyText(getUncheckedLinksText(), "Unchecked A.N.N notes copied."));
     $("#linkSearch").addEventListener("input", (event) => { linkFilters.search = event.target.value; renderLinks(); });
     $("#linkStatusFilter").addEventListener("change", (event) => { linkFilters.status = event.target.value; renderLinks(); });
     $("#linkSort").addEventListener("change", (event) => { linkFilters.sort = event.target.value; renderLinks(); });
@@ -2544,9 +3908,20 @@
     if (!Array.isArray(winsState)) winsState = [];
     winsState = winsState.map((entry) => ({ ...entry, id: entry.id || makeId(), createdAt: entry.createdAt || new Date().toISOString() }));
     let winFilters = { search: "", result: "all", sort: "newest" };
+    let editingWinId = null;
 
     function todayIsoDate() {
       return new Date().toISOString().slice(0, 10);
+    }
+
+    function parseDurationMs(value) {
+      const text = String(value || "").trim();
+      if (!text) return 0;
+      const parts = text.split(":").map(Number);
+      if (parts.some((part) => Number.isNaN(part))) return 0;
+      if (parts.length === 3) return ((parts[0] * 3600) + (parts[1] * 60) + parts[2]) * 1000;
+      if (parts.length === 2) return ((parts[0] * 60) + parts[1]) * 1000;
+      return parts[0] * 1000;
     }
 
     function getWinStats() {
@@ -2567,7 +3942,11 @@
         }
       });
       const total = winsState.filter((entry) => entry.result === "win").length;
-      return { current, best, total };
+      const attempts = winsState.length;
+      const winRate = attempts ? Math.round((total / attempts) * 100) : 0;
+      const durations = winsState.map((entry) => parseDurationMs(entry.time)).filter(Boolean);
+      const avgDurationMs = durations.length ? Math.round(durations.reduce((sum, value) => sum + value, 0) / durations.length) : 0;
+      return { current, best, total, attempts, winRate, avgDurationMs };
     }
 
     function saveWins() {
@@ -2619,6 +3998,9 @@
       $("#winsCurrentStreak").textContent = stats.current;
       $("#winsBestStreak").textContent = stats.best;
       $("#winsTotal").textContent = stats.total;
+      $("#winsAttempts").textContent = stats.attempts;
+      $("#winsWinRate").textContent = `${stats.winRate}%`;
+      $("#winsAvgDuration").textContent = stats.avgDurationMs ? formatDuration(stats.avgDurationMs, false) : "--";
       const filtered = getFilteredWins();
       $("#winsCounter").textContent = filtered.length === winsState.length
         ? `${winsState.length} ${winsState.length === 1 ? "entry" : "entries"}`
@@ -2637,7 +4019,25 @@
       filtered.forEach((entry) => {
         const div = document.createElement("div");
         div.className = `entry ${entry.result === "win" ? "win-entry" : "loss-entry"}`;
-        div.innerHTML = `
+        const isEditing = editingWinId === entry.id;
+        div.innerHTML = isEditing ? `
+          <div class="form-span">
+            <div class="edit-grid">
+              <input data-win-edit-date="${entry.id}" type="date" value="${escapeHtml(entry.date || todayIsoDate())}" />
+              <select data-win-edit-result="${entry.id}">
+                <option value="win" ${entry.result === "win" ? "selected" : ""}>Win</option>
+                <option value="loss" ${entry.result === "loss" ? "selected" : ""}>Loss / reset</option>
+              </select>
+              <input data-win-edit-day="${entry.id}" value="${escapeHtml(entry.day || "")}" placeholder="In-game day" />
+              <input data-win-edit-time="${entry.id}" value="${escapeHtml(entry.time || "")}" placeholder="Duration, e.g. 42:10" />
+            </div>
+            <textarea data-win-edit-note="${entry.id}" style="margin-top:10px">${escapeHtml(entry.note || "")}</textarea>
+          </div>
+          <div class="entry-actions">
+            <button class="btn tiny-btn good" data-win-save="${entry.id}">Save</button>
+            <button class="btn tiny-btn ghost" data-win-cancel="${entry.id}">Cancel</button>
+          </div>
+        ` : `
           <div>
             <div class="entry-title">${entry.result === "win" ? "★ Win" : "× Loss / reset"} — ${escapeHtml(entry.date || "unknown date")}</div>
             <div class="entry-url">${entry.day ? `Day ${escapeHtml(entry.day)}` : "Day ?"}${entry.time ? ` · ${escapeHtml(entry.time)}` : ""}</div>
@@ -2645,6 +4045,7 @@
           </div>
           <div class="entry-actions">
             <span class="status-tag ${entry.result === "win" ? "status-key" : "status-danger"}">${entry.result === "win" ? "Win" : "Loss"}</span>
+            <button class="btn tiny-btn ghost" data-win-edit="${entry.id}">Edit</button>
             <button class="btn tiny-btn danger" data-win-delete="${entry.id}">Delete</button>
           </div>
         `;
@@ -2657,12 +4058,42 @@
           saveWins();
         });
       });
+      entries.querySelectorAll("button[data-win-edit]").forEach((button) => {
+        button.addEventListener("click", () => {
+          editingWinId = button.dataset.winEdit;
+          renderWins();
+        });
+      });
+      entries.querySelectorAll("button[data-win-cancel]").forEach((button) => {
+        button.addEventListener("click", () => {
+          editingWinId = null;
+          renderWins();
+        });
+      });
+      entries.querySelectorAll("button[data-win-save]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.dataset.winSave;
+          const entry = winsState.find((item) => item.id === id);
+          if (!entry) return;
+          entry.date = entries.querySelector(`[data-win-edit-date="${CSS.escape(id)}"]`).value;
+          entry.result = entries.querySelector(`[data-win-edit-result="${CSS.escape(id)}"]`).value;
+          entry.day = entries.querySelector(`[data-win-edit-day="${CSS.escape(id)}"]`).value.trim();
+          entry.time = entries.querySelector(`[data-win-edit-time="${CSS.escape(id)}"]`).value.trim();
+          entry.note = entries.querySelector(`[data-win-edit-note="${CSS.escape(id)}"]`).value.trim();
+          entry.updatedAt = new Date().toISOString();
+          editingWinId = null;
+          saveWins();
+          showToast("Run entry updated.");
+        });
+      });
     }
 
     function renderWinsTimeline() {
       const timeline = $("#winsTimeline");
+      const graph = $("#winsStreakGraph");
       if (!timeline) return;
       timeline.innerHTML = "";
+      if (graph) graph.innerHTML = "";
       const chronological = [...winsState]
         .sort((a, b) => String(a.date || "").localeCompare(String(b.date || "")) || String(a.createdAt || "").localeCompare(String(b.createdAt || "")))
         .slice(-28);
@@ -2676,6 +4107,15 @@
         dot.textContent = entry.result === "win" ? "W" : "L";
         dot.title = `${entry.result === "win" ? "Win" : "Loss"} · ${entry.date || "unknown date"}${entry.time ? ` · ${entry.time}` : ""}`;
         timeline.appendChild(dot);
+      });
+      if (!graph) return;
+      chronological.forEach((entry, index) => {
+        const bar = document.createElement("span");
+        bar.className = `streak-bar ${entry.result === "win" ? "win" : "loss"}`;
+        const height = entry.result === "win" ? 24 + Math.min(54, (index + 1) * 4) : 18;
+        bar.style.height = `${height}px`;
+        bar.title = `${entry.result === "win" ? "Win" : "Loss"} · ${entry.date || "unknown date"}`;
+        graph.appendChild(bar);
       });
     }
 
@@ -2694,6 +4134,8 @@
     });
     $("#quickWinBtn").addEventListener("click", () => addRunResult("win"));
     $("#quickLossBtn").addEventListener("click", () => addRunResult("loss"));
+    $("#quickWinTopBtn").addEventListener("click", () => addRunResult("win", { date: todayIsoDate(), day: "", time: "", note: "Quick win.", skipFormReset: true }));
+    $("#quickLossTopBtn").addEventListener("click", () => addRunResult("loss", { date: todayIsoDate(), day: "", time: "", note: "Quick loss/reset.", skipFormReset: true }));
     $("#copyWinsBtn").addEventListener("click", () => copyText(getWinsText(), "Win log copied."));
     $("#copyWinsJsonBtn").addEventListener("click", () => copyText(getWinsJsonText(), "Win log JSON copied."));
     $("#winSearch").addEventListener("input", (event) => { winFilters.search = event.target.value; renderWins(); });
@@ -2775,16 +4217,32 @@
 
     let soundState = loadJson(STORAGE.soundboard, {
       correct: 0,
+      wrong: 0,
       total: 0,
+      streak: 0,
+      bestStreak: 0,
+      difficulty: "normal",
+      realisticDelay: false,
+      guessHistory: [],
+      trollHistory: [],
       troll: { frequency: 45, jitter: 20, pool: "scary", instant: false }
     });
     if (!soundState || typeof soundState !== "object") soundState = { correct: 0, total: 0 };
+    soundState.correct = Number(soundState.correct || 0);
+    soundState.total = Number(soundState.total || 0);
+    soundState.wrong = Number(soundState.wrong ?? Math.max(0, soundState.total - soundState.correct));
+    soundState.streak = Number(soundState.streak || 0);
+    soundState.bestStreak = Number(soundState.bestStreak || 0);
+    soundState.difficulty = ["easy", "normal", "hard"].includes(soundState.difficulty) ? soundState.difficulty : "normal";
+    soundState.realisticDelay = Boolean(soundState.realisticDelay);
+    if (!Array.isArray(soundState.guessHistory)) soundState.guessHistory = [];
+    if (!Array.isArray(soundState.trollHistory)) soundState.trollHistory = [];
     if (!soundState.troll || typeof soundState.troll !== "object") {
       soundState.troll = { ...settingsState.trollDefaults };
     }
     soundState.troll.frequency = Number(soundState.troll.frequency || 45);
     soundState.troll.jitter = Number(soundState.troll.jitter || 20);
-    soundState.troll.pool = soundState.troll.pool || "scary";
+    soundState.troll.pool = ["scary", "all", "fake", "breather", "kidnapper"].includes(soundState.troll.pool) ? soundState.troll.pool : "scary";
     soundState.troll.instant = Boolean(soundState.troll.instant);
     let audioCtx = null;
     let activeOscillators = [];
@@ -2805,6 +4263,23 @@
       if (settingsVolume) settingsVolume.value = String(settingsState.soundVolume);
       if ($("#soundVolumeValue")) $("#soundVolumeValue").textContent = value;
       if ($("#settingsVolumeValue")) $("#settingsVolumeValue").textContent = value;
+    }
+
+    function renderSoundHistory() {
+      const guessBox = $("#soundGuessHistory");
+      if (guessBox) {
+        guessBox.innerHTML = soundState.guessHistory.length
+          ? soundState.guessHistory.slice(-10).reverse().map((item) => `<div class="history-item">${escapeHtml(formatDateTime(item.time))} · ${escapeHtml(item.guess)} → ${escapeHtml(item.cue)} · ${item.correct ? "correct" : "wrong"}</div>`).join("")
+          : `<div class="small">No guesses yet.</div>`;
+      }
+      const trollBox = $("#trollHistory");
+      if (trollBox) {
+        trollBox.innerHTML = soundState.trollHistory.length
+          ? soundState.trollHistory.slice(-10).reverse().map((item) => `<div class="history-item">${escapeHtml(formatDateTime(item.time))} · ${escapeHtml(item.title)} · ${escapeHtml(item.type)}</div>`).join("")
+          : `<div class="small">No Troll mode cues yet.</div>`;
+      }
+      if ($("#soundDifficulty")) $("#soundDifficulty").value = soundState.difficulty;
+      if ($("#soundRealisticDelay")) $("#soundRealisticDelay").checked = Boolean(soundState.realisticDelay);
     }
 
     function updateSoundVolume(value) {
@@ -2906,7 +4381,9 @@
 
     function refreshSoundScore() {
       saveJson(STORAGE.soundboard, soundState);
-      $("#soundScoreBox").textContent = `Score: ${soundState.correct} / ${soundState.total}`;
+      const accuracy = soundState.total ? Math.round((soundState.correct / soundState.total) * 100) : 0;
+      $("#soundScoreBox").textContent = `Score: ${soundState.correct} / ${soundState.total}\nWrong: ${soundState.wrong || 0}\nAccuracy: ${accuracy}%\nTraining streak: ${soundState.streak || 0} · Best: ${soundState.bestStreak || 0}`;
+      renderSoundHistory();
       renderTrollControls();
       renderDashboard();
     }
@@ -2915,6 +4392,8 @@
       const audioCues = cueData.filter((cue) => cue.pattern !== "location");
       if (soundState.troll.pool === "fake") return audioCues.filter((cue) => cue.type === "fake");
       if (soundState.troll.pool === "all") return audioCues;
+      if (soundState.troll.pool === "breather") return audioCues.filter((cue) => cue.enemy.toLowerCase().includes("breather"));
+      if (soundState.troll.pool === "kidnapper") return audioCues.filter((cue) => cue.enemy.toLowerCase().includes("kidnapper"));
       return audioCues.filter((cue) => cue.type === "real" || cue.type === "critical");
     }
 
@@ -2968,10 +4447,21 @@
       if (trollTimer) restartTrollMode();
     }
 
+    function getTrainingCuePool() {
+      if (soundState.difficulty === "easy") return cueData.filter((cue) => cue.pattern !== "location" && cue.type !== "critical");
+      if (soundState.difficulty === "hard") return cueData.filter((cue) => cue.pattern !== "location");
+      return cueData;
+    }
+
     function startDrill() {
-      currentDrillCue = cueData[Math.floor(Math.random() * cueData.length)];
-      $("#drillStatus").innerHTML = `<strong>Listen now...</strong><span class="small">Guess reaction or source: Real, Fake, Breather, or Kidnapper.</span>`;
-      playCue(currentDrillCue.id);
+      const pool = getTrainingCuePool();
+      currentDrillCue = pool[Math.floor(Math.random() * pool.length)];
+      $("#drillStatus").innerHTML = `<strong>Listen now...</strong><span class="small">Guess reaction or source: Real, Fake, Breather, Kidnapper, or Ignore.</span>`;
+      const delay = soundState.realisticDelay ? 700 + Math.random() * (soundState.difficulty === "hard" ? 2200 : 1200) : 0;
+      if (delay) {
+        $("#drillStatus").innerHTML = `<strong>Wait for it...</strong><span class="small">Realistic delay is enabled.</span>`;
+      }
+      setTimeout(() => playCue(currentDrillCue.id), delay);
     }
 
     function answerDrill(guess) {
@@ -2982,14 +4472,40 @@
       const shouldReact = currentDrillCue.type === "real" || currentDrillCue.type === "critical";
       const correct = guess === "real"
         ? shouldReact
-        : guess === "fake"
+        : guess === "fake" || guess === "ignore"
           ? !shouldReact
           : currentDrillCue.enemy.toLowerCase().includes(guess);
       soundState.total++;
-      if (correct) soundState.correct++;
+      if (correct) {
+        soundState.correct++;
+        soundState.streak = Number(soundState.streak || 0) + 1;
+        soundState.bestStreak = Math.max(Number(soundState.bestStreak || 0), soundState.streak);
+      } else {
+        soundState.wrong = Number(soundState.wrong || 0) + 1;
+        soundState.streak = 0;
+      }
+      soundState.guessHistory.push({
+        time: new Date().toISOString(),
+        cue: currentDrillCue.title,
+        cueType: currentDrillCue.type,
+        guess,
+        correct
+      });
+      soundState.guessHistory = soundState.guessHistory.slice(-25);
       $("#drillStatus").innerHTML = `<strong>${correct ? "Correct" : "Wrong"}: ${escapeHtml(currentDrillCue.title)}</strong><span class="small">${escapeHtml(currentDrillCue.reaction)}</span>`;
       currentDrillCue = null;
       refreshSoundScore();
+    }
+
+    function logTrollCue(cue) {
+      soundState.trollHistory.push({
+        time: new Date().toISOString(),
+        title: cue.title,
+        type: cue.type === "fake" ? "fake / ignore" : "real-like"
+      });
+      soundState.trollHistory = soundState.trollHistory.slice(-25);
+      saveJson(STORAGE.soundboard, soundState);
+      renderSoundHistory();
     }
 
     function scheduleTrollCue() {
@@ -2999,7 +4515,10 @@
       trollTimer = setTimeout(() => {
         const trollCues = getTrollCues();
         const cue = trollCues[Math.floor(Math.random() * trollCues.length)];
-        if (cue) playCue(cue.id);
+        if (cue) {
+          playCue(cue.id);
+          logTrollCue(cue);
+        }
         scheduleTrollCue();
       }, delay);
     }
@@ -3021,7 +4540,10 @@
       if (soundState.troll.instant) {
         const trollCues = getTrollCues();
         const cue = trollCues[Math.floor(Math.random() * trollCues.length)];
-        if (cue) playCue(cue.id);
+        if (cue) {
+          playCue(cue.id);
+          logTrollCue(cue);
+        }
       }
       scheduleTrollCue();
       trollCountdownTimer = setInterval(updateTrollStatus, 1000);
@@ -3044,6 +4566,26 @@
     $("#guessFakeBtn").addEventListener("click", () => answerDrill("fake"));
     $("#guessBreatherBtn").addEventListener("click", () => answerDrill("breather"));
     $("#guessKidnapperBtn").addEventListener("click", () => answerDrill("kidnapper"));
+    $("#guessIgnoreBtn").addEventListener("click", () => answerDrill("ignore"));
+    $("#resetSoundStatsBtn").addEventListener("click", () => {
+      if (!confirmAction("Reset cue trainer stats?")) return;
+      soundState.correct = 0;
+      soundState.wrong = 0;
+      soundState.total = 0;
+      soundState.streak = 0;
+      soundState.bestStreak = 0;
+      soundState.guessHistory = [];
+      refreshSoundScore();
+      showToast("Cue trainer stats reset.");
+    });
+    $("#soundDifficulty").addEventListener("change", (event) => {
+      soundState.difficulty = event.target.value;
+      refreshSoundScore();
+    });
+    $("#soundRealisticDelay").addEventListener("change", (event) => {
+      soundState.realisticDelay = event.target.checked;
+      refreshSoundScore();
+    });
     $("#soundVolume").addEventListener("input", (event) => updateSoundVolume(event.target.value));
     ["#trollFrequency", "#trollJitter", "#trollCuePool", "#trollInstant"].forEach((selector) => {
       const el = $(selector);
@@ -3062,9 +4604,12 @@
       { id: "during-keys", group: "during", title: "Save every key part", hint: "Mark unsure fragments instead of deleting them immediately." },
       { id: "during-claffis", group: "during", title: "Use Claffis helper for sequence", hint: "Pause, mark the note, continue. Keep the 7-step order clean." },
       { id: "during-pages", group: "during", title: "Mark solved pages", hint: "Dead ends and solved pages should not waste your next loop." },
+      { id: "key-copy", group: "during", title: "Copy key part into compiler", hint: "Put the fragment in the numbered slot immediately." },
+      { id: "key-source", group: "during", title: "Save key source page", hint: "Keep the URL/page name in case the fragment looks fake later." },
+      { id: "key-review", group: "during", title: "Review duplicate or fake warnings", hint: "Warnings are cheaper than rebuilding the run from memory." },
       { id: "safety-breather", group: "safety", title: "Breather response ready", hint: "Car/knob cue means front door and doorknob." },
       { id: "safety-kidnapper", group: "safety", title: "Kidnapper response ready", hint: "Steps plus Hmmm means lights off and quiet." },
-      { id: "safety-phone", group: "safety", title: "Phone panic check", hint: "If it rings during a Kidnapper moment, pick up and hang up." },
+      { id: "safety-phone", group: "safety", title: "Phone danger check", hint: "If it rings during a Kidnapper moment, pick up and hang up." },
       { id: "endgame-url", group: "endgame", title: "Compiled .ann URL checked", hint: "Review missing/fake slots before using the final URL." },
       { id: "endgame-notes", group: "endgame", title: "Important notes reviewed", hint: "Look at starred A.N.N notes and danger pages." },
       { id: "endgame-timer", group: "endgame", title: "Run result ready", hint: "Finish the timer as win/loss so the log stays current." }
@@ -3074,6 +4619,7 @@
       "new-run": ["before-notes", "before-keys", "before-sound", "before-zoom"],
       "while-searching": ["during-log", "during-keys", "during-claffis", "during-pages"],
       "enemy-safety": ["safety-breather", "safety-kidnapper", "safety-phone"],
+      "key-routine": ["key-copy", "key-source", "key-review"],
       endgame: ["endgame-url", "endgame-notes", "endgame-timer"]
     };
 
@@ -3153,6 +4699,13 @@
       (checklistPresets[preset] || []).forEach((id) => { checklistState[id] = true; });
       saveChecklist();
       showToast("Checklist preset applied.");
+    });
+    $("#resetChecklistPresetBtn").addEventListener("click", () => {
+      const preset = $("#checklistPreset").value;
+      if (!confirmAction("Reset progress for the selected checklist preset?")) return;
+      (checklistPresets[preset] || []).forEach((id) => { checklistState[id] = false; });
+      saveChecklist();
+      showToast("Selected preset reset.");
     });
     $("#copyChecklistBtn").addEventListener("click", () => copyText(getChecklistText(), "Checklist copied."));
     $("#resetChecklistBtn").addEventListener("click", () => {
@@ -3239,6 +4792,31 @@
         showToast("Import failed. Check the JSON.");
       }
     });
+    $("#settingsResetModuleBtn").addEventListener("click", () => {
+      const module = $("#settingsModuleReset").value;
+      if (module === "soundTraining") {
+        if (!confirmAction("Reset only Sound Cue training stats and history?")) return;
+        soundState.correct = 0;
+        soundState.wrong = 0;
+        soundState.total = 0;
+        soundState.streak = 0;
+        soundState.bestStreak = 0;
+        soundState.guessHistory = [];
+        saveJson(STORAGE.soundboard, soundState);
+        refreshSoundScore();
+        showToast("Sound training stats reset.");
+        return;
+      }
+      const key = STORAGE[module];
+      if (!key) {
+        showToast("Unknown module.");
+        return;
+      }
+      if (!confirmAction(`Reset ${module} data in this browser?`)) return;
+      localStorage.removeItem(key);
+      showToast("Module data reset. Reloading...");
+      setTimeout(() => location.reload(), 450);
+    });
     $("#settingsResetAllBtn").addEventListener("click", () => {
       if (!confirmAction("Reset all WTTG 1 Toolkit local data in this browser?")) return;
       Object.values(STORAGE).forEach((key) => localStorage.removeItem(key));
@@ -3264,6 +4842,16 @@
       $("#dashMissingKeys").textContent = `${getMissingKeyNumbers().length}`;
       $("#dashImportantLinks").textContent = `${linksState.filter((entry) => entry.important || entry.status === "important").length}`;
       $("#dashChecklistDone").textContent = `${done} / ${allChecklistItems.length}`;
+      $("#dashTrollStatus").textContent = trollTimer ? "ON" : "OFF";
+      const lastRun = [...winsState].sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")))[0];
+      $("#dashLastRun").textContent = lastRun ? (lastRun.result === "win" ? "Win" : "Loss") : "None";
+      const favoriteResources = resourceLibrary.filter((resource) => getResourceMeta(resource.id).favorite).length;
+      $("#dashResourceCount").textContent = `${favoriteResources} / ${resourceLibrary.length}`;
+      $("#dashOpenSites").textContent = siteFilters.time ? `${sitesDatabase.filter((site) => isSiteOpenAt(site)).length}` : "--";
+      const practiceRate = claffisPracticeState.attempts ? Math.round((claffisPracticeState.wins / claffisPracticeState.attempts) * 100) : 0;
+      $("#dashClaffisPractice").textContent = `${practiceRate}%`;
+      const soundAccuracy = soundState.total ? Math.round((soundState.correct / soundState.total) * 100) : 0;
+      $("#dashSoundAccuracy").textContent = `${soundAccuracy}%`;
       const timerStatus = runTimerState.running ? "running" : elapsed > 0 ? "paused" : "idle";
       $("#dashStatusLine").textContent = `Timer ${timerStatus}. ${runTimerState.events.length} timeline ${runTimerState.events.length === 1 ? "event" : "events"} saved.`;
     }
@@ -3275,6 +4863,9 @@
     $("#dashOpenKeysBtn").addEventListener("click", () => setRoute("keys"));
     $("#dashOpenClaffisBtn").addEventListener("click", () => setRoute("claffis"));
     $("#dashAddLinkBtn").addEventListener("click", () => setRoute("links"));
+    $("#dashResourcesBtn").addEventListener("click", () => setRoute("resources"));
+    $("#dashSitesBtn").addEventListener("click", () => setRoute("sites"));
+    $("#dashThreatsBtn").addEventListener("click", () => setRoute("threats"));
     $("#dashQuickWinBtn").addEventListener("click", () => addRunResult("win", { date: todayIsoDate(), day: "", time: "", note: "Quick dashboard win.", skipFormReset: true }));
     $("#dashQuickLossBtn").addEventListener("click", () => addRunResult("loss", { date: todayIsoDate(), day: "", time: "", note: "Quick dashboard loss/reset.", skipFormReset: true }));
 
@@ -3286,6 +4877,11 @@
     renderWins();
     renderSoundboard();
     renderChecklist();
+    renderStrategy();
+    renderResources();
+    renderThreatGuide();
+    renderSites();
+    renderClaffisPractice();
     renderSettings();
     navigate();
   </script>
