@@ -41,6 +41,15 @@
         linear-gradient(135deg, #04070d, var(--bg) 48%, #08141d);
     }
 
+    body.fx-off {
+      background: linear-gradient(135deg, #04070d, var(--bg) 48%, #08141d);
+    }
+
+    body.compact-mode {
+      --radius: 16px;
+      --sidebar: 256px;
+    }
+
     button, input, textarea, select { font: inherit; }
 
     a { color: inherit; text-decoration: none; }
@@ -135,6 +144,15 @@
       box-shadow: inset 0 0 0 1px rgba(114, 247, 255, 0.08);
     }
 
+    .nav-link:focus-visible,
+    .btn:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
     .nav-icon {
       width: 32px;
       height: 32px;
@@ -218,6 +236,49 @@
       box-shadow: 0 0 0 5px rgba(114, 247, 255, 0.04);
     }
 
+    .dashboard-status {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr);
+      gap: 18px;
+    }
+
+    .status-widget {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .status-chip {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px;
+      background: rgba(255,255,255,.032);
+    }
+
+    .status-chip strong {
+      display: block;
+      font-size: 20px;
+      letter-spacing: -.03em;
+      margin-top: 3px;
+    }
+
+    .quick-action-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 980px) {
+      .dashboard-status { grid-template-columns: 1fr; }
+      .status-grid { grid-template-columns: 1fr; }
+    }
+
     .view { display: none; }
     .view.active { display: block; }
 
@@ -283,6 +344,13 @@
       background: rgba(15, 28, 38, 0.92);
       box-shadow: var(--shadow);
       overflow: hidden;
+    }
+
+    body.compact-mode .card-header,
+    body.compact-mode .card-body,
+    body.compact-mode .stat-card,
+    body.compact-mode .module-card {
+      padding: 13px;
     }
 
     .card.soft { background: rgba(20, 38, 50, 0.68); }
@@ -498,9 +566,12 @@
 
     .hotspot:hover { transform: translate(-50%, -50%) scale(1.1); background: rgba(4, 18, 24, 0.95); border-color: white; }
     .hotspot.used { background: rgba(167, 255, 207, 0.93); color: #061017; border-color: #061017; min-width: calc(var(--size) + 28px); box-shadow: 0 0 0 5px rgba(167, 255, 207, 0.24), 0 8px 22px rgba(0, 0, 0, 0.28); }
-    .hotspot-order, .hotspot-id { font-weight: 950; }
+    .hotspot-order, .hotspot-id, .hotspot-label { font-weight: 950; }
+    .hotspot-label { font-size: 11px; opacity: .82; }
     .map-shell.hide-hotspots .hotspot { opacity: 0.18; }
     .map-shell.hide-hotspots .hotspot:hover { opacity: 1; }
+    .map-shell.hide-labels .hotspot-label { display: none; }
+    .map-shell.hide-orders .hotspot-order { display: none; }
 
     .sequence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
@@ -551,6 +622,11 @@
       gap: 10px;
     }
 
+    .key-slot.status-found { border-color: rgba(157, 255, 188, 0.38); }
+    .key-slot.status-unsure { border-color: rgba(255, 209, 102, 0.42); }
+    .key-slot.status-fake { border-color: rgba(255, 85, 117, 0.44); opacity: .82; }
+    .key-slot.status-empty { border-style: dashed; }
+
     .key-slot-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .key-slot-title { font-weight: 950; }
     .badge {
@@ -562,6 +638,15 @@
       font-size: 12px;
       font-weight: 900;
     }
+
+    .key-hint {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+
+    .key-hint.warn { color: var(--warning); }
 
     .compiled-key {
       border-radius: 18px;
@@ -603,6 +688,41 @@
     .status-key { color: var(--good); background: rgba(157, 255, 188, 0.08); }
     .status-dead { color: var(--muted); background: rgba(255,255,255,0.04); }
     .status-danger { color: #ffdce3; background: rgba(255, 85, 117, 0.12); }
+    .status-important { color: var(--pink); background: rgba(255, 115, 183, 0.1); }
+
+    .filter-bar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 160px 150px;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 780px) {
+      .filter-bar { grid-template-columns: 1fr; }
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 9px;
+    }
+
+    .tag-chip {
+      border: 1px solid rgba(114, 247, 255, 0.22);
+      border-radius: 999px;
+      padding: 4px 7px;
+      color: var(--accent);
+      background: rgba(114, 247, 255, 0.065);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .meta-line {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 7px;
+    }
 
     /* Checklist */
     .check-group { display: grid; gap: 10px; }
@@ -621,6 +741,200 @@
     .check-title { font-weight: 900; }
     .check-hint { color: var(--muted); font-size: 13px; line-height: 1.42; margin-top: 3px; }
     .done .check-title { text-decoration: line-through; color: var(--muted); }
+
+    .check-item.custom {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+
+
+    /* Win log */
+    .metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    @media (max-width: 700px) { .metric-grid { grid-template-columns: 1fr; } }
+    .mini-metric {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      padding: 14px;
+    }
+    .mini-metric-label { color: var(--muted); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .mini-metric-value { font-size: 30px; font-weight: 950; letter-spacing: -.045em; margin-top: 6px; }
+    .win-entry { border-color: rgba(157, 255, 188, 0.28); }
+    .loss-entry { border-color: rgba(255, 85, 117, 0.32); }
+
+    .win-timeline {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 42px;
+      overflow-x: auto;
+      padding: 7px 0 14px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .timeline-dot.win { color: #061017; background: var(--good); }
+    .timeline-dot.loss { color: #ffdce3; background: rgba(255, 85, 117, .24); border-color: rgba(255, 85, 117, .5); }
+
+    /* Soundboard */
+    .sound-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    @media (max-width: 860px) { .sound-grid { grid-template-columns: 1fr; } }
+    .cue-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.032);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+    .cue-head { display:flex; align-items:flex-start; justify-content:space-between; gap: 12px; }
+    .cue-title { font-weight: 950; font-size: 16px; }
+    .cue-meta { color: var(--muted); font-size: 13px; line-height: 1.42; margin-top: 4px; }
+    .cue-actions { display:flex; flex-wrap:wrap; gap: 8px; }
+    .cue-real { border-color: rgba(157, 255, 188, 0.34); }
+    .cue-fake { border-color: rgba(255, 209, 102, 0.28); }
+    .cue-critical { border-color: rgba(255, 85, 117, 0.42); }
+    .pill {
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 950;
+      border: 1px solid rgba(255,255,255,0.12);
+      white-space: nowrap;
+    }
+    .pill.real { color: var(--good); background: rgba(157,255,188,.08); }
+    .pill.fake { color: var(--warning); background: rgba(255,209,102,.08); }
+    .pill.critical { color: #ffdce3; background: rgba(255,85,117,.12); }
+    .sound-training-panel { display: grid; gap: 12px; }
+    .big-status {
+      border: 1px solid rgba(114, 247, 255, 0.28);
+      border-radius: 18px;
+      background: rgba(114, 247, 255, 0.07);
+      padding: 16px;
+      min-height: 110px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+    }
+    .big-status strong { font-size: 22px; letter-spacing: -.03em; }
+    .sound-visual {
+      height: 60px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(90deg, rgba(114,247,255,.08), rgba(255,115,183,.08));
+      overflow: hidden;
+      position: relative;
+    }
+    .sound-visual::after {
+      content: "";
+      position: absolute;
+      inset: 16px 12px;
+      background: repeating-linear-gradient(90deg, rgba(237,247,248,.85) 0 3px, transparent 3px 16px);
+      opacity: .18;
+      transform-origin: left center;
+    }
+    .sound-visual.playing::after { animation: pulseWave .58s ease-in-out infinite alternate; }
+    @keyframes pulseWave { from { transform: scaleY(.45); opacity: .14; } to { transform: scaleY(1.3); opacity: .42; } }
+    body.fx-off .sound-visual.playing::after { animation: none; opacity: .28; }
+    .range-row {
+      display: grid;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 12px;
+      background: rgba(255,255,255,0.028);
+    }
+    .range-row label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--pink);
+      cursor: pointer;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .toggle-row input { width: auto; accent-color: var(--pink); }
+    .status-line {
+      border: 1px solid rgba(255, 115, 183, .22);
+      background: rgba(255, 115, 183, .065);
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* Run timer */
+    .timer-display {
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(44px, 9vw, 86px);
+      line-height: .95;
+      font-weight: 950;
+      letter-spacing: -.055em;
+      color: var(--text);
+      text-shadow: 0 0 28px rgba(114,247,255,.18);
+    }
+    .timer-panel { display: grid; gap: 14px; }
+    .event-buttons { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    @media (max-width: 700px) { .event-buttons { grid-template-columns: 1fr; } }
+    .timeline-list { display: grid; gap: 10px; }
+    .timeline-entry {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255,255,255,.032);
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .timeline-time { color: var(--accent); font-weight: 950; font-variant-numeric: tabular-nums; }
+
+    .settings-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    .data-box {
+      min-height: 210px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+
+    .danger-zone {
+      border: 1px solid rgba(255, 85, 117, 0.32);
+      border-radius: 16px;
+      background: rgba(255, 85, 117, 0.06);
+      padding: 13px;
+      display: grid;
+      gap: 10px;
+    }
 
     .toast {
       position: fixed;
@@ -662,14 +976,18 @@
 
       <nav class="nav" aria-label="Main navigation">
         <a class="nav-link" href="#dashboard" data-nav="dashboard"><span class="nav-icon">⌂</span><span class="nav-text"><strong>Dashboard</strong><span>All tools</span></span></a>
+        <a class="nav-link" href="#run" data-nav="run"><span class="nav-icon">⏱</span><span class="nav-text"><strong>Run Timer</strong><span>Timeline</span></span></a>
         <a class="nav-link" href="#claffis" data-nav="claffis"><span class="nav-icon">♪</span><span class="nav-text"><strong>Claffis</strong><span>Sequence map</span></span></a>
         <a class="nav-link" href="#keys" data-nav="keys"><span class="nav-icon">⌘</span><span class="nav-text"><strong>Key Compiler</strong><span>8 key parts</span></span></a>
         <a class="nav-link" href="#links" data-nav="links"><span class="nav-icon">A</span><span class="nav-text"><strong>A.N.N Notes</strong><span>Links tracker</span></span></a>
+        <a class="nav-link" href="#wins" data-nav="wins"><span class="nav-icon">★</span><span class="nav-text"><strong>Win Log</strong><span>Streak tracker</span></span></a>
+        <a class="nav-link" href="#soundboard" data-nav="soundboard"><span class="nav-icon">◉</span><span class="nav-text"><strong>Soundboard</strong><span>Cue trainer</span></span></a>
         <a class="nav-link" href="#checklist" data-nav="checklist"><span class="nav-icon">✓</span><span class="nav-text"><strong>Checklist</strong><span>Run control</span></span></a>
+        <a class="nav-link" href="#settings" data-nav="settings"><span class="nav-icon">⚙</span><span class="nav-text"><strong>Settings</strong><span>Data + defaults</span></span></a>
       </nav>
 
       <div class="side-note">
-        One file, multiple subpages. Later this can become React Router pages: Dashboard, Claffis, Keys, Notes and Checklist.
+        One file, multiple subpages. Later this can become React Router pages: Dashboard, Run Timer, Claffis, Keys, Notes, Win Log, Soundboard and Checklist.
       </div>
     </aside>
 
@@ -686,6 +1004,10 @@
       <section class="view active" id="view-dashboard">
         <div class="grid dashboard-grid">
           <article class="card stat-card">
+            <div class="stat-label">Run timer</div>
+            <div><div class="stat-value" id="dashRunTimer">00:00</div><div class="stat-hint">current session clock</div></div>
+          </article>
+          <article class="card stat-card">
             <div class="stat-label">Claffis sequence</div>
             <div><div class="stat-value" id="dashClaffisCount">0 / 7</div><div class="stat-hint">notes currently recorded</div></div>
           </article>
@@ -698,6 +1020,22 @@
             <div><div class="stat-value" id="dashLinkCount">0</div><div class="stat-hint">saved links / hashes</div></div>
           </article>
           <article class="card stat-card">
+            <div class="stat-label">Win streak</div>
+            <div><div class="stat-value" id="dashWinStreak">0</div><div class="stat-hint">current saved streak</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Best streak</div>
+            <div><div class="stat-value" id="dashBestStreak">0</div><div class="stat-hint">best saved streak</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Total wins</div>
+            <div><div class="stat-value" id="dashTotalWins">0</div><div class="stat-hint">successful runs logged</div></div>
+          </article>
+          <article class="card stat-card">
+            <div class="stat-label">Sound drills</div>
+            <div><div class="stat-value" id="dashSoundScore">0 / 0</div><div class="stat-hint">cue trainer score</div></div>
+          </article>
+          <article class="card stat-card">
             <div class="stat-label">Checklist</div>
             <div><div class="stat-value" id="dashChecklistCount">0%</div><div class="stat-hint">run prep completed</div></div>
           </article>
@@ -705,7 +1043,42 @@
 
         <div style="height: 18px"></div>
 
+        <section class="dashboard-status">
+          <article class="card status-widget">
+            <div>
+              <div class="card-title">Run Status</div>
+              <div class="small" id="dashStatusLine">Timer idle. No active run pressure.</div>
+            </div>
+            <div class="status-grid">
+              <div class="status-chip"><span class="small">Missing keys</span><strong id="dashMissingKeys">8</strong></div>
+              <div class="status-chip"><span class="small">Important notes</span><strong id="dashImportantLinks">0</strong></div>
+              <div class="status-chip"><span class="small">Checklist done</span><strong id="dashChecklistDone">0 / 0</strong></div>
+            </div>
+          </article>
+          <article class="card status-widget">
+            <div>
+              <div class="card-title">Quick Actions</div>
+              <div class="small">Fast run controls without hunting through the sidebar.</div>
+            </div>
+            <div class="quick-action-grid">
+              <button class="btn primary" id="dashStartRunBtn">Start Run</button>
+              <button class="btn ghost" id="dashOpenKeysBtn">Open Key Compiler</button>
+              <button class="btn ghost" id="dashOpenClaffisBtn">Open Claffis</button>
+              <button class="btn ghost" id="dashAddLinkBtn">Add Link</button>
+              <button class="btn good" id="dashQuickWinBtn">Quick Win</button>
+              <button class="btn danger" id="dashQuickLossBtn">Quick Loss</button>
+            </div>
+          </article>
+        </section>
+
+        <div style="height: 18px"></div>
+
         <div class="grid module-grid">
+          <a class="card module-card" href="#run">
+            <div class="module-icon">⏱</div>
+            <div><div class="module-title">Run Timer</div><div class="module-description">Track the current attempt with a stopwatch and timestamp quick events like key parts, enemies or deaths.</div></div>
+            <div class="arrow">→</div>
+          </a>
           <a class="card module-card" href="#claffis">
             <div class="module-icon">♪</div>
             <div><div class="module-title">Claffis Helper</div><div class="module-description">Clickable Claffis page with ordered notes. This is the first real subpage already integrated.</div></div>
@@ -721,12 +1094,82 @@
             <div><div class="module-title">A.N.N Notes Tracker</div><div class="module-description">A stronger version of the in-game notepad for URLs, hashes, page states and quick notes.</div></div>
             <div class="arrow">→</div>
           </a>
+          <a class="card module-card" href="#wins">
+            <div class="module-icon">★</div>
+            <div><div class="module-title">Win Log</div><div class="module-description">Save every completed run, track current streak, best streak, dates and short run notes.</div></div>
+            <div class="arrow">→</div>
+          </a>
+          <a class="card module-card" href="#soundboard">
+            <div class="module-icon">◉</div>
+            <div><div class="module-title">Soundboard</div><div class="module-description">Practice enemy cue recognition with true/fake cues and an optional troll training mode.</div></div>
+            <div class="arrow">→</div>
+          </a>
           <a class="card module-card" href="#checklist">
             <div class="module-icon">✓</div>
             <div><div class="module-title">Session Checklist</div><div class="module-description">A small panic-proof run checklist for preparation and searching.</div></div>
             <div class="arrow">→</div>
           </a>
+          <a class="card module-card" href="#settings">
+            <div class="module-icon">⚙</div>
+            <div><div class="module-title">Settings</div><div class="module-description">Tune volume, compact mode, visual effects, Troll defaults, and export or import local saves.</div></div>
+            <div class="arrow">→</div>
+          </a>
         </div>
+      </section>
+
+      <section class="view" id="view-run">
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Run timer</div><div class="small">Simple stopwatch with timestamped notes for the current WTTG 1 attempt.</div></div>
+            </div>
+            <div class="card-body timer-panel">
+              <div class="timer-display" id="runTimerDisplay">00:00.0</div>
+              <div class="controls" style="margin-top:0">
+                <button class="btn primary" id="timerStartPauseBtn">Start timer</button>
+                <button class="btn ghost" id="timerAddTimestampBtn">Add timestamp</button>
+                <button class="btn danger" id="timerResetBtn">Reset timer</button>
+              </div>
+              <div class="card soft">
+                <div class="card-body">
+                  <div class="card-title" style="font-size:16px">Quick event</div>
+                  <p class="small">These add a timeline note at the current timer value. Handy after a cue, key part, weird page, or death.</p>
+                  <div class="event-buttons">
+                    <button class="btn ghost" data-quick-event="Key part found">Key part found</button>
+                    <button class="btn ghost" data-quick-event="Suspicious link">Suspicious link</button>
+                    <button class="btn ghost" data-quick-event="Important page">Important page</button>
+                    <button class="btn ghost" data-quick-event="Enemy cue">Enemy cue</button>
+                    <button class="btn ghost" data-quick-event="Safe escape">Safe escape</button>
+                    <button class="btn danger" data-quick-event="Death / reset">Death / reset</button>
+                  </div>
+                  <div style="height:12px"></div>
+                  <label class="field-label" for="timerCustomNote">Custom event note</label>
+                  <input id="timerCustomNote" placeholder="e.g. found key 3, heard kidnapper, opened Deep Wiki..." autocomplete="off" />
+                  <label class="toggle-row" style="margin-top:10px">
+                    <input id="timerSendToNotes" type="checkbox" />
+                    <span>Send timer events to A.N.N notes.</span>
+                  </label>
+                  <div class="controls">
+                    <button class="btn good" id="timerFinishWinBtn">Finish as win</button>
+                    <button class="btn danger" id="timerFinishLossBtn">Finish as loss</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div><div class="card-title">Timeline</div><div class="small" id="timerEventCount">0 events</div></div>
+            </div>
+            <div class="card-body">
+              <div class="controls" style="margin-top:0; margin-bottom:12px">
+                <button class="btn primary" id="copyTimelineBtn">Copy timeline</button>
+                <button class="btn danger" id="clearTimelineBtn">Clear timeline</button>
+              </div>
+              <div class="timeline-list" id="timerTimeline"></div>
+            </div>
+          </aside>
+        </section>
       </section>
 
       <section class="view" id="view-claffis">
@@ -745,6 +1188,8 @@
               </div>
               <div class="controls" style="justify-content:center">
                 <button class="btn ghost" id="claffisToggleHotspotsBtn">Dim hotspots</button>
+                <button class="btn ghost" id="claffisToggleLabelsBtn">Hide labels</button>
+                <button class="btn ghost" id="claffisToggleOrdersBtn">Hide order</button>
                 <button class="btn danger" id="claffisUndoBtn">Undo last</button>
                 <button class="btn danger" id="claffisResetBtn">Reset sequence</button>
               </div>
@@ -776,7 +1221,7 @@
         <section class="two-col">
           <article class="card">
             <div class="card-header">
-              <div><div class="card-title">Key slots</div><div class="small">Fill parts as you find them. Everything saves locally.</div></div>
+              <div><div class="card-title">Key slots</div><div class="small">Paste fragments like <strong>1 - yx6B</strong>. The tool will put the code in the correct slot.</div></div>
               <button class="btn danger" id="keysResetBtn">Reset keys</button>
             </div>
             <div class="card-body">
@@ -785,14 +1230,16 @@
           </article>
           <aside class="card">
             <div class="card-header">
-              <div class="card-title">Compiled key</div>
+              <div class="card-title">Compiled Red Room URL</div>
               <div id="keyCounter" class="small">0 / 8</div>
             </div>
             <div class="card-body">
               <div class="compiled-key" id="compiledKey">No key parts yet.</div>
               <div class="controls">
-                <button class="btn primary" id="copyCompiledKeyBtn">Copy compiled key</button>
+                <button class="btn primary" id="copyCompiledKeyBtn">Copy .ann URL</button>
+                <button class="btn ghost" id="copyRawKeyBtn">Copy raw parts</button>
                 <button class="btn ghost" id="copyKeyNotesBtn">Copy key notes</button>
+                <button class="btn danger" id="clearUnsureKeysBtn">Clear fake / unsure</button>
               </div>
               <div style="height:16px"></div>
               <div class="progress-list" id="keyProgress"></div>
@@ -825,7 +1272,12 @@
                     <option value="key">Key found</option>
                     <option value="dead">Dead end</option>
                     <option value="danger">Danger / risky</option>
+                    <option value="important">Important</option>
                   </select>
+                </div>
+                <div class="form-span">
+                  <label class="field-label" for="linkTags">Tags</label>
+                  <input id="linkTags" placeholder="key, clue, revisit" autocomplete="off" />
                 </div>
                 <div class="form-span">
                   <label class="field-label" for="linkNote">Note</label>
@@ -834,6 +1286,7 @@
                 <div class="form-span controls" style="margin-top:0">
                   <button class="btn primary" type="submit">Add note</button>
                   <button class="btn ghost" type="button" id="copyLinksBtn">Copy all notes</button>
+                  <button class="btn ghost" type="button" id="copyImportantLinksBtn">Copy important</button>
                   <button class="btn danger" type="button" id="clearLinksBtn">Clear notes</button>
                 </div>
               </form>
@@ -845,7 +1298,162 @@
               <div id="linksCounter" class="small">0 entries</div>
             </div>
             <div class="card-body">
+              <div class="filter-bar">
+                <input id="linkSearch" placeholder="Search notes, tags, URLs..." autocomplete="off" />
+                <select id="linkStatusFilter">
+                  <option value="all">All statuses</option>
+                  <option value="unchecked">Unchecked</option>
+                  <option value="checked">Checked</option>
+                  <option value="key">Key found</option>
+                  <option value="dead">Dead end</option>
+                  <option value="danger">Danger</option>
+                  <option value="important">Important</option>
+                </select>
+                <select id="linkSort">
+                  <option value="newest">Newest</option>
+                  <option value="updated">Recently updated</option>
+                  <option value="status">Status</option>
+                  <option value="important">Important first</option>
+                </select>
+              </div>
               <div class="entries" id="linksEntries"></div>
+            </div>
+          </aside>
+        </section>
+      </section>
+
+
+      <section class="view" id="view-wins">
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Add run result</div><div class="small">Use this for simple wins/losses and streak history.</div></div>
+            </div>
+            <div class="card-body">
+              <div class="metric-grid">
+                <div class="mini-metric"><div class="mini-metric-label">Current streak</div><div class="mini-metric-value" id="winsCurrentStreak">0</div></div>
+                <div class="mini-metric"><div class="mini-metric-label">Best streak</div><div class="mini-metric-value" id="winsBestStreak">0</div></div>
+                <div class="mini-metric"><div class="mini-metric-label">Total wins</div><div class="mini-metric-value" id="winsTotal">0</div></div>
+              </div>
+              <div style="height:16px"></div>
+              <form id="winForm" class="form-grid">
+                <div>
+                  <label class="field-label" for="winDate">Date</label>
+                  <input id="winDate" type="date" />
+                </div>
+                <div>
+                  <label class="field-label" for="winResult">Result</label>
+                  <select id="winResult">
+                    <option value="win">Win</option>
+                    <option value="loss">Loss / reset</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label" for="winDays">In-game day</label>
+                  <input id="winDays" placeholder="e.g. 17" autocomplete="off" />
+                </div>
+                <div>
+                  <label class="field-label" for="winTime">Real time</label>
+                  <input id="winTime" placeholder="e.g. 42:10" autocomplete="off" />
+                </div>
+                <div class="form-span">
+                  <label class="field-label" for="winNote">Note</label>
+                  <textarea id="winNote" placeholder="What went well, what killed the run, lucky pages, etc."></textarea>
+                </div>
+                <div class="form-span controls" style="margin-top:0">
+                  <button class="btn primary" type="submit">Save result</button>
+                  <button class="btn ghost" type="button" id="quickWinBtn">Quick win</button>
+                  <button class="btn danger" type="button" id="quickLossBtn">Quick loss</button>
+                  <button class="btn ghost" type="button" id="copyWinsBtn">Copy log</button>
+                  <button class="btn ghost" type="button" id="copyWinsJsonBtn">Copy JSON</button>
+                  <button class="btn danger" type="button" id="clearWinsBtn">Clear log</button>
+                </div>
+              </form>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div class="card-title">Run history</div>
+              <div id="winsCounter" class="small">0 entries</div>
+            </div>
+            <div class="card-body">
+              <div class="filter-bar" style="grid-template-columns: minmax(0, 1fr) 160px 150px">
+                <input id="winSearch" placeholder="Search win notes..." autocomplete="off" />
+                <select id="winResultFilter">
+                  <option value="all">All results</option>
+                  <option value="win">Wins only</option>
+                  <option value="loss">Losses only</option>
+                </select>
+                <select id="winSort">
+                  <option value="newest">Newest</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+              </div>
+              <div class="win-timeline" id="winsTimeline" aria-label="Run result timeline"></div>
+              <div class="entries" id="winsEntries"></div>
+            </div>
+          </aside>
+        </section>
+      </section>
+
+      <section class="view" id="view-soundboard">
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Enemy sound cues</div><div class="small">Synthetic practice sounds, not ripped game audio. Use it to train recognition habits.</div></div>
+              <button class="btn ghost" id="stopSoundsBtn">Stop sounds</button>
+            </div>
+            <div class="card-body">
+              <div class="sound-grid" id="cueGrid"></div>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div><div class="card-title">Cue trainer</div><div class="small">Guess if the cue requires a reaction.</div></div>
+            </div>
+            <div class="card-body sound-training-panel">
+              <div id="soundVisual" class="sound-visual"></div>
+              <div class="big-status" id="drillStatus"><strong>No drill running</strong><span class="small">Press Start drill, listen, then choose Real or Fake.</span></div>
+              <div class="controls" style="margin-top:0">
+                <button class="btn primary" id="startDrillBtn">Start drill</button>
+                <button class="btn good" id="guessRealBtn">Real cue</button>
+                <button class="btn ghost" id="guessFakeBtn">Fake / ignore</button>
+                <button class="btn ghost" id="guessBreatherBtn">Breather</button>
+                <button class="btn ghost" id="guessKidnapperBtn">Kidnapper</button>
+              </div>
+              <div class="compiled-key" id="soundScoreBox">Score: 0 / 0</div>
+              <div class="card soft">
+                <div class="card-body">
+                  <div class="card-title" style="font-size:16px">Troll mode</div>
+                  <p class="small">Plays random browser cues on a timer. It is intentionally annoying, so only enable it when you actually want stress training.</p>
+                  <div class="range-row">
+                    <label for="soundVolume"><span>Volume</span><strong id="soundVolumeValue">70%</strong></label>
+                    <input id="soundVolume" type="range" min="0" max="100" step="5" value="70" />
+                  </div>
+                  <div class="range-row">
+                    <label for="trollFrequency"><span>Frequency</span><strong id="trollFrequencyValue">45s</strong></label>
+                    <input id="trollFrequency" type="range" min="10" max="180" step="5" value="45" />
+                  </div>
+                  <div class="range-row">
+                    <label for="trollJitter"><span>Random spread</span><strong id="trollJitterValue">±20s</strong></label>
+                    <input id="trollJitter" type="range" min="0" max="90" step="5" value="20" />
+                  </div>
+                  <label class="field-label" for="trollCuePool">Cue pool</label>
+                  <select id="trollCuePool">
+                    <option value="scary">Scary real-like cues</option>
+                    <option value="all">All audio cues</option>
+                    <option value="fake">Fake / ignore only</option>
+                  </select>
+                  <label class="toggle-row">
+                    <input id="trollInstant" type="checkbox" />
+                    <span>Play one cue immediately when Troll mode starts.</span>
+                  </label>
+                  <div class="status-line" id="trollStatus">Troll mode is off.</div>
+                  <div class="controls">
+                    <button class="btn danger" id="trollModeBtn">Troll mode: OFF</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </aside>
         </section>
@@ -862,15 +1470,118 @@
             <div class="card-body"><div class="check-group" id="checkDuring"></div></div>
           </article>
           <article class="card">
+            <div class="card-header"><div><div class="card-title">Enemy safety</div><div class="small">Reaction reminders for stressful cues.</div></div></div>
+            <div class="card-body"><div class="check-group" id="checkSafety"></div></div>
+          </article>
+          <article class="card">
+            <div class="card-header"><div><div class="card-title">Endgame</div><div class="small">Final checks before committing to the Red Room URL.</div></div></div>
+            <div class="card-body"><div class="check-group" id="checkEndgame"></div></div>
+          </article>
+          <article class="card">
             <div class="card-header"><div><div class="card-title">Tool controls</div><div class="small">Checklist saves locally too.</div></div></div>
             <div class="card-body">
               <div class="compiled-key" id="checklistSummary">0% done</div>
+              <div style="height:12px"></div>
+              <label class="field-label" for="checklistPreset">Preset</label>
+              <select id="checklistPreset">
+                <option value="new-run">New Run Prep</option>
+                <option value="while-searching">While Searching</option>
+                <option value="enemy-safety">Enemy Safety</option>
+                <option value="endgame">Endgame</option>
+              </select>
               <div class="controls">
+                <button class="btn ghost" id="applyChecklistPresetBtn">Apply preset</button>
                 <button class="btn primary" id="copyChecklistBtn">Copy checklist</button>
                 <button class="btn danger" id="resetChecklistBtn">Reset checklist</button>
               </div>
+              <div style="height:14px"></div>
+              <form id="customChecklistForm" class="form-grid">
+                <div class="form-span">
+                  <label class="field-label" for="customChecklistTitle">Custom item</label>
+                  <input id="customChecklistTitle" placeholder="Add a personal run reminder" autocomplete="off" />
+                </div>
+                <div>
+                  <label class="field-label" for="customChecklistGroup">Group</label>
+                  <select id="customChecklistGroup">
+                    <option value="before">Before searching</option>
+                    <option value="during">During run</option>
+                    <option value="safety">Enemy safety</option>
+                    <option value="endgame">Endgame</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="field-label">&nbsp;</label>
+                  <button class="btn full" type="submit">Add item</button>
+                </div>
+              </form>
+              <div class="check-group" id="checkCustom" style="margin-top:14px"></div>
             </div>
           </article>
+        </section>
+      </section>
+
+      <section class="view" id="view-settings">
+        <section class="two-col">
+          <article class="card">
+            <div class="card-header">
+              <div><div class="card-title">Preferences</div><div class="small">Saved locally on this browser.</div></div>
+            </div>
+            <div class="card-body settings-panel">
+              <div class="range-row">
+                <label for="settingsVolume"><span>Sound volume</span><strong id="settingsVolumeValue">70%</strong></label>
+                <input id="settingsVolume" type="range" min="0" max="100" step="5" value="70" />
+              </div>
+              <label class="toggle-row">
+                <input id="settingsCompactMode" type="checkbox" />
+                <span>Compact mode.</span>
+              </label>
+              <label class="toggle-row">
+                <input id="settingsDangerFx" type="checkbox" />
+                <span>Danger/glitch visual effects.</span>
+              </label>
+              <div class="card soft">
+                <div class="card-body settings-panel">
+                  <div><div class="card-title" style="font-size:16px">Default Troll Mode</div><div class="small">Applies to new Troll mode settings when you press Apply defaults.</div></div>
+                  <div class="range-row">
+                    <label for="settingsTrollFrequency"><span>Frequency</span><strong id="settingsTrollFrequencyValue">45s</strong></label>
+                    <input id="settingsTrollFrequency" type="range" min="10" max="180" step="5" value="45" />
+                  </div>
+                  <div class="range-row">
+                    <label for="settingsTrollJitter"><span>Random spread</span><strong id="settingsTrollJitterValue">±20s</strong></label>
+                    <input id="settingsTrollJitter" type="range" min="0" max="90" step="5" value="20" />
+                  </div>
+                  <label class="field-label" for="settingsTrollPool">Cue pool</label>
+                  <select id="settingsTrollPool">
+                    <option value="scary">Scary real-like cues</option>
+                    <option value="all">All audio cues</option>
+                    <option value="fake">Fake / ignore only</option>
+                  </select>
+                  <label class="toggle-row">
+                    <input id="settingsTrollInstant" type="checkbox" />
+                    <span>Play one cue immediately when Troll mode starts.</span>
+                  </label>
+                  <button class="btn ghost" id="applyTrollDefaultsBtn">Apply defaults to Soundboard</button>
+                </div>
+              </div>
+            </div>
+          </article>
+          <aside class="card">
+            <div class="card-header">
+              <div><div class="card-title">Local Data</div><div class="small">Export, import, or reset this toolkit's localStorage entries.</div></div>
+            </div>
+            <div class="card-body settings-panel">
+              <textarea class="data-box" id="settingsDataBox" placeholder="Exported JSON appears here. Paste JSON here before importing."></textarea>
+              <div class="controls" style="margin-top:0">
+                <button class="btn primary" id="settingsExportBtn">Export JSON</button>
+                <button class="btn ghost" id="settingsCopyExportBtn">Copy JSON</button>
+                <button class="btn ghost" id="settingsImportBtn">Import JSON</button>
+              </div>
+              <div class="danger-zone">
+                <div><div class="card-title" style="font-size:16px">Reset local saves</div><div class="small">This clears only the toolkit keys listed in this app, not unrelated browser storage.</div></div>
+                <button class="btn danger" id="settingsResetAllBtn">Reset all toolkit data</button>
+              </div>
+            </div>
+          </aside>
         </section>
       </section>
     </main>
@@ -888,6 +1599,12 @@
         eyebrow: "Welcome to the Game Toolkit",
         subtitle: "A compact helper hub for WTTG 1 runs. Start with Claffis, compile keys, track A.N.N links, and keep a simple session checklist.",
         pill: "Local save: ON"
+      },
+      run: {
+        title: "Run Timer",
+        eyebrow: "Session utility",
+        subtitle: "A stopwatch and timeline for the current attempt. Mark key finds, enemy cues, weird pages and deaths without leaving the toolkit.",
+        pill: "Timer + timeline"
       },
       claffis: {
         title: "Claffis Helper",
@@ -907,19 +1624,41 @@
         subtitle: "A stronger notepad for suspicious URLs, hashes, pages and key locations. Use it like the in-game Notes panel, but with statuses.",
         pill: "Links + notes"
       },
+      wins: {
+        title: "Win Log",
+        eyebrow: "Run history",
+        subtitle: "Save wins and failed runs, track your current streak, best streak, dates, run times and notes.",
+        pill: "Streak tracker"
+      },
+      soundboard: {
+        title: "Soundboard",
+        eyebrow: "Cue trainer",
+        subtitle: "Practice Breather and Kidnapper cues with synthetic sounds, real/fake labels, drills and optional troll mode.",
+        pill: "Sound cues"
+      },
       checklist: {
         title: "Session Checklist",
         eyebrow: "Run control",
         subtitle: "Simple saved checkboxes for preparation and searching. Mostly here to stop panic-clicking and forgetting important stuff.",
         pill: "Local checklist"
+      },
+      settings: {
+        title: "Settings",
+        eyebrow: "Local controls",
+        subtitle: "Tune sounds, compact mode, visual effects, Troll defaults, and export or import this browser's toolkit data.",
+        pill: "Preferences + data"
       }
     };
 
     const STORAGE = {
       claffis: "wttg1-toolkit-claffis-v1",
-      keys: "wttg1-toolkit-keys-v1",
+      runTimer: "wttg1-toolkit-run-timer-v1",
+      keys: "wttg1-toolkit-keys-v2",
       links: "wttg1-toolkit-links-v1",
-      checklist: "wttg1-toolkit-checklist-v1"
+      wins: "wttg1-toolkit-wins-v1",
+      soundboard: "wttg1-toolkit-soundboard-v1",
+      checklist: "wttg1-toolkit-checklist-v1",
+      settings: "wttg1-toolkit-settings-v1"
     };
 
     function loadJson(key, fallback) {
@@ -965,6 +1704,92 @@
       }
     }
 
+    function makeId() {
+      return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random());
+    }
+
+    function confirmAction(message) {
+      return window.confirm(message);
+    }
+
+    function setRoute(route) {
+      location.hash = route;
+      navigate();
+    }
+
+    function formatDateTime(value) {
+      if (!value) return "unknown time";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "unknown time";
+      return date.toLocaleString([], { dateStyle: "short", timeStyle: "short" });
+    }
+
+    const defaultSettings = {
+      soundVolume: 70,
+      compactMode: false,
+      dangerFx: true,
+      trollDefaults: { frequency: 45, jitter: 20, pool: "scary", instant: false }
+    };
+
+    function normalizeSettings(value) {
+      const settings = { ...defaultSettings, ...(value && typeof value === "object" ? value : {}) };
+      settings.soundVolume = Math.min(100, Math.max(0, Number(settings.soundVolume ?? defaultSettings.soundVolume)));
+      settings.compactMode = Boolean(settings.compactMode);
+      settings.dangerFx = settings.dangerFx !== false;
+      settings.trollDefaults = { ...defaultSettings.trollDefaults, ...(settings.trollDefaults || {}) };
+      settings.trollDefaults.frequency = Math.min(180, Math.max(10, Number(settings.trollDefaults.frequency || 45)));
+      settings.trollDefaults.jitter = Math.min(90, Math.max(0, Number(settings.trollDefaults.jitter || 20)));
+      settings.trollDefaults.pool = ["scary", "all", "fake"].includes(settings.trollDefaults.pool) ? settings.trollDefaults.pool : "scary";
+      settings.trollDefaults.instant = Boolean(settings.trollDefaults.instant);
+      return settings;
+    }
+
+    let settingsState = normalizeSettings(loadJson(STORAGE.settings, defaultSettings));
+
+    function applySettings() {
+      document.body.classList.toggle("compact-mode", settingsState.compactMode);
+      document.body.classList.toggle("fx-off", !settingsState.dangerFx);
+    }
+
+    function saveSettings(options = {}) {
+      const { render = true } = options;
+      settingsState = normalizeSettings(settingsState);
+      saveJson(STORAGE.settings, settingsState);
+      applySettings();
+      if (render) {
+        renderSettings();
+        renderSoundSettingsControls();
+      }
+    }
+
+    function getToolkitExportText() {
+      const data = {
+        app: "WTTG 1 Toolkit",
+        version: 2,
+        exportedAt: new Date().toISOString(),
+        storage: {}
+      };
+      Object.values(STORAGE).forEach((key) => {
+        const raw = localStorage.getItem(key);
+        if (raw !== null) data.storage[key] = JSON.parse(raw);
+      });
+      return JSON.stringify(data, null, 2);
+    }
+
+    function importToolkitData(text) {
+      const parsed = JSON.parse(text);
+      const incoming = parsed.storage && typeof parsed.storage === "object" ? parsed.storage : parsed;
+      Object.values(STORAGE).forEach((key) => {
+        if (Object.prototype.hasOwnProperty.call(incoming, key)) {
+          localStorage.setItem(key, JSON.stringify(incoming[key]));
+        }
+      });
+      showToast("Data imported. Reloading...");
+      setTimeout(() => location.reload(), 450);
+    }
+
+    applySettings();
+
     function navigate() {
       const route = (location.hash || "#dashboard").replace("#", "");
       const safeRoute = routeData[route] ? route : "dashboard";
@@ -985,6 +1810,194 @@
 
     window.addEventListener("hashchange", navigate);
 
+    // Run timer module
+    let runTimerState = loadJson(STORAGE.runTimer, {
+      elapsedMs: 0,
+      running: false,
+      startedAt: null,
+      sendToNotes: false,
+      events: []
+    });
+    if (!runTimerState || typeof runTimerState !== "object") {
+      runTimerState = { elapsedMs: 0, running: false, startedAt: null, sendToNotes: false, events: [] };
+    }
+    if (!Array.isArray(runTimerState.events)) runTimerState.events = [];
+    runTimerState.sendToNotes = Boolean(runTimerState.sendToNotes);
+    let timerTick = null;
+
+    function getRunElapsedMs() {
+      const base = Number(runTimerState.elapsedMs || 0);
+      if (!runTimerState.running || !runTimerState.startedAt) return base;
+      return base + Math.max(0, Date.now() - Number(runTimerState.startedAt));
+    }
+
+    function formatDuration(ms, showTenths = false) {
+      const total = Math.max(0, Number(ms) || 0);
+      const tenths = Math.floor((total % 1000) / 100);
+      const seconds = Math.floor(total / 1000) % 60;
+      const minutes = Math.floor(total / 60000) % 60;
+      const hours = Math.floor(total / 3600000);
+      const two = (n) => String(n).padStart(2, "0");
+      const main = hours > 0 ? `${hours}:${two(minutes)}:${two(seconds)}` : `${two(minutes)}:${two(seconds)}`;
+      return showTenths ? `${main}.${tenths}` : main;
+    }
+
+    function saveRunTimer(skipRender = false) {
+      saveJson(STORAGE.runTimer, runTimerState);
+      if (!skipRender) {
+        renderRunTimer();
+        renderDashboard();
+      }
+    }
+
+    function renderRunTimer() {
+      const elapsed = getRunElapsedMs();
+      const display = $("#runTimerDisplay");
+      if (display) display.textContent = formatDuration(elapsed, true);
+      const startBtn = $("#timerStartPauseBtn");
+      if (startBtn) startBtn.textContent = runTimerState.running ? "Pause timer" : elapsed > 0 ? "Resume timer" : "Start timer";
+      const count = $("#timerEventCount");
+      if (count) count.textContent = `${runTimerState.events.length} ${runTimerState.events.length === 1 ? "event" : "events"}`;
+      const sendToNotes = $("#timerSendToNotes");
+      if (sendToNotes) sendToNotes.checked = Boolean(runTimerState.sendToNotes);
+      const timeline = $("#timerTimeline");
+      if (!timeline) return;
+      timeline.innerHTML = "";
+      if (!runTimerState.events.length) {
+        timeline.innerHTML = `<div class="small">No timeline events yet. Start the timer and add quick events during a run.</div>`;
+        return;
+      }
+      [...runTimerState.events].reverse().forEach((event) => {
+        const div = document.createElement("div");
+        div.className = "timeline-entry";
+        div.innerHTML = `
+          <div>
+            <div class="timeline-time">${escapeHtml(formatDuration(event.timeMs || 0, true))}</div>
+            <div class="entry-title">${escapeHtml(event.title || "Event")}</div>
+            ${event.note ? `<div class="entry-note">${escapeHtml(event.note)}</div>` : ""}
+          </div>
+          <button class="btn tiny-btn danger" data-timer-delete="${escapeHtml(event.id)}">Delete</button>
+        `;
+        timeline.appendChild(div);
+      });
+      timeline.querySelectorAll("button[data-timer-delete]").forEach((button) => {
+        button.addEventListener("click", () => {
+          runTimerState.events = runTimerState.events.filter((event) => event.id !== button.dataset.timerDelete);
+          saveRunTimer();
+        });
+      });
+    }
+
+    function startTimerTicker() {
+      clearInterval(timerTick);
+      timerTick = setInterval(() => {
+        if (runTimerState.running) {
+          renderRunTimer();
+          renderDashboard();
+          saveRunTimer(true);
+        }
+      }, 250);
+    }
+
+    function toggleRunTimer() {
+      if (runTimerState.running) {
+        runTimerState.elapsedMs = getRunElapsedMs();
+        runTimerState.running = false;
+        runTimerState.startedAt = null;
+        showToast("Timer paused.");
+      } else {
+        runTimerState.running = true;
+        runTimerState.startedAt = Date.now();
+        showToast("Timer started.");
+      }
+      saveRunTimer();
+    }
+
+    function addTimerEvent(title, note = "") {
+      const custom = $("#timerCustomNote")?.value.trim() || "";
+      const timerEvent = {
+        id: makeId(),
+        timeMs: getRunElapsedMs(),
+        title,
+        note: note || custom,
+        createdAt: new Date().toISOString()
+      };
+      runTimerState.events.push(timerEvent);
+      if (runTimerState.sendToNotes) addTimerEventToNotes(timerEvent);
+      if ($("#timerCustomNote")) $("#timerCustomNote").value = "";
+      saveRunTimer();
+      showToast("Timeline event added.");
+    }
+
+    function resetRunTimer() {
+      if (getRunElapsedMs() > 0 && !confirmAction("Reset the run timer? Timeline events will stay.")) return;
+      runTimerState.elapsedMs = 0;
+      runTimerState.running = false;
+      runTimerState.startedAt = null;
+      saveRunTimer();
+      showToast("Timer reset. Timeline kept.");
+    }
+
+    function getTimelineText() {
+      return runTimerState.events
+        .map((event, index) => `${index + 1}. ${formatDuration(event.timeMs || 0, true)} — ${event.title || "Event"}${event.note ? `\n   ${event.note}` : ""}`)
+        .join("\n");
+    }
+
+    function addTimerEventToNotes(timerEvent) {
+      const status = /death|enemy/i.test(timerEvent.title) ? "danger" : /important|key|safe/i.test(timerEvent.title) ? "important" : "unchecked";
+      linksState.push({
+        id: makeId(),
+        url: "",
+        title: `Timer: ${timerEvent.title}`,
+        status,
+        note: `${formatDuration(timerEvent.timeMs || 0, true)}${timerEvent.note ? ` — ${timerEvent.note}` : ""}`,
+        tags: ["timer"],
+        important: status === "important",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+      saveLinks();
+    }
+
+    function finishTimerAsResult(result) {
+      const elapsed = getRunElapsedMs();
+      runTimerState.elapsedMs = elapsed;
+      runTimerState.running = false;
+      runTimerState.startedAt = null;
+      const timeline = getTimelineText();
+      addRunResult(result, {
+        date: todayIsoDate(),
+        time: formatDuration(elapsed, true),
+        note: timeline ? `Finished from Run Timer.\n\nTimeline:\n${timeline}` : "Finished from Run Timer.",
+        skipFormReset: true
+      });
+      saveRunTimer();
+      showToast(result === "win" ? "Timer saved as win." : "Timer saved as loss.");
+    }
+
+    $("#timerStartPauseBtn")?.addEventListener("click", toggleRunTimer);
+    $("#timerResetBtn")?.addEventListener("click", resetRunTimer);
+    $("#timerAddTimestampBtn")?.addEventListener("click", () => addTimerEvent("Timestamp"));
+    $$("button[data-quick-event]").forEach((button) => button.addEventListener("click", () => addTimerEvent(button.dataset.quickEvent)));
+    $("#timerSendToNotes")?.addEventListener("change", (event) => {
+      runTimerState.sendToNotes = event.target.checked;
+      saveRunTimer();
+    });
+    $("#timerFinishWinBtn")?.addEventListener("click", () => finishTimerAsResult("win"));
+    $("#timerFinishLossBtn")?.addEventListener("click", () => finishTimerAsResult("loss"));
+    $("#timerCustomNote")?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") addTimerEvent("Custom note");
+    });
+    $("#copyTimelineBtn")?.addEventListener("click", () => copyText(getTimelineText(), "Timeline copied."));
+    $("#clearTimelineBtn")?.addEventListener("click", () => {
+      if (!confirmAction("Clear the current timer timeline?")) return;
+      runTimerState.events = [];
+      saveRunTimer();
+      showToast("Timeline cleared.");
+    });
+    startTimerTicker();
+
     // Claffis module
     const MAX_CLAFFIS = 7;
     const claffisDefaultSpots = [
@@ -1003,7 +2016,7 @@
     ];
 
     function getDefaultClaffisState() {
-      return { lockAfterFull: true, dimHotspots: false, sequence: [], spots: claffisDefaultSpots };
+      return { lockAfterFull: true, dimHotspots: false, showLabels: true, showOrders: true, sequence: [], spots: claffisDefaultSpots };
     }
 
     let claffisState = loadJson(STORAGE.claffis, getDefaultClaffisState());
@@ -1013,6 +2026,8 @@
       const labelById = new Map(claffisState.spots.map((spot) => [spot.id, spot.label]));
       claffisState.spots = claffisDefaultSpots.map((spot) => ({ ...spot, label: labelById.get(spot.id) || spot.label }));
     }
+    claffisState.showLabels = claffisState.showLabels !== false;
+    claffisState.showOrders = claffisState.showOrders !== false;
 
     function saveClaffis() {
       saveJson(STORAGE.claffis, claffisState);
@@ -1048,6 +2063,7 @@
     }
 
     function resetClaffis() {
+      if (claffisState.sequence.length && !confirmAction("Reset the Claffis sequence?")) return;
       claffisState.sequence = [];
       saveClaffis();
     }
@@ -1056,6 +2072,8 @@
       const mapShell = $("#claffisMapShell");
       mapShell.querySelectorAll(".hotspot").forEach((button) => button.remove());
       mapShell.classList.toggle("hide-hotspots", claffisState.dimHotspots);
+      mapShell.classList.toggle("hide-labels", !claffisState.showLabels);
+      mapShell.classList.toggle("hide-orders", !claffisState.showOrders);
 
       claffisState.spots.forEach((spot) => {
         const orders = getClaffisOrders(spot.id);
@@ -1066,9 +2084,11 @@
         button.style.setProperty("--x", spot.x);
         button.style.setProperty("--y", spot.y);
         button.title = orders.length ? `${orderText} ${spot.id} — ${spot.label}` : `Add ${spot.id} — ${spot.label}`;
-        button.innerHTML = orders.length
-          ? `<span class="hotspot-order">${orderText}</span><span class="hotspot-id">${escapeHtml(spot.id)}</span>`
-          : `<span class="hotspot-id">${escapeHtml(spot.id)}</span>`;
+        button.innerHTML = `
+          ${orders.length ? `<span class="hotspot-order">${orderText}</span>` : ""}
+          <span class="hotspot-id">${escapeHtml(spot.id)}</span>
+          <span class="hotspot-label">${escapeHtml(spot.label)}</span>
+        `;
         if (orders.length) button.classList.add("used");
         button.addEventListener("click", () => addClaffisSpot(spot.id));
         mapShell.appendChild(button);
@@ -1093,6 +2113,8 @@
       $("#claffisResultBox").textContent = getClaffisSequenceText() || "No notes selected yet.";
       $("#claffisLockBtn").textContent = `Lock at 7: ${claffisState.lockAfterFull ? "ON" : "OFF"}`;
       $("#claffisToggleHotspotsBtn").textContent = claffisState.dimHotspots ? "Show hotspots" : "Dim hotspots";
+      $("#claffisToggleLabelsBtn").textContent = claffisState.showLabels ? "Hide labels" : "Show labels";
+      $("#claffisToggleOrdersBtn").textContent = claffisState.showOrders ? "Hide order" : "Show order";
 
       const settings = $("#claffisSettingsGrid");
       settings.innerHTML = "";
@@ -1113,6 +2135,8 @@
     $("#claffisCopyBtn").addEventListener("click", () => copyText(getClaffisSequenceText(), "Claffis sequence copied."));
     $("#claffisLockBtn").addEventListener("click", () => { claffisState.lockAfterFull = !claffisState.lockAfterFull; saveClaffis(); });
     $("#claffisToggleHotspotsBtn").addEventListener("click", () => { claffisState.dimHotspots = !claffisState.dimHotspots; saveClaffis(); });
+    $("#claffisToggleLabelsBtn").addEventListener("click", () => { claffisState.showLabels = !claffisState.showLabels; saveClaffis(); });
+    $("#claffisToggleOrdersBtn").addEventListener("click", () => { claffisState.showOrders = !claffisState.showOrders; saveClaffis(); });
 
     document.addEventListener("keydown", (event) => {
       if ((location.hash || "#dashboard") !== "#claffis") return;
@@ -1130,27 +2154,88 @@
     ];
 
     function getDefaultKeyState() {
-      return Array.from({ length: 8 }, (_, index) => ({ part: "", source: "", status: "empty", note: "" }));
+      return Array.from({ length: 8 }, (_, index) => ({ number: index + 1, part: "", source: "", status: "empty", note: "" }));
     }
 
     let keyState = loadJson(STORAGE.keys, getDefaultKeyState());
     if (!Array.isArray(keyState) || keyState.length !== 8) keyState = getDefaultKeyState();
+    keyState = getDefaultKeyState().map((fallback, index) => ({ ...fallback, ...(keyState[index] || {}) }));
 
-    function saveKeys() {
+    function saveKeys(options = {}) {
+      const { rerender = false } = options;
       saveJson(STORAGE.keys, keyState);
-      renderKeys();
+      if (rerender) renderKeys();
+      refreshKeyOutputs();
       renderDashboard();
+    }
+
+    function parseKeyFragments(value) {
+      const text = String(value || "");
+      const matches = [];
+      const lineRegex = /(?:^|\n|\s)([1-8])\s*[-–—:]\s*([a-zA-Z0-9]{2,12})(?=\s|$)/g;
+      let match;
+      while ((match = lineRegex.exec(text))) {
+        matches.push({ number: Number(match[1]), code: match[2] });
+      }
+      return matches;
+    }
+
+    function setKeyPart(index, value, inputElement = null) {
+      const parsed = parseKeyFragments(value);
+      if (parsed.length) {
+        parsed.forEach(({ number, code }) => {
+          const slot = keyState[number - 1];
+          if (!slot) return;
+          slot.part = code;
+          if (slot.status === "empty") slot.status = "found";
+        });
+        renderKeys();
+        saveKeys();
+        showToast(parsed.length === 1 ? `Key ${parsed[0].number} imported.` : `${parsed.length} keys imported.`);
+        return;
+      }
+
+      const slot = keyState[index];
+      slot.part = value;
+      if (slot.part.trim() && slot.status === "empty") slot.status = "found";
+      if (!slot.part.trim() && slot.status === "found") slot.status = "empty";
+      if (inputElement) {
+        const card = inputElement.closest(".key-slot");
+        const badge = card?.querySelector(".badge");
+        if (badge) badge.textContent = slot.status;
+        if (card) card.className = `key-slot status-${slot.part.trim() ? slot.status : "empty"}`;
+      }
+      saveKeys();
     }
 
     function getFilledKeys() {
       return keyState.filter((slot) => slot.part.trim() && slot.status !== "fake");
     }
 
-    function getCompiledKey() {
+    function getRawCompiledKey() {
       return keyState
-        .filter((slot) => slot.part.trim() && slot.status !== "fake")
+        .filter((slot) => slot.status !== "fake")
         .map((slot) => slot.part.trim())
         .join("");
+    }
+
+    function getCompiledUrl() {
+      const raw = getRawCompiledKey();
+      return raw ? `http://${raw}.ann` : "";
+    }
+
+    function getMissingKeyNumbers() {
+      return keyState
+        .filter((slot) => !slot.part.trim() || slot.status === "fake")
+        .map((slot) => slot.number);
+    }
+
+    function getKeyValidationHint(slot) {
+      const part = slot.part.trim();
+      if (!part) return "";
+      if (!/^[a-zA-Z0-9]+$/.test(part)) return "Contains unusual characters. Saved anyway.";
+      if (part.length < 3 || part.length > 12) return "Unusual length. Double-check before trusting it.";
+      return "Looks usable.";
     }
 
     function getKeyNotesText() {
@@ -1163,21 +2248,45 @@
       }).join("\n");
     }
 
+    function refreshKeyOutputs() {
+      const filled = getFilledKeys();
+      const raw = getRawCompiledKey();
+      const url = getCompiledUrl();
+      const missing = getMissingKeyNumbers();
+      $("#keyCounter").textContent = `${filled.length} / 8 · ${missing.length} missing`;
+      $("#compiledKey").textContent = url
+        ? `Red Room URL:\n${url}\n\nRaw compiled key:\n${raw}\n\nMissing / fake slots: ${missing.length ? missing.join(", ") : "none"}`
+        : "No key parts yet.";
+
+      const progress = $("#keyProgress");
+      progress.innerHTML = "";
+      keyState.forEach((slot, index) => {
+        const row = document.createElement("div");
+        row.className = "progress-row";
+        const label = slot.part.trim() ? slot.status : "missing";
+        row.innerHTML = `<span>Key ${index + 1}</span><strong>${escapeHtml(label)}</strong>`;
+        progress.appendChild(row);
+      });
+    }
+
     function renderKeys() {
       const grid = $("#keyGrid");
       grid.innerHTML = "";
 
       keyState.forEach((slot, index) => {
         const card = document.createElement("div");
-        card.className = "key-slot";
+        const slotStatus = slot.part.trim() ? slot.status : "empty";
+        const hint = getKeyValidationHint(slot);
+        card.className = `key-slot status-${slotStatus}`;
         card.innerHTML = `
           <div class="key-slot-head">
             <div class="key-slot-title">Key part ${index + 1}</div>
-            <span class="badge">${escapeHtml(slot.status)}</span>
+            <span class="badge">${escapeHtml(slotStatus)}</span>
           </div>
           <div>
             <label class="field-label" for="key-part-${index}">Part</label>
-            <input id="key-part-${index}" value="${escapeHtml(slot.part)}" placeholder="Paste fragment here" autocomplete="off" />
+            <input id="key-part-${index}" value="${escapeHtml(slot.part)}" placeholder="Paste 1 - yx6B or just yx6B" autocomplete="off" spellcheck="false" />
+            ${hint ? `<div class="key-hint ${hint === "Looks usable." ? "" : "warn"}">${escapeHtml(hint)}</div>` : ""}
           </div>
           <div class="form-grid">
             <div>
@@ -1196,39 +2305,50 @@
             <input id="key-note-${index}" value="${escapeHtml(slot.note)}" placeholder="Optional note" autocomplete="off" />
           </div>
         `;
-        card.querySelector(`#key-part-${index}`).addEventListener("input", (event) => {
-          slot.part = event.target.value;
-          if (slot.part.trim() && slot.status === "empty") slot.status = "found";
+        const partInput = card.querySelector(`#key-part-${index}`);
+        partInput.addEventListener("paste", () => {
+          setTimeout(() => setKeyPart(index, partInput.value, partInput), 0);
+        });
+        partInput.addEventListener("input", (event) => {
+          setKeyPart(index, event.target.value, event.target);
+        });
+        card.querySelector(`#key-source-${index}`).addEventListener("input", (event) => {
+          slot.source = event.target.value;
           saveKeys();
         });
-        card.querySelector(`#key-source-${index}`).addEventListener("input", (event) => { slot.source = event.target.value; saveKeys(); });
-        card.querySelector(`#key-status-${index}`).addEventListener("change", (event) => { slot.status = event.target.value; saveKeys(); });
-        card.querySelector(`#key-note-${index}`).addEventListener("input", (event) => { slot.note = event.target.value; saveKeys(); });
+        card.querySelector(`#key-status-${index}`).addEventListener("change", (event) => {
+          slot.status = event.target.value;
+          card.querySelector(".badge").textContent = slot.status;
+          card.className = `key-slot status-${slot.part.trim() ? slot.status : "empty"}`;
+          saveKeys();
+        });
+        card.querySelector(`#key-note-${index}`).addEventListener("input", (event) => {
+          slot.note = event.target.value;
+          saveKeys();
+        });
         grid.appendChild(card);
       });
 
-      const filled = getFilledKeys();
-      const compiled = getCompiledKey();
-      $("#keyCounter").textContent = `${filled.length} / 8`;
-      $("#compiledKey").textContent = compiled || "No key parts yet.";
-
-      const progress = $("#keyProgress");
-      progress.innerHTML = "";
-      keyState.forEach((slot, index) => {
-        const row = document.createElement("div");
-        row.className = "progress-row";
-        row.innerHTML = `<span>Key ${index + 1}</span><strong>${slot.part.trim() ? escapeHtml(slot.status) : "missing"}</strong>`;
-        progress.appendChild(row);
-      });
+      refreshKeyOutputs();
     }
 
     $("#keysResetBtn").addEventListener("click", () => {
+      if (!confirmAction("Reset all key slots?")) return;
       keyState = getDefaultKeyState();
-      saveKeys();
+      saveKeys({ rerender: true });
       showToast("Key compiler reset.");
     });
-    $("#copyCompiledKeyBtn").addEventListener("click", () => copyText(getCompiledKey(), "Compiled key copied."));
+    $("#copyCompiledKeyBtn").addEventListener("click", () => copyText(getCompiledUrl(), "Compiled .ann URL copied."));
+    $("#copyRawKeyBtn").addEventListener("click", () => copyText(getRawCompiledKey(), "Raw key parts copied."));
     $("#copyKeyNotesBtn").addEventListener("click", () => copyText(getKeyNotesText(), "Key notes copied."));
+    $("#clearUnsureKeysBtn").addEventListener("click", () => {
+      if (!confirmAction("Clear only fake and unsure key slots?")) return;
+      keyState = keyState.map((slot) => ["fake", "unsure"].includes(slot.status)
+        ? { ...slot, part: "", source: "", status: "empty", note: "" }
+        : slot);
+      saveKeys({ rerender: true });
+      showToast("Fake and unsure keys cleared.");
+    });
 
     // Links module
     let linksState = loadJson(STORAGE.links, []);
@@ -1239,8 +2359,61 @@
       checked: "Checked",
       key: "Key found",
       dead: "Dead end",
-      danger: "Danger"
+      danger: "Danger",
+      important: "Important"
     };
+
+    let linkFilters = { search: "", status: "all", sort: "newest" };
+
+    function parseTags(value) {
+      if (Array.isArray(value)) return value.map((tag) => String(tag).trim()).filter(Boolean);
+      return String(value || "")
+        .split(/[,\s]+/)
+        .map((tag) => tag.trim().replace(/^#/, ""))
+        .filter(Boolean);
+    }
+
+    function normalizeLinkEntry(entry) {
+      const createdAt = entry.createdAt || new Date().toISOString();
+      const tags = parseTags(entry.tags || entry.tagText || "");
+      return {
+        id: entry.id || makeId(),
+        url: entry.url || "",
+        title: entry.title || "",
+        status: statusLabels[entry.status] ? entry.status : "unchecked",
+        note: entry.note || "",
+        tags,
+        important: Boolean(entry.important || entry.status === "important"),
+        createdAt,
+        updatedAt: entry.updatedAt || createdAt
+      };
+    }
+
+    linksState = linksState.map(normalizeLinkEntry);
+
+    function getFilteredLinks() {
+      const search = linkFilters.search.trim().toLowerCase();
+      const status = linkFilters.status;
+      let list = linksState.filter((entry) => {
+        const text = [entry.title, entry.url, entry.note, entry.status, ...(entry.tags || [])].join(" ").toLowerCase();
+        const matchesSearch = !search || text.includes(search);
+        const matchesStatus = status === "all"
+          || entry.status === status
+          || (status === "important" && (entry.important || entry.status === "important"));
+        return matchesSearch && matchesStatus;
+      });
+      const timeValue = (entry, key) => new Date(entry[key] || entry.createdAt || 0).getTime() || 0;
+      if (linkFilters.sort === "status") {
+        list = list.sort((a, b) => String(a.status).localeCompare(String(b.status)) || timeValue(b, "updatedAt") - timeValue(a, "updatedAt"));
+      } else if (linkFilters.sort === "important") {
+        list = list.sort((a, b) => Number(b.important) - Number(a.important) || timeValue(b, "updatedAt") - timeValue(a, "updatedAt"));
+      } else if (linkFilters.sort === "updated") {
+        list = list.sort((a, b) => timeValue(b, "updatedAt") - timeValue(a, "updatedAt"));
+      } else {
+        list = list.sort((a, b) => timeValue(b, "createdAt") - timeValue(a, "createdAt"));
+      }
+      return list;
+    }
 
     function saveLinks() {
       saveJson(STORAGE.links, linksState);
@@ -1249,7 +2422,10 @@
     }
 
     function renderLinks() {
-      $("#linksCounter").textContent = `${linksState.length} ${linksState.length === 1 ? "entry" : "entries"}`;
+      const filtered = getFilteredLinks();
+      $("#linksCounter").textContent = filtered.length === linksState.length
+        ? `${linksState.length} ${linksState.length === 1 ? "entry" : "entries"}`
+        : `${filtered.length} / ${linksState.length} shown`;
       const entries = $("#linksEntries");
       entries.innerHTML = "";
 
@@ -1258,7 +2434,12 @@
         return;
       }
 
-      [...linksState].reverse().forEach((entry) => {
+      if (!filtered.length) {
+        entries.innerHTML = `<div class="small">No notes match the current filters.</div>`;
+        return;
+      }
+
+      filtered.forEach((entry) => {
         const div = document.createElement("div");
         const statusClass = `status-${entry.status || "unchecked"}`;
         div.className = "entry";
@@ -1267,6 +2448,8 @@
             <div class="entry-title">${entry.important ? "★ " : ""}${escapeHtml(entry.title || "Unknown page")}</div>
             <div class="entry-url">${escapeHtml(entry.url || "No URL")}</div>
             ${entry.note ? `<div class="entry-note">${escapeHtml(entry.note)}</div>` : ""}
+            ${entry.tags?.length ? `<div class="tag-list">${entry.tags.map((tag) => `<span class="tag-chip">#${escapeHtml(tag)}</span>`).join("")}</div>` : ""}
+            <div class="meta-line">Created ${escapeHtml(formatDateTime(entry.createdAt))} · Updated ${escapeHtml(formatDateTime(entry.updatedAt))}</div>
           </div>
           <div class="entry-actions">
             <span class="status-tag ${statusClass}">${escapeHtml(statusLabels[entry.status] || entry.status)}</span>
@@ -1281,21 +2464,32 @@
         button.addEventListener("click", () => {
           const id = button.dataset.id;
           const action = button.dataset.action;
-          if (action === "delete") linksState = linksState.filter((entry) => entry.id !== id);
+          if (action === "delete") {
+            if (!confirmAction("Delete this A.N.N note?")) return;
+            linksState = linksState.filter((entry) => entry.id !== id);
+          }
           if (action === "important") {
             const entry = linksState.find((item) => item.id === id);
-            if (entry) entry.important = !entry.important;
+            if (entry) {
+              entry.important = !entry.important;
+              entry.updatedAt = new Date().toISOString();
+            }
           }
           saveLinks();
         });
       });
     }
 
-    function getLinksText() {
-      return linksState.map((entry, index) => {
+    function getLinksText(list = linksState) {
+      return list.map((entry, index) => {
         const star = entry.important ? "★ " : "";
-        return `${index + 1}. ${star}${entry.title || "Unknown page"}\n   ${entry.url || "No URL"}\n   Status: ${statusLabels[entry.status] || entry.status}\n   Note: ${entry.note || "—"}`;
+        const tags = entry.tags?.length ? `\n   Tags: ${entry.tags.map((tag) => `#${tag}`).join(", ")}` : "";
+        return `${index + 1}. ${star}${entry.title || "Unknown page"}\n   ${entry.url || "No URL"}\n   Status: ${statusLabels[entry.status] || entry.status}${tags}\n   Created: ${formatDateTime(entry.createdAt)}\n   Updated: ${formatDateTime(entry.updatedAt)}\n   Note: ${entry.note || "—"}`;
       }).join("\n\n");
+    }
+
+    function getImportantLinksText() {
+      return getLinksText(linksState.filter((entry) => entry.important || entry.status === "important"));
     }
 
     $("#linkForm").addEventListener("submit", (event) => {
@@ -1303,37 +2497,560 @@
       const url = $("#linkUrl").value.trim();
       const title = $("#linkTitle").value.trim();
       const status = $("#linkStatus").value;
+      const tags = parseTags($("#linkTags").value);
       const note = $("#linkNote").value.trim();
 
-      if (!url && !title && !note) {
+      if (!url && !title && !note && !tags.length) {
         showToast("Add at least a URL, title or note.");
         return;
       }
 
       linksState.push({
-        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+        id: makeId(),
         url,
         title,
         status,
         note,
-        important: false,
-        createdAt: new Date().toISOString()
+        tags,
+        important: status === "important",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       });
 
       $("#linkUrl").value = "";
       $("#linkTitle").value = "";
       $("#linkStatus").value = "unchecked";
+      $("#linkTags").value = "";
       $("#linkNote").value = "";
       saveLinks();
       showToast("Note added.");
     });
 
     $("#copyLinksBtn").addEventListener("click", () => copyText(getLinksText(), "A.N.N notes copied."));
+    $("#copyImportantLinksBtn").addEventListener("click", () => copyText(getImportantLinksText(), "Important A.N.N notes copied."));
+    $("#linkSearch").addEventListener("input", (event) => { linkFilters.search = event.target.value; renderLinks(); });
+    $("#linkStatusFilter").addEventListener("change", (event) => { linkFilters.status = event.target.value; renderLinks(); });
+    $("#linkSort").addEventListener("change", (event) => { linkFilters.sort = event.target.value; renderLinks(); });
     $("#clearLinksBtn").addEventListener("click", () => {
+      if (!confirmAction("Clear all A.N.N notes?")) return;
       linksState = [];
       saveLinks();
       showToast("Notes cleared.");
     });
+
+
+    // Win log module
+    let winsState = loadJson(STORAGE.wins, []);
+    if (!Array.isArray(winsState)) winsState = [];
+    winsState = winsState.map((entry) => ({ ...entry, id: entry.id || makeId(), createdAt: entry.createdAt || new Date().toISOString() }));
+    let winFilters = { search: "", result: "all", sort: "newest" };
+
+    function todayIsoDate() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function getWinStats() {
+      const chronological = [...winsState].sort((a, b) => String(a.date || "").localeCompare(String(b.date || "")) || String(a.createdAt || "").localeCompare(String(b.createdAt || "")));
+      let current = 0;
+      for (let i = chronological.length - 1; i >= 0; i--) {
+        if (chronological[i].result === "win") current++;
+        else break;
+      }
+      let best = 0;
+      let streak = 0;
+      chronological.forEach((entry) => {
+        if (entry.result === "win") {
+          streak++;
+          best = Math.max(best, streak);
+        } else {
+          streak = 0;
+        }
+      });
+      const total = winsState.filter((entry) => entry.result === "win").length;
+      return { current, best, total };
+    }
+
+    function saveWins() {
+      saveJson(STORAGE.wins, winsState);
+      renderWins();
+      renderDashboard();
+    }
+
+    function getFilteredWins() {
+      const search = winFilters.search.trim().toLowerCase();
+      let list = winsState.filter((entry) => {
+        const text = [entry.date, entry.result, entry.day, entry.time, entry.note].join(" ").toLowerCase();
+        const matchesSearch = !search || text.includes(search);
+        const matchesResult = winFilters.result === "all" || entry.result === winFilters.result;
+        return matchesSearch && matchesResult;
+      });
+      list = list.sort((a, b) => {
+        const aTime = new Date(a.createdAt || a.date || 0).getTime() || 0;
+        const bTime = new Date(b.createdAt || b.date || 0).getTime() || 0;
+        return winFilters.sort === "oldest" ? aTime - bTime : bTime - aTime;
+      });
+      return list;
+    }
+
+    function addRunResult(result = null, options = {}) {
+      const entry = {
+        id: makeId(),
+        date: options.date || $("#winDate").value || todayIsoDate(),
+        result: result || options.result || $("#winResult").value,
+        day: options.day ?? $("#winDays").value.trim(),
+        time: options.time ?? $("#winTime").value.trim(),
+        note: options.note ?? $("#winNote").value.trim(),
+        createdAt: new Date().toISOString()
+      };
+      winsState.push(entry);
+      if (!options.skipFormReset) {
+        $("#winDate").value = todayIsoDate();
+        $("#winResult").value = "win";
+        $("#winDays").value = "";
+        $("#winTime").value = "";
+        $("#winNote").value = "";
+      }
+      saveWins();
+      showToast(entry.result === "win" ? "Win saved." : "Loss/reset saved.");
+    }
+
+    function renderWins() {
+      const stats = getWinStats();
+      $("#winsCurrentStreak").textContent = stats.current;
+      $("#winsBestStreak").textContent = stats.best;
+      $("#winsTotal").textContent = stats.total;
+      const filtered = getFilteredWins();
+      $("#winsCounter").textContent = filtered.length === winsState.length
+        ? `${winsState.length} ${winsState.length === 1 ? "entry" : "entries"}`
+        : `${filtered.length} / ${winsState.length} shown`;
+      renderWinsTimeline();
+      const entries = $("#winsEntries");
+      entries.innerHTML = "";
+      if (!winsState.length) {
+        entries.innerHTML = `<div class="small">No runs saved yet. Add your first win when you beat the game.</div>`;
+        return;
+      }
+      if (!filtered.length) {
+        entries.innerHTML = `<div class="small">No runs match the current filters.</div>`;
+        return;
+      }
+      filtered.forEach((entry) => {
+        const div = document.createElement("div");
+        div.className = `entry ${entry.result === "win" ? "win-entry" : "loss-entry"}`;
+        div.innerHTML = `
+          <div>
+            <div class="entry-title">${entry.result === "win" ? "★ Win" : "× Loss / reset"} — ${escapeHtml(entry.date || "unknown date")}</div>
+            <div class="entry-url">${entry.day ? `Day ${escapeHtml(entry.day)}` : "Day ?"}${entry.time ? ` · ${escapeHtml(entry.time)}` : ""}</div>
+            ${entry.note ? `<div class="entry-note">${escapeHtml(entry.note)}</div>` : ""}
+          </div>
+          <div class="entry-actions">
+            <span class="status-tag ${entry.result === "win" ? "status-key" : "status-danger"}">${entry.result === "win" ? "Win" : "Loss"}</span>
+            <button class="btn tiny-btn danger" data-win-delete="${entry.id}">Delete</button>
+          </div>
+        `;
+        entries.appendChild(div);
+      });
+      entries.querySelectorAll("button[data-win-delete]").forEach((button) => {
+        button.addEventListener("click", () => {
+          if (!confirmAction("Delete this run entry?")) return;
+          winsState = winsState.filter((entry) => entry.id !== button.dataset.winDelete);
+          saveWins();
+        });
+      });
+    }
+
+    function renderWinsTimeline() {
+      const timeline = $("#winsTimeline");
+      if (!timeline) return;
+      timeline.innerHTML = "";
+      const chronological = [...winsState]
+        .sort((a, b) => String(a.date || "").localeCompare(String(b.date || "")) || String(a.createdAt || "").localeCompare(String(b.createdAt || "")))
+        .slice(-28);
+      if (!chronological.length) {
+        timeline.innerHTML = `<span class="small">No timeline yet.</span>`;
+        return;
+      }
+      chronological.forEach((entry) => {
+        const dot = document.createElement("span");
+        dot.className = `timeline-dot ${entry.result === "win" ? "win" : "loss"}`;
+        dot.textContent = entry.result === "win" ? "W" : "L";
+        dot.title = `${entry.result === "win" ? "Win" : "Loss"} · ${entry.date || "unknown date"}${entry.time ? ` · ${entry.time}` : ""}`;
+        timeline.appendChild(dot);
+      });
+    }
+
+    function getWinsText() {
+      return winsState.map((entry, index) => `${index + 1}. ${entry.result.toUpperCase()} | ${entry.date || "?"} | day ${entry.day || "?"} | time ${entry.time || "?"}\n   ${entry.note || "—"}`).join("\n\n");
+    }
+
+    function getWinsJsonText() {
+      return JSON.stringify(winsState, null, 2);
+    }
+
+    $("#winDate").value = todayIsoDate();
+    $("#winForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      addRunResult();
+    });
+    $("#quickWinBtn").addEventListener("click", () => addRunResult("win"));
+    $("#quickLossBtn").addEventListener("click", () => addRunResult("loss"));
+    $("#copyWinsBtn").addEventListener("click", () => copyText(getWinsText(), "Win log copied."));
+    $("#copyWinsJsonBtn").addEventListener("click", () => copyText(getWinsJsonText(), "Win log JSON copied."));
+    $("#winSearch").addEventListener("input", (event) => { winFilters.search = event.target.value; renderWins(); });
+    $("#winResultFilter").addEventListener("change", (event) => { winFilters.result = event.target.value; renderWins(); });
+    $("#winSort").addEventListener("change", (event) => { winFilters.sort = event.target.value; renderWins(); });
+    $("#clearWinsBtn").addEventListener("click", () => {
+      if (!confirmAction("Clear the full win/loss log?")) return;
+      winsState = [];
+      saveWins();
+      showToast("Win log cleared.");
+    });
+
+    // Soundboard module
+    const cueData = [
+      {
+        id: "breather-car",
+        enemy: "Breather",
+        title: "Car door slam",
+        type: "real",
+        reaction: "Go to the front door and hold the doorknob.",
+        description: "Real Breather approach cue. It may not always be the first cue.",
+        pattern: "slam"
+      },
+      {
+        id: "breather-knob",
+        enemy: "Breather",
+        title: "Faint doorknob turning",
+        type: "real",
+        reaction: "Go to the front door and hold the doorknob.",
+        description: "Real Breather cue; easy to miss if volume is low.",
+        pattern: "knob"
+      },
+      {
+        id: "kidnapper-steps-hmm",
+        enemy: "Kidnapper",
+        title: "Two grass steps + Hmmm",
+        type: "real",
+        reaction: "Turn off the lights and stay quiet.",
+        description: "React only when the grass steps and the Hmmm are together.",
+        pattern: "stepsHmm"
+      },
+      {
+        id: "kidnapper-location",
+        enemy: "Kidnapper",
+        title: "Location Services icon",
+        type: "real",
+        reaction: "Turn off the lights and stay quiet.",
+        description: "Visual cue next to the Wi-Fi symbol; included here as a visual practice card.",
+        pattern: "location"
+      },
+      {
+        id: "fake-hmmm",
+        enemy: "Fake / ambience",
+        title: "Standalone Hmmm voice",
+        type: "fake",
+        reaction: "Ignore unless it has two grass steps before it.",
+        description: "The walkthrough calls out this fake specifically.",
+        pattern: "hmm"
+      },
+      {
+        id: "fake-chair",
+        enemy: "Fake / ambience",
+        title: "Chair / room ambience",
+        type: "fake",
+        reaction: "Ignore.",
+        description: "Ambience cues exist to make you nervous; not every sound is an enemy.",
+        pattern: "ambience"
+      },
+      {
+        id: "phone-danger",
+        enemy: "Situational danger",
+        title: "Phone during Kidnapper encounter",
+        type: "critical",
+        reaction: "Pick up and hang up before it rings or speaks.",
+        description: "Not the main arrival cue, but dangerous during a Kidnapper event.",
+        pattern: "phone"
+      }
+    ];
+
+    let soundState = loadJson(STORAGE.soundboard, {
+      correct: 0,
+      total: 0,
+      troll: { frequency: 45, jitter: 20, pool: "scary", instant: false }
+    });
+    if (!soundState || typeof soundState !== "object") soundState = { correct: 0, total: 0 };
+    if (!soundState.troll || typeof soundState.troll !== "object") {
+      soundState.troll = { ...settingsState.trollDefaults };
+    }
+    soundState.troll.frequency = Number(soundState.troll.frequency || 45);
+    soundState.troll.jitter = Number(soundState.troll.jitter || 20);
+    soundState.troll.pool = soundState.troll.pool || "scary";
+    soundState.troll.instant = Boolean(soundState.troll.instant);
+    let audioCtx = null;
+    let activeOscillators = [];
+    let currentDrillCue = null;
+    let trollTimer = null;
+    let trollCountdownTimer = null;
+    let trollNextAt = null;
+
+    function getVolumeScale() {
+      return Math.min(1, Math.max(0, Number(settingsState.soundVolume || 0) / 100));
+    }
+
+    function renderSoundSettingsControls() {
+      const soundVolume = $("#soundVolume");
+      const settingsVolume = $("#settingsVolume");
+      const value = `${settingsState.soundVolume}%`;
+      if (soundVolume) soundVolume.value = String(settingsState.soundVolume);
+      if (settingsVolume) settingsVolume.value = String(settingsState.soundVolume);
+      if ($("#soundVolumeValue")) $("#soundVolumeValue").textContent = value;
+      if ($("#settingsVolumeValue")) $("#settingsVolumeValue").textContent = value;
+    }
+
+    function updateSoundVolume(value) {
+      settingsState.soundVolume = Number(value);
+      saveSettings();
+    }
+
+    function getAudioCtx() {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+
+    function stopSounds() {
+      activeOscillators.forEach((node) => {
+        try { node.stop(); } catch {}
+      });
+      activeOscillators = [];
+      $("#soundVisual").classList.remove("playing");
+    }
+
+    function tone(freq, start, duration, type = "sine", gain = 0.06) {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const amp = ctx.createGain();
+      const scaledGain = Math.max(0.0001, gain * getVolumeScale());
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
+      amp.gain.setValueAtTime(0.0001, ctx.currentTime + start);
+      amp.gain.exponentialRampToValueAtTime(scaledGain, ctx.currentTime + start + 0.02);
+      amp.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + duration);
+      osc.connect(amp).connect(ctx.destination);
+      osc.start(ctx.currentTime + start);
+      osc.stop(ctx.currentTime + start + duration + 0.03);
+      activeOscillators.push(osc);
+    }
+
+    function noiseBurst(start, duration, gain = 0.08) {
+      const ctx = getAudioCtx();
+      const buffer = ctx.createBuffer(1, ctx.sampleRate * duration, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+      const source = ctx.createBufferSource();
+      const amp = ctx.createGain();
+      const scaledGain = Math.max(0.0001, gain * getVolumeScale());
+      amp.gain.setValueAtTime(scaledGain, ctx.currentTime + start);
+      amp.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + duration);
+      source.buffer = buffer;
+      source.connect(amp).connect(ctx.destination);
+      source.start(ctx.currentTime + start);
+      activeOscillators.push(source);
+    }
+
+    function playCue(cueId) {
+      stopSounds();
+      const cue = cueData.find((item) => item.id === cueId);
+      if (!cue) return;
+      $("#soundVisual").classList.add("playing");
+      showToast(`Playing: ${cue.title}`);
+      if (cue.pattern === "slam") {
+        noiseBurst(0.00, 0.15, 0.14); tone(80, 0.01, 0.18, "sawtooth", 0.08); noiseBurst(0.22, 0.08, 0.05);
+      } else if (cue.pattern === "knob") {
+        tone(210, 0.00, 0.08, "triangle", 0.035); tone(260, 0.14, 0.08, "triangle", 0.03); tone(190, 0.28, 0.1, "triangle", 0.035); noiseBurst(0.1, 0.2, 0.018);
+      } else if (cue.pattern === "stepsHmm") {
+        noiseBurst(0.00, 0.08, 0.07); noiseBurst(0.34, 0.08, 0.065); tone(120, 0.75, 0.55, "sine", 0.055);
+      } else if (cue.pattern === "location") {
+        tone(880, 0.00, 0.08, "sine", 0.045); tone(1320, 0.12, 0.08, "sine", 0.04);
+      } else if (cue.pattern === "hmm") {
+        tone(118, 0.00, 0.55, "sine", 0.05);
+      } else if (cue.pattern === "phone") {
+        tone(700, 0.00, 0.18, "sine", 0.06); tone(700, 0.32, 0.18, "sine", 0.06); tone(700, 0.64, 0.18, "sine", 0.06);
+      } else {
+        noiseBurst(0.00, 0.45, 0.025); tone(330, 0.05, 0.08, "triangle", 0.018); tone(280, 0.35, 0.06, "triangle", 0.016);
+      }
+      setTimeout(() => $("#soundVisual").classList.remove("playing"), 1500);
+    }
+
+    function renderSoundboard() {
+      const grid = $("#cueGrid");
+      grid.innerHTML = "";
+      cueData.forEach((cue) => {
+        const div = document.createElement("div");
+        const cls = cue.type === "real" ? "cue-real" : cue.type === "critical" ? "cue-critical" : "cue-fake";
+        const pillCls = cue.type === "real" ? "real" : cue.type === "critical" ? "critical" : "fake";
+        const pillText = cue.type === "real" ? "Real cue" : cue.type === "critical" ? "Danger" : "Fake / ignore";
+        div.className = `cue-card ${cls}`;
+        div.innerHTML = `
+          <div class="cue-head">
+            <div><div class="cue-title">${escapeHtml(cue.title)}</div><div class="cue-meta">${escapeHtml(cue.enemy)} · ${escapeHtml(cue.description)}</div></div>
+            <span class="pill ${pillCls}">${pillText}</span>
+          </div>
+          <div class="small"><strong>Reaction:</strong> ${escapeHtml(cue.reaction)}</div>
+          <div class="cue-actions"><button class="btn ghost" data-cue-play="${cue.id}">Play / simulate</button></div>
+        `;
+        grid.appendChild(div);
+      });
+      grid.querySelectorAll("button[data-cue-play]").forEach((button) => button.addEventListener("click", () => playCue(button.dataset.cuePlay)));
+      refreshSoundScore();
+    }
+
+    function refreshSoundScore() {
+      saveJson(STORAGE.soundboard, soundState);
+      $("#soundScoreBox").textContent = `Score: ${soundState.correct} / ${soundState.total}`;
+      renderTrollControls();
+      renderDashboard();
+    }
+
+    function getTrollCues() {
+      const audioCues = cueData.filter((cue) => cue.pattern !== "location");
+      if (soundState.troll.pool === "fake") return audioCues.filter((cue) => cue.type === "fake");
+      if (soundState.troll.pool === "all") return audioCues;
+      return audioCues.filter((cue) => cue.type === "real" || cue.type === "critical");
+    }
+
+    function getTrollDelayMs() {
+      const base = Math.max(10, Number(soundState.troll.frequency || 45));
+      const jitter = Math.max(0, Number(soundState.troll.jitter || 0));
+      const min = Math.max(5, base - jitter);
+      const max = Math.max(min, base + jitter);
+      return Math.round((min + Math.random() * (max - min)) * 1000);
+    }
+
+    function updateTrollStatus() {
+      const status = $("#trollStatus");
+      if (!status) return;
+      if (!trollTimer) {
+        status.textContent = "Troll mode is off.";
+        return;
+      }
+      const seconds = Math.max(0, Math.ceil((Number(trollNextAt || 0) - Date.now()) / 1000));
+      status.textContent = `Troll mode is ON. Next browser cue in about ${seconds}s. Pool: ${soundState.troll.pool}.`;
+    }
+
+    function renderTrollControls() {
+      const freq = $("#trollFrequency");
+      const jitter = $("#trollJitter");
+      const pool = $("#trollCuePool");
+      const instant = $("#trollInstant");
+      if (!freq || !jitter || !pool || !instant) return;
+      renderSoundSettingsControls();
+      freq.value = String(soundState.troll.frequency);
+      jitter.value = String(soundState.troll.jitter);
+      pool.value = soundState.troll.pool;
+      instant.checked = Boolean(soundState.troll.instant);
+      $("#trollFrequencyValue").textContent = `${soundState.troll.frequency}s`;
+      $("#trollJitterValue").textContent = `±${soundState.troll.jitter}s`;
+      updateTrollStatus();
+    }
+
+    function saveTrollControls() {
+      const freq = $("#trollFrequency");
+      const jitter = $("#trollJitter");
+      const pool = $("#trollCuePool");
+      const instant = $("#trollInstant");
+      if (!freq || !jitter || !pool || !instant) return;
+      soundState.troll.frequency = Number(freq.value);
+      soundState.troll.jitter = Number(jitter.value);
+      soundState.troll.pool = pool.value;
+      soundState.troll.instant = instant.checked;
+      saveJson(STORAGE.soundboard, soundState);
+      renderTrollControls();
+      if (trollTimer) restartTrollMode();
+    }
+
+    function startDrill() {
+      currentDrillCue = cueData[Math.floor(Math.random() * cueData.length)];
+      $("#drillStatus").innerHTML = `<strong>Listen now...</strong><span class="small">Guess reaction or source: Real, Fake, Breather, or Kidnapper.</span>`;
+      playCue(currentDrillCue.id);
+    }
+
+    function answerDrill(guess) {
+      if (!currentDrillCue) {
+        showToast("Start a drill first.");
+        return;
+      }
+      const shouldReact = currentDrillCue.type === "real" || currentDrillCue.type === "critical";
+      const correct = guess === "real"
+        ? shouldReact
+        : guess === "fake"
+          ? !shouldReact
+          : currentDrillCue.enemy.toLowerCase().includes(guess);
+      soundState.total++;
+      if (correct) soundState.correct++;
+      $("#drillStatus").innerHTML = `<strong>${correct ? "Correct" : "Wrong"}: ${escapeHtml(currentDrillCue.title)}</strong><span class="small">${escapeHtml(currentDrillCue.reaction)}</span>`;
+      currentDrillCue = null;
+      refreshSoundScore();
+    }
+
+    function scheduleTrollCue() {
+      const delay = getTrollDelayMs();
+      trollNextAt = Date.now() + delay;
+      updateTrollStatus();
+      trollTimer = setTimeout(() => {
+        const trollCues = getTrollCues();
+        const cue = trollCues[Math.floor(Math.random() * trollCues.length)];
+        if (cue) playCue(cue.id);
+        scheduleTrollCue();
+      }, delay);
+    }
+
+    function stopTrollMode(showMessage = true) {
+      if (trollTimer) clearTimeout(trollTimer);
+      if (trollCountdownTimer) clearInterval(trollCountdownTimer);
+      trollTimer = null;
+      trollCountdownTimer = null;
+      trollNextAt = null;
+      $("#trollModeBtn").textContent = "Troll mode: OFF";
+      updateTrollStatus();
+      if (showMessage) showToast("Troll mode disabled.");
+    }
+
+    function startTrollMode(showMessage = true) {
+      stopTrollMode(false);
+      $("#trollModeBtn").textContent = "Troll mode: ON";
+      if (soundState.troll.instant) {
+        const trollCues = getTrollCues();
+        const cue = trollCues[Math.floor(Math.random() * trollCues.length)];
+        if (cue) playCue(cue.id);
+      }
+      scheduleTrollCue();
+      trollCountdownTimer = setInterval(updateTrollStatus, 1000);
+      if (showMessage) showToast("Troll mode enabled.");
+    }
+
+    function restartTrollMode() {
+      if (!trollTimer) return;
+      startTrollMode(false);
+    }
+
+    function toggleTrollMode() {
+      if (trollTimer) stopTrollMode();
+      else startTrollMode();
+    }
+
+    $("#stopSoundsBtn").addEventListener("click", stopSounds);
+    $("#startDrillBtn").addEventListener("click", startDrill);
+    $("#guessRealBtn").addEventListener("click", () => answerDrill("real"));
+    $("#guessFakeBtn").addEventListener("click", () => answerDrill("fake"));
+    $("#guessBreatherBtn").addEventListener("click", () => answerDrill("breather"));
+    $("#guessKidnapperBtn").addEventListener("click", () => answerDrill("kidnapper"));
+    $("#soundVolume").addEventListener("input", (event) => updateSoundVolume(event.target.value));
+    ["#trollFrequency", "#trollJitter", "#trollCuePool", "#trollInstant"].forEach((selector) => {
+      const el = $(selector);
+      if (el) el.addEventListener("input", saveTrollControls);
+      if (el) el.addEventListener("change", saveTrollControls);
+    });
+    $("#trollModeBtn").addEventListener("click", toggleTrollMode);
 
     // Checklist module
     const checklistItems = [
@@ -1344,11 +3061,25 @@
       { id: "during-log", group: "during", title: "Log suspicious URLs", hint: "Save hashes and pages even if they look useless at first." },
       { id: "during-keys", group: "during", title: "Save every key part", hint: "Mark unsure fragments instead of deleting them immediately." },
       { id: "during-claffis", group: "during", title: "Use Claffis helper for sequence", hint: "Pause, mark the note, continue. Keep the 7-step order clean." },
-      { id: "during-pages", group: "during", title: "Mark solved pages", hint: "Dead ends and solved pages should not waste your next loop." }
+      { id: "during-pages", group: "during", title: "Mark solved pages", hint: "Dead ends and solved pages should not waste your next loop." },
+      { id: "safety-breather", group: "safety", title: "Breather response ready", hint: "Car/knob cue means front door and doorknob." },
+      { id: "safety-kidnapper", group: "safety", title: "Kidnapper response ready", hint: "Steps plus Hmmm means lights off and quiet." },
+      { id: "safety-phone", group: "safety", title: "Phone panic check", hint: "If it rings during a Kidnapper moment, pick up and hang up." },
+      { id: "endgame-url", group: "endgame", title: "Compiled .ann URL checked", hint: "Review missing/fake slots before using the final URL." },
+      { id: "endgame-notes", group: "endgame", title: "Important notes reviewed", hint: "Look at starred A.N.N notes and danger pages." },
+      { id: "endgame-timer", group: "endgame", title: "Run result ready", hint: "Finish the timer as win/loss so the log stays current." }
     ];
+
+    const checklistPresets = {
+      "new-run": ["before-notes", "before-keys", "before-sound", "before-zoom"],
+      "while-searching": ["during-log", "during-keys", "during-claffis", "during-pages"],
+      "enemy-safety": ["safety-breather", "safety-kidnapper", "safety-phone"],
+      endgame: ["endgame-url", "endgame-notes", "endgame-timer"]
+    };
 
     let checklistState = loadJson(STORAGE.checklist, {});
     if (!checklistState || typeof checklistState !== "object") checklistState = {};
+    if (!Array.isArray(checklistState.customItems)) checklistState.customItems = [];
 
     function saveChecklist() {
       saveJson(STORAGE.checklist, checklistState);
@@ -1356,56 +3087,206 @@
       renderDashboard();
     }
 
-    function renderChecklist() {
-      const before = $("#checkBefore");
-      const during = $("#checkDuring");
-      before.innerHTML = "";
-      during.innerHTML = "";
+    function getAllChecklistItems() {
+      return [
+        ...checklistItems,
+        ...checklistState.customItems.map((item) => ({ ...item, custom: true }))
+      ];
+    }
 
-      checklistItems.forEach((item) => {
-        const label = document.createElement("label");
-        const isDone = !!checklistState[item.id];
-        label.className = `check-item ${isDone ? "done" : ""}`;
-        label.innerHTML = `
-          <input type="checkbox" ${isDone ? "checked" : ""} />
-          <span><span class="check-title">${escapeHtml(item.title)}</span><span class="check-hint">${escapeHtml(item.hint)}</span></span>
-        `;
-        label.querySelector("input").addEventListener("change", (event) => {
-          checklistState[item.id] = event.target.checked;
-          saveChecklist();
-        });
-        (item.group === "before" ? before : during).appendChild(label);
+    function renderChecklistItem(container, item) {
+      const row = document.createElement("div");
+      const isDone = !!checklistState[item.id];
+      row.className = `check-item ${item.custom ? "custom" : ""} ${isDone ? "done" : ""}`;
+      row.innerHTML = `
+        <input type="checkbox" ${isDone ? "checked" : ""} aria-label="${escapeHtml(item.title)}" />
+        <span><span class="check-title">${escapeHtml(item.title)}</span><span class="check-hint">${escapeHtml(item.hint || "Custom reminder")}</span></span>
+        ${item.custom ? `<button class="btn tiny-btn danger" type="button" data-custom-check-delete="${escapeHtml(item.id)}">Delete</button>` : ""}
+      `;
+      row.querySelector("input").addEventListener("change", (event) => {
+        checklistState[item.id] = event.target.checked;
+        saveChecklist();
       });
+      const deleteButton = row.querySelector("button[data-custom-check-delete]");
+      if (deleteButton) {
+        deleteButton.addEventListener("click", () => {
+          checklistState.customItems = checklistState.customItems.filter((custom) => custom.id !== item.id);
+          delete checklistState[item.id];
+          saveChecklist();
+          showToast("Custom checklist item removed.");
+        });
+      }
+      container.appendChild(row);
+    }
 
-      const done = checklistItems.filter((item) => checklistState[item.id]).length;
-      const pct = Math.round((done / checklistItems.length) * 100);
-      $("#checklistSummary").textContent = `${done} / ${checklistItems.length} complete (${pct}%)`;
+    function renderChecklist() {
+      const containers = {
+        before: $("#checkBefore"),
+        during: $("#checkDuring"),
+        safety: $("#checkSafety"),
+        endgame: $("#checkEndgame"),
+        custom: $("#checkCustom")
+      };
+      Object.values(containers).forEach((container) => { if (container) container.innerHTML = ""; });
+
+      checklistItems.forEach((item) => renderChecklistItem(containers[item.group], item));
+      checklistState.customItems.forEach((item) => renderChecklistItem(containers[item.group] || containers.custom, { ...item, custom: true }));
+
+      if (!checklistState.customItems.length) {
+        containers.custom.innerHTML = `<div class="small">No custom checklist items yet.</div>`;
+      } else {
+        containers.custom.innerHTML = `<div class="small">Custom items appear in their selected group.</div>`;
+      }
+
+      const allItems = getAllChecklistItems();
+      const done = allItems.filter((item) => checklistState[item.id]).length;
+      const pct = allItems.length ? Math.round((done / allItems.length) * 100) : 0;
+      $("#checklistSummary").textContent = `${done} / ${allItems.length} complete (${pct}%)`;
     }
 
     function getChecklistText() {
-      return checklistItems.map((item) => `${checklistState[item.id] ? "[x]" : "[ ]"} ${item.title}`).join("\n");
+      return getAllChecklistItems().map((item) => `${checklistState[item.id] ? "[x]" : "[ ]"} ${item.title}`).join("\n");
     }
 
+    $("#applyChecklistPresetBtn").addEventListener("click", () => {
+      const preset = $("#checklistPreset").value;
+      (checklistPresets[preset] || []).forEach((id) => { checklistState[id] = true; });
+      saveChecklist();
+      showToast("Checklist preset applied.");
+    });
     $("#copyChecklistBtn").addEventListener("click", () => copyText(getChecklistText(), "Checklist copied."));
     $("#resetChecklistBtn").addEventListener("click", () => {
-      checklistState = {};
+      if (!confirmAction("Reset checklist progress? Custom items will stay.")) return;
+      const customItems = checklistState.customItems || [];
+      checklistState = { customItems };
       saveChecklist();
       showToast("Checklist reset.");
     });
+    $("#customChecklistForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const title = $("#customChecklistTitle").value.trim();
+      if (!title) {
+        showToast("Add a checklist item first.");
+        return;
+      }
+      checklistState.customItems.push({
+        id: `custom-${makeId()}`,
+        group: $("#customChecklistGroup").value,
+        title,
+        hint: "Custom reminder"
+      });
+      $("#customChecklistTitle").value = "";
+      saveChecklist();
+      showToast("Custom checklist item added.");
+    });
+
+    function renderSettings() {
+      renderSoundSettingsControls();
+      $("#settingsCompactMode").checked = Boolean(settingsState.compactMode);
+      $("#settingsDangerFx").checked = Boolean(settingsState.dangerFx);
+      $("#settingsTrollFrequency").value = String(settingsState.trollDefaults.frequency);
+      $("#settingsTrollJitter").value = String(settingsState.trollDefaults.jitter);
+      $("#settingsTrollPool").value = settingsState.trollDefaults.pool;
+      $("#settingsTrollInstant").checked = Boolean(settingsState.trollDefaults.instant);
+      $("#settingsTrollFrequencyValue").textContent = `${settingsState.trollDefaults.frequency}s`;
+      $("#settingsTrollJitterValue").textContent = `±${settingsState.trollDefaults.jitter}s`;
+    }
+
+    function readSettingsControls() {
+      settingsState.soundVolume = Number($("#settingsVolume").value);
+      settingsState.compactMode = $("#settingsCompactMode").checked;
+      settingsState.dangerFx = $("#settingsDangerFx").checked;
+      settingsState.trollDefaults.frequency = Number($("#settingsTrollFrequency").value);
+      settingsState.trollDefaults.jitter = Number($("#settingsTrollJitter").value);
+      settingsState.trollDefaults.pool = $("#settingsTrollPool").value;
+      settingsState.trollDefaults.instant = $("#settingsTrollInstant").checked;
+      saveSettings();
+    }
+
+    ["#settingsVolume", "#settingsCompactMode", "#settingsDangerFx", "#settingsTrollFrequency", "#settingsTrollJitter", "#settingsTrollPool", "#settingsTrollInstant"].forEach((selector) => {
+      const el = $(selector);
+      if (el) el.addEventListener("input", readSettingsControls);
+      if (el) el.addEventListener("change", readSettingsControls);
+    });
+
+    $("#applyTrollDefaultsBtn").addEventListener("click", () => {
+      soundState.troll = { ...settingsState.trollDefaults };
+      saveJson(STORAGE.soundboard, soundState);
+      renderTrollControls();
+      if (trollTimer) restartTrollMode();
+      showToast("Troll defaults applied.");
+    });
+
+    $("#settingsExportBtn").addEventListener("click", () => {
+      $("#settingsDataBox").value = getToolkitExportText();
+      showToast("Export JSON generated.");
+    });
+    $("#settingsCopyExportBtn").addEventListener("click", () => {
+      const box = $("#settingsDataBox");
+      if (!box.value.trim()) box.value = getToolkitExportText();
+      copyText(box.value, "Toolkit data copied.");
+    });
+    $("#settingsImportBtn").addEventListener("click", () => {
+      const text = $("#settingsDataBox").value.trim();
+      if (!text) {
+        showToast("Paste exported JSON first.");
+        return;
+      }
+      if (!confirmAction("Import this JSON and reload the toolkit?")) return;
+      try {
+        importToolkitData(text);
+      } catch {
+        showToast("Import failed. Check the JSON.");
+      }
+    });
+    $("#settingsResetAllBtn").addEventListener("click", () => {
+      if (!confirmAction("Reset all WTTG 1 Toolkit local data in this browser?")) return;
+      Object.values(STORAGE).forEach((key) => localStorage.removeItem(key));
+      showToast("Toolkit data reset. Reloading...");
+      setTimeout(() => location.reload(), 450);
+    });
 
     function renderDashboard() {
+      const dashTimer = $("#dashRunTimer");
+      const elapsed = getRunElapsedMs();
+      if (dashTimer) dashTimer.textContent = formatDuration(elapsed, false);
       $("#dashClaffisCount").textContent = `${claffisState.sequence.length} / ${MAX_CLAFFIS}`;
       $("#dashKeyCount").textContent = `${getFilledKeys().length} / 8`;
       $("#dashLinkCount").textContent = `${linksState.length}`;
-      const done = checklistItems.filter((item) => checklistState[item.id]).length;
-      $("#dashChecklistCount").textContent = `${Math.round((done / checklistItems.length) * 100)}%`;
+      const allChecklistItems = getAllChecklistItems();
+      const done = allChecklistItems.filter((item) => checklistState[item.id]).length;
+      $("#dashChecklistCount").textContent = `${allChecklistItems.length ? Math.round((done / allChecklistItems.length) * 100) : 0}%`;
+      const winStats = getWinStats();
+      $("#dashWinStreak").textContent = `${winStats.current}`;
+      $("#dashBestStreak").textContent = `${winStats.best}`;
+      $("#dashTotalWins").textContent = `${winStats.total}`;
+      $("#dashSoundScore").textContent = `${soundState.correct} / ${soundState.total}`;
+      $("#dashMissingKeys").textContent = `${getMissingKeyNumbers().length}`;
+      $("#dashImportantLinks").textContent = `${linksState.filter((entry) => entry.important || entry.status === "important").length}`;
+      $("#dashChecklistDone").textContent = `${done} / ${allChecklistItems.length}`;
+      const timerStatus = runTimerState.running ? "running" : elapsed > 0 ? "paused" : "idle";
+      $("#dashStatusLine").textContent = `Timer ${timerStatus}. ${runTimerState.events.length} timeline ${runTimerState.events.length === 1 ? "event" : "events"} saved.`;
     }
 
+    $("#dashStartRunBtn").addEventListener("click", () => {
+      if (!runTimerState.running) toggleRunTimer();
+      setRoute("run");
+    });
+    $("#dashOpenKeysBtn").addEventListener("click", () => setRoute("keys"));
+    $("#dashOpenClaffisBtn").addEventListener("click", () => setRoute("claffis"));
+    $("#dashAddLinkBtn").addEventListener("click", () => setRoute("links"));
+    $("#dashQuickWinBtn").addEventListener("click", () => addRunResult("win", { date: todayIsoDate(), day: "", time: "", note: "Quick dashboard win.", skipFormReset: true }));
+    $("#dashQuickLossBtn").addEventListener("click", () => addRunResult("loss", { date: todayIsoDate(), day: "", time: "", note: "Quick dashboard loss/reset.", skipFormReset: true }));
+
     // Initial render
+    renderRunTimer();
     renderClaffis();
     renderKeys();
     renderLinks();
+    renderWins();
+    renderSoundboard();
     renderChecklist();
+    renderSettings();
     navigate();
   </script>
 </body>
